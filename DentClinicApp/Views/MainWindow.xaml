@@ -3,8 +3,34 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:DentClinicApp"
         Title="DentClinicApp" Height="450" Width="800"
-        xmlns:vm="clr-namespace:DentClinicApp.Views">
-    <Grid>
-        
-    </Grid>
+        xmlns:vm="clr-namespace:DentClinicApp.ViewModels"
+        DataContext="{DynamicResource MainWindowViewModel}">
+
+    <Window.Resources>
+        <ResourceDictionary Source="MainWindowResources.xaml"/>
+    </Window.Resources>
+
+    <DockPanel>
+        <!-- Menu Górne -->
+        <Menu DockPanel.Dock="Top" Background="LightGray">
+            <MenuItem Header="Plik">
+                <MenuItem Header="Wyjdź" Command="{Binding CloseCommand}" />
+            </MenuItem>
+            <MenuItem Header="Pomoc">
+                <MenuItem Header="O aplikacji" />
+            </MenuItem>
+        </Menu>
+
+        <!-- Boczne menu nawigacyjne -->
+        <StackPanel DockPanel.Dock="Left" Width="200" Background="LightBlue">
+            <Button Content="Wszyscy Pacjenci" Command="{Binding ShowAllPacjentCommand}" Margin="10" />
+            <Button Content="Nowy Pacjent" Command="{Binding CreatePacjentCommand}" Margin="10" />
+            <Button Content="Wszyscy Pracownicy" Command="{Binding ShowAllPracownikCommand}" Margin="10" />
+            <Button Content="Nowy Pracownik" Command="{Binding CreatePracownikCommand}" Margin="10" />
+        </StackPanel>
+
+        <!-- Obszar na dynamiczną zawartość -->
+        <ContentControl Content="{Binding ActiveWorkspace}" Margin="10"/>
+    </DockPanel>
+
 </Window>
