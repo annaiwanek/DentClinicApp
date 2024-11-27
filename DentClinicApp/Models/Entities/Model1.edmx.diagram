@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7ab53d2ae2144579a6953d8cc0f731e8" Name="Diagram1">
+        <EntityTypeShape EntityType="DentCareModel.Dokumenty" Width="1.5" PointX="3" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentCareModel.GrafikPracownikow" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentCareModel.HistoriaLeczenia" Width="1.5" PointX="6" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentCareModel.Leki" Width="1.5" PointX="3" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentCareModel.LogiAktywnosci" Width="1.5" PointX="8.25" PointY="18.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentCareModel.Notatki" Width="1.5" PointX="3" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentCareModel.Pacjenci" Width="1.5" PointX="0.75" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentCareModel.Platnosci" Width="1.5" PointX="8.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentCareModel.Pracownicy" Width="1.5" PointX="3.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentCareModel.Recepty" Width="1.5" PointX="3" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentCareModel.ReceptyLeki" Width="1.5" PointX="5.25" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentCareModel.Stanowiska" Width="1.5" PointX="1.5" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentCareModel.sysdiagrams" Width="1.5" PointX="8.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentCareModel.Uslugi" Width="1.5" PointX="3.75" PointY="19.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentCareModel.UzytkownicySystemu" Width="1.5" PointX="6" PointY="18.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentCareModel.Wizyty" Width="1.5" PointX="6" PointY="4.5" IsExpanded="true" />
+        <AssociationConnector Association="DentCareModel.FK_Dokumenty_Pacjenci" ManuallyRouted="false" />
+        <AssociationConnector Association="DentCareModel.FK_GrafikPracowników_Pracownicy" ManuallyRouted="false" />
+        <AssociationConnector Association="DentCareModel.FK_HistoriaLeczenia_Pacjenci" ManuallyRouted="false" />
+        <AssociationConnector Association="DentCareModel.FK_HistoriaLeczenia_Pracownicy" ManuallyRouted="false" />
+        <AssociationConnector Association="DentCareModel.FK__ReceptyLe__IdLek__14270015" ManuallyRouted="false" />
+        <AssociationConnector Association="DentCareModel.FK_LogiAktywności_UżytkownicySystemu" ManuallyRouted="false" />
+        <AssociationConnector Association="DentCareModel.FK_Notatki_Pacjenci" ManuallyRouted="false" />
+        <AssociationConnector Association="DentCareModel.FK_Recepty_Pacjenci" ManuallyRouted="false" />
+        <AssociationConnector Association="DentCareModel.FK_Wizyty_Pacjenci" ManuallyRouted="false" />
+        <AssociationConnector Association="DentCareModel.FK_Płatności_Wizyty" ManuallyRouted="false" />
+        <AssociationConnector Association="DentCareModel.FK_Płatności_Wizyty1" ManuallyRouted="false" />
+        <AssociationConnector Association="DentCareModel.FK_Pracownicy_Stanowiska" ManuallyRouted="false" />
+        <AssociationConnector Association="DentCareModel.FK_UżytkownicySystemu_Pracownicy" ManuallyRouted="false" />
+        <AssociationConnector Association="DentCareModel.FK_Wizyty_Pracownicy" ManuallyRouted="false" />
+        <AssociationConnector Association="DentCareModel.FK__ReceptyLe__IdRec__1332DBDC" ManuallyRouted="false" />
+        <AssociationConnector Association="DentCareModel.FK_Wizyty_Usługi" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
