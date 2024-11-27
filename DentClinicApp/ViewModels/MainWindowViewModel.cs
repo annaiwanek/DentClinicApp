@@ -42,7 +42,7 @@ namespace DentClinicApp.ViewModels
 
                 new CommandViewModel(
                     "Pacjent",
-                    new BaseCommand(() => this.CreatePacjent())),
+                    new BaseCommand(() => this.CreateView(new NowyPacjentViewModel()))),
 
                 new CommandViewModel(
                     "Pracownik",
@@ -50,7 +50,7 @@ namespace DentClinicApp.ViewModels
 
                 new CommandViewModel(
                     "Pracownicy",
-                    new BaseCommand(() => this.CreatePracownik()))
+                    new BaseCommand(() => this.CreateView(new NowyPacjentViewModel())))
 
             };
         }
@@ -89,17 +89,10 @@ namespace DentClinicApp.ViewModels
         #endregion // Workspaces
 
         #region Private Helpers
-        private void CreatePacjent()
+        private void CreateView(WorkspaceViewModel nowy)
         {
-            NowyPacjentViewModel workspace = new NowyPacjentViewModel();
-            this.Workspaces.Add(workspace);
-            this.SetActiveWorkspace(workspace);
-        }
-        private void CreatePracownik()
-        {
-            NowyPracownikViewModel workspace = new NowyPracownikViewModel();
-            this.Workspaces.Add(workspace);
-            this.SetActiveWorkspace(workspace);
+            this.Workspaces.Add(nowy); // dodanie zakładki do kolekcji zakładek 
+            this.SetActiveWorkspace(nowy); // aktywowanie zakładki 
         }
         private void ShowAllPacjent()
         {
