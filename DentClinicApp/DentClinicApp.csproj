@@ -67,6 +67,69 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Helper\BaseCommand.cs" />
+    <Compile Include="Models\Entities\Dokumenty.cs">
+      <DependentUpon>ModelDentCare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entities\GrafikPracownikow.cs">
+      <DependentUpon>ModelDentCare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entities\HistoriaLeczenia.cs">
+      <DependentUpon>ModelDentCare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entities\Leki.cs">
+      <DependentUpon>ModelDentCare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entities\LogiAktywnosci.cs">
+      <DependentUpon>ModelDentCare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entities\ModelDentCare.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelDentCare.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entities\ModelDentCare.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelDentCare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entities\ModelDentCare.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelDentCare.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entities\Notatki.cs">
+      <DependentUpon>ModelDentCare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entities\Pacjenci.cs">
+      <DependentUpon>ModelDentCare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entities\Platnosci.cs">
+      <DependentUpon>ModelDentCare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entities\Pracownicy.cs">
+      <DependentUpon>ModelDentCare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entities\Recepty.cs">
+      <DependentUpon>ModelDentCare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entities\ReceptyLeki.cs">
+      <DependentUpon>ModelDentCare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entities\Stanowiska.cs">
+      <DependentUpon>ModelDentCare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entities\sysdiagrams.cs">
+      <DependentUpon>ModelDentCare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entities\Uslugi.cs">
+      <DependentUpon>ModelDentCare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entities\UzytkownicySystemu.cs">
+      <DependentUpon>ModelDentCare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entities\Wizyty.cs">
+      <DependentUpon>ModelDentCare.tt</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\CommandViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
@@ -153,6 +216,13 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EntityDeploy Include="Models\Entities\ModelDentCare.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ModelDentCare.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Models\Entities\ModelDentCare.edmx.diagram">
+      <DependentUpon>ModelDentCare.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -162,11 +232,21 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Models\Entities\ModelDentCare.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelDentCare.edmx</DependentUpon>
+      <LastGenOutput>ModelDentCare.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Entities\ModelDentCare.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelDentCare.edmx</DependentUpon>
+      <LastGenOutput>ModelDentCare.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
