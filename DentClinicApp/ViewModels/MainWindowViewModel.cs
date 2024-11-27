@@ -42,7 +42,16 @@ namespace DentClinicApp.ViewModels
 
                 new CommandViewModel(
                     "Pacjent",
-                    new BaseCommand(() => this.CreatePacjent()))
+                    new BaseCommand(() => this.CreatePacjent())),
+
+                new CommandViewModel(
+                    "Pracownik",
+                    new BaseCommand(() => this.ShowAllPracownik())),
+
+                new CommandViewModel(
+                    "Pracownicy",
+                    new BaseCommand(() => this.CreatePracownik()))
+
             };
         }
         #endregion
@@ -86,6 +95,12 @@ namespace DentClinicApp.ViewModels
             this.Workspaces.Add(workspace);
             this.SetActiveWorkspace(workspace);
         }
+        private void CreatePracownik()
+        {
+            NowyPracownikViewModel workspace = new NowyPracownikViewModel();
+            this.Workspaces.Add(workspace);
+            this.SetActiveWorkspace(workspace);
+        }
         private void ShowAllPacjent()
         {
             WszyscyPacjenciViewModel workspace =
@@ -94,6 +109,19 @@ namespace DentClinicApp.ViewModels
             if (workspace == null)
             {
                 workspace = new WszyscyPacjenciViewModel();
+                this.Workspaces.Add(workspace);
+            }
+
+            this.SetActiveWorkspace(workspace);
+        }
+        private void ShowAllPracownik()
+        {
+            WszyscyPracownicyViewModel workspace =
+                this.Workspaces.FirstOrDefault(vm => vm is WszyscyPracownicyViewModel)
+                as WszyscyPracownicyViewModel;
+            if (workspace == null)
+            {
+                workspace = new WszyscyPracownicyViewModel();
                 this.Workspaces.Add(workspace);
             }
 

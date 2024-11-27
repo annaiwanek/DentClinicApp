@@ -62,8 +62,10 @@
     <Compile Include="ViewModels\CommandViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\NowyPacjentViewModel.cs" />
+    <Compile Include="ViewModels\NowyPracownikViewModel.cs" />
     <Compile Include="ViewModels\WorkspaceViewModel.cs" />
     <Compile Include="ViewModels\WszyscyPacjenciViewModel.cs" />
+    <Compile Include="ViewModels\WszyscyPracownicyViewModel.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
@@ -74,8 +76,14 @@
     <Compile Include="Views\NowyPacjentView.xaml.cs">
       <DependentUpon>NowyPacjentView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\NowyPracownikView.xaml.cs">
+      <DependentUpon>NowyPracownikView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\WszyscyPacjenciView.xaml.cs">
       <DependentUpon>WszyscyPacjenciView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WszyscyPracownicyView.xaml.cs">
+      <DependentUpon>WszyscyPracownicyView.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -89,7 +97,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\NowyPracownikView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\WszyscyPacjenciView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WszyscyPracownicyView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

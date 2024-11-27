@@ -6,5 +6,9 @@
     <DataTemplate DataType="{x:Type vm:WszyscyPacjenciViewModel}">
         <vw:WszyscyPacjenciView/>
     </DataTemplate>
-         
+    
+    <DataTemplate DataType="{x:Type vm:WszyscyPracownicyViewModel}">
+        <vw:WszyscyPracownicyView/>
+    </DataTemplate>
+
 </ResourceDictionary>
