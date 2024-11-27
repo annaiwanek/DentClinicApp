@@ -8,53 +8,39 @@ namespace DentClinicApp.ViewModels
 {
     public class MainWindowViewModel : BaseViewModel
     {
-        // Komendy do obsługi przycisków w widoku
-        public ICommand ShowPacjenciCommand => new BaseCommand(() => ShowWorkspace<WszyscyPacjenciViewModel>());
-        public ICommand ShowPracownicyCommand => new BaseCommand(() => ShowWorkspace<WszyscyPracownicyViewModel>());
+        // Komendy do przełączania stref
+        public ICommand SwitchToPacjentSectionCommand => new BaseCommand(() => SwitchToSection("Pacjent"));
+        public ICommand SwitchToPracownikSectionCommand => new BaseCommand(() => SwitchToSection("Pracownik"));
 
-        // Aktualny aktywny workspace (widok w centralnej części aplikacji)
-        private WorkspaceViewModel _activeWorkspace;
-        public WorkspaceViewModel ActiveWorkspace
+        // Aktualna strefa w aplikacji
+        private object _activeSection;
+        public object ActiveSection
         {
-            get => _activeWorkspace;
+            get => _activeSection;
             set
             {
-                if (_activeWorkspace != value)
-                {
-                    _activeWorkspace = value;
-                    OnPropertyChanged(() => ActiveWorkspace);
-                }
+                _activeSection = value;
+                OnPropertyChanged(() => ActiveSection);
             }
         }
 
-        // Kolekcja wszystkich otwartych widoków
-        public ObservableCollection<WorkspaceViewModel> Workspaces { get; }
-
-        // Konstruktor
+        // Konstruktor - ustaw domyślną sekcję
         public MainWindowViewModel()
         {
-            Workspaces = new ObservableCollection<WorkspaceViewModel>();
+            SwitchToSection("Pacjent"); // Domyślnie pokaż strefę pacjenta
         }
 
-        // Generyczna metoda do wyświetlania widoku
-        private void ShowWorkspace<T>() where T : WorkspaceViewModel, new()
+        // Logika przełączania sekcji
+        private void SwitchToSection(string section)
         {
-            // Sprawdzenie, czy workspace już istnieje
-            var workspace = Workspaces.OfType<T>().FirstOrDefault();
-            if (workspace == null)
+            if (section == "Pacjent")
             {
-                // Jeśli nie istnieje, utwórz nowy
-                workspace = new T();
-                Workspaces.Add(workspace);
+                ActiveSection = new PacjentSectionViewModel();
             }
-            // Ustaw jako aktywny widok
-            SetActiveWorkspace(workspace);
-        }
-
-        // Ustawienie aktywnego workspace
-        private void SetActiveWorkspace(WorkspaceViewModel workspace)
-        {
-            ActiveWorkspace = workspace;
+            else if (section == "Pracownik")
+            {
+                ActiveSection = new PracownikSectionViewModel();
+            }
         }
     }
 }

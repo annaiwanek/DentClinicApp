@@ -1,0 +1,72 @@
+﻿<UserControl x:Class="DentClinicApp.Views.PacjentSectionView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             d:DesignHeight="500" d:DesignWidth="800">
+    <Grid Background="#FAFAFA" Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Nagłówek -->
+        <Border Background="#1E88E5" CornerRadius="5" Padding="10" Margin="0,0,0,20">
+            <TextBlock Text="Pacjenci" 
+                       FontSize="24" 
+                       FontWeight="Bold" 
+                       Foreground="White" 
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center" />
+        </Border>
+
+        <!-- Lista pacjentów -->
+        <Border Grid.Row="1" Background="White" CornerRadius="10" Padding="10" BorderBrush="#E0E0E0" BorderThickness="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <!-- Pasek narzędzi -->
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 0 10">
+                    <Button Content="Dodaj Pacjenta"
+                            Background="#1E88E5"
+                            Foreground="White"
+                            FontWeight="Bold"
+                            Padding="10,5"
+                            Margin="5"
+                            Width="150" />
+                    <Button Content="Odśwież"
+                            Background="#43A047"
+                            Foreground="White"
+                            FontWeight="Bold"
+                            Padding="10,5"
+                            Margin="5"
+                            Width="150" />
+                </StackPanel>
+
+                <!-- Tabela pacjentów -->
+                <DataGrid Grid.Row="1"
+                          AutoGenerateColumns="False"
+                          HeadersVisibility="Column"
+                          GridLinesVisibility="Horizontal"
+                          BorderThickness="0"
+                          CanUserAddRows="False"
+                          AlternatingRowBackground="#F3F4F6"
+                          RowBackground="White"
+                          FontSize="14">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="L.p." Width="50" />
+                        <DataGridTextColumn Header="Imię" Width="*" />
+                        <DataGridTextColumn Header="Nazwisko" Width="*" />
+                        <DataGridTextColumn Header="Data Urodzenia" Width="*" />
+                        <DataGridTextColumn Header="PESEL" Width="*" />
+                        <DataGridTextColumn Header="Telefon" Width="*" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

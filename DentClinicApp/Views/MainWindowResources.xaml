@@ -11,4 +11,11 @@
         <vw:WszyscyPracownicyView/>
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type vm:PacjentSectionViewModel}">
+        <vw:PacjentSectionView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:PracownikSectionViewModel}">
+        <vw:PracownikSectionView />
+    </DataTemplate>
+
 </ResourceDictionary>
