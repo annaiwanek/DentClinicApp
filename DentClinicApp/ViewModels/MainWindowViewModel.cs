@@ -37,11 +37,11 @@ namespace DentClinicApp.ViewModels
             {
                 new CommandViewModel(
                     "Pacjenci",
-                    new BaseCommand(() => this.ShowAllPacjenci())),
+                    new BaseCommand(() => this.ShowWorkspace<WszyscyPacjenciViewModel>())),
 
                 new CommandViewModel(
                     "Pacjent",
-                    new BaseCommand(() => this.CreatePacjent()))
+                    new BaseCommand(() => this.CreateView(new NowyPacjentViewModel())))
             };
         }
         #endregion
@@ -79,20 +79,17 @@ namespace DentClinicApp.ViewModels
         #endregion // Workspaces
 
         #region Private Helpers
-        private void CreatePacjent()
+        private void CreateView(WorkspaceViewModel nowy)
         {
-            NowyPacjentViewModel workspace = new NowyPacjentViewModel();
-            this.Workspaces.Add(workspace);
-            this.SetActiveWorkspace(workspace);
+            this.Workspaces.Add(nowy);
+            this.SetActiveWorkspace(nowy);
         }
-        private void ShowAllPacjenci()
+        private void ShowWorkspace<T>() where T : WorkspaceViewModel,  new()
         {
-            WszyscyPacjenciViewModel workspace =
-                this.Workspaces.FirstOrDefault(vm => vm is WszyscyPacjenciViewModel)
-                as WszyscyPacjenciViewModel;
+            T workspace = this.Workspaces.OfType<T>().FirstOrDefault();
             if (workspace == null)
             {
-                workspace = new WszyscyPacjenciViewModel();
+                workspace = new T();
                 this.Workspaces.Add(workspace);
             }
 
