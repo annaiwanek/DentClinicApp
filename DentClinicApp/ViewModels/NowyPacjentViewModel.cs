@@ -12,43 +12,16 @@ using System.Windows.Input;
 
 namespace DentClinicApp.ViewModels
 {
-    public class NowyPacjentViewModel : WorkspaceViewModel
+    public class NowyPacjentViewModel : JedenViewModel<Pacjenci>
     {
-        #region DB
-
-        private DentCareEntities dentCareEntities;
-
-        #endregion
-
-        #region Item
-
-        private Pacjenci pacjenci;
-
-        #endregion
-
-        #region Command
-        // to jest komenda, która zostanie podpięta pod przycisk zapisz i zamknij i wywoła funkcję SaveAndClose 
-
-        private BaseCommand _SaveCommand;
-        public ICommand SaveCommand
-        {
-            get
-            {
-                if (_SaveCommand == null)
-                    _SaveCommand = new BaseCommand(() => SaveAndClose());
-                return _SaveCommand;
-            }
-        }
-
-        #endregion
-
+        
         #region Constructor
 
         public NowyPacjentViewModel()
+            :base("Pacjent")
         {
-            base.DisplayName = "Pacjent";
-            dentCareEntities = new DentCareEntities();
-            pacjenci = new Pacjenci();
+            item = new Pacjenci();
+          
         }
 
         #endregion
@@ -59,12 +32,12 @@ namespace DentClinicApp.ViewModels
         {
             get
             {
-                return pacjenci.Imie;
+                return item.Imie;
             }
 
             set
             {
-                pacjenci.Imie = value;
+                item.Imie = value;
                 OnPropertyChanged(() => Imie);
             }
         }
@@ -73,12 +46,12 @@ namespace DentClinicApp.ViewModels
         {
             get
             {
-                return pacjenci.Nazwisko;
+                return item.Nazwisko;
             }
 
             set
             {
-                pacjenci.Nazwisko = value;
+                item.Nazwisko = value;
                 OnPropertyChanged(() => Nazwisko);
             }
         }
@@ -87,12 +60,12 @@ namespace DentClinicApp.ViewModels
         {
             get
             {
-                return pacjenci.PESEL;
+                return item.PESEL;
             }
 
             set
             {
-                pacjenci.PESEL = value;
+                item.PESEL = value;
                 OnPropertyChanged(() => Pesel);
             }
         }
@@ -101,11 +74,11 @@ namespace DentClinicApp.ViewModels
         {
             get
             {
-                return pacjenci.DataUrodzenia;
+                return item.DataUrodzenia;
             }
             set
             {
-                pacjenci.DataUrodzenia = value;
+                item.DataUrodzenia = value;
                 OnPropertyChanged(() => DataUrodzenia);
             }
         }
@@ -114,12 +87,12 @@ namespace DentClinicApp.ViewModels
         {
             get
             {
-                return pacjenci.Adres;
+                return item.Adres;
             }
 
             set
             {
-                pacjenci.Adres = value;
+                item.Adres = value;
                 OnPropertyChanged(() => Adres);
             }
         }
@@ -128,12 +101,12 @@ namespace DentClinicApp.ViewModels
         {
             get
             {
-                return pacjenci.Telefon;
+                return item.Telefon;
             }
 
             set
             {
-                pacjenci.Telefon = value;
+                item.Telefon = value;
                 OnPropertyChanged(() => Telefon);
             }
         }
@@ -142,12 +115,12 @@ namespace DentClinicApp.ViewModels
         {
             get
             {
-                return pacjenci.Email;
+                return item.Email;
             }
 
             set
             {
-                pacjenci.Email = value;
+                item.Email = value;
                 OnPropertyChanged(() => Email);
             }
         }
@@ -155,50 +128,46 @@ namespace DentClinicApp.ViewModels
         #endregion
 
         #region Helpers
-        public void Save()
+        public override void Save()
         {
-            if (string.IsNullOrWhiteSpace(pacjenci.Imie))
+            if (string.IsNullOrWhiteSpace(item.Imie))
                 throw new InvalidOperationException("Pole 'Imię' jest wymagane.");
 
-            if (string.IsNullOrWhiteSpace(pacjenci.Nazwisko))
+            if (string.IsNullOrWhiteSpace(item.Nazwisko))
                 throw new InvalidOperationException("Pole 'Nazwisko' jest wymagane.");
 
-            if (pacjenci.DataUrodzenia == null || pacjenci.DataUrodzenia == DateTime.MinValue)
+            if (item    .DataUrodzenia == null || item.DataUrodzenia == DateTime.MinValue)
                 throw new InvalidOperationException("Pole 'Data Urodzenia' jest wymagane.");
 
-            savePatient();
+            //savePatient();
            
         }
 
-        public void SaveAndClose()
-        {
-            Save();
-            base.OnRequestClose(); // Zamknięcie zakładki 
-        }
+      
 
-        private void savePatient() {
-            try {
-                Console.WriteLine("Adding patient");
-                dentCareEntities.Pacjenci.Add(pacjenci); // dodawanie rekordu najpierw do lokalnej kolekcji
-                dentCareEntities.SaveChanges(); // zapisywanie do bazy danych 
-                Console.WriteLine("Added patient successfuly");
-            }
-            catch (DbEntityValidationException e)
-            {
-                Console.WriteLine("Errors");
-                //Console.WriteLine(e.EntityValidationErrors.ToList);
-                foreach (DbEntityValidationResult entityError in e.EntityValidationErrors) {
+        ////private void savePatient() {
+        ////    try {
+        ////        Console.WriteLine("Adding patient");
+        ////        dentCareEntities.Pacjenci.Add(item); // dodawanie rekordu najpierw do lokalnej kolekcji
+        ////        dentCareEntities.SaveChanges(); // zapisywanie do bazy danych 
+        ////        Console.WriteLine("Added patient successfuly");
+        ////    }
+        ////    catch (DbEntityValidationException e)
+        ////    {
+        ////        Console.WriteLine("Errors");
+        ////        //Console.WriteLine(e.EntityValidationErrors.ToList);
+        ////        foreach (DbEntityValidationResult entityError in e.EntityValidationErrors) {
                     
-                    foreach (DbValidationError validationError in entityError.ValidationErrors)
-                    {
-                        Console.WriteLine(validationError.PropertyName + ": " + validationError.ErrorMessage);
-                    }
-                }
-            }
-            catch (Exception e) {
-                Console.WriteLine(e);
-            }
-        }
+        ////            foreach (DbValidationError validationError in entityError.ValidationErrors)
+        ////            {
+        ////                Console.WriteLine(validationError.PropertyName + ": " + validationError.ErrorMessage);
+        ////            }
+        ////        }
+        ////    }
+        ////    catch (Exception e) {
+        ////        Console.WriteLine(e);
+        ////    }
+        //}
         #endregion
     }
 }
