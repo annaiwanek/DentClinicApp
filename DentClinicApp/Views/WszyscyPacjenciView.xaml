@@ -11,7 +11,7 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding IdPacjenta}"/>
                 <DataGridTextColumn Header="Pesel" Binding="{Binding PESEL}"/>
-                <DataGridTextColumn Header="Imię" Binding="{Binding Imie}"/>
+                <DataGridTextColumn Header="Imie" Binding="{Binding Imie}"/>
                 <DataGridTextColumn Header="Nazwisko" Binding="{Binding Nazwisko}"/>
                 <DataGridTextColumn Header="Data urodzenia" Binding="{Binding DataUrodzenia, StringFormat={}{0:dd.MM.yyyy}}"/>
                 <DataGridTextColumn Header="Adres" Binding="{Binding Adres}"/>
