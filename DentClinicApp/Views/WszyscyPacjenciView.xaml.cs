@@ -18,7 +18,7 @@ namespace DentClinicApp.Views
     /// <summary>
     /// Interaction logic for WszyscyPacjenciView.xaml
     /// </summary>
-    public partial class WszyscyPacjenciView : UserControl
+    public partial class WszyscyPacjenciView : WszystkieViewBase
     {
         public WszyscyPacjenciView()
         {
