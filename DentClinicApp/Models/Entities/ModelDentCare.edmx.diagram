@@ -4,23 +4,23 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="5db07a5d47924685968ee1356f568576" Name="Diagram1">
-        <EntityTypeShape EntityType="DentCareModel.Dokumenty" Width="1.5" PointX="3" PointY="6.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="DentCareModel.GrafikPracownikow" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DentCareModel.HistoriaLeczenia" Width="1.5" PointX="6" PointY="9" IsExpanded="true" />
-        <EntityTypeShape EntityType="DentCareModel.Leki" Width="1.5" PointX="3" PointY="9.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DentCareModel.LogiAktywnosci" Width="1.5" PointX="8.25" PointY="18.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="DentCareModel.Notatki" Width="1.5" PointX="3" PointY="12.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DentCareModel.Pacjenci" Width="1.5" PointX="0.75" PointY="8.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DentCareModel.Platnosci" Width="1.5" PointX="8.25" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DentCareModel.Pracownicy" Width="1.5" PointX="3.75" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="DentCareModel.Recepty" Width="1.5" PointX="3" PointY="15.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="DentCareModel.ReceptyLeki" Width="1.5" PointX="5.25" PointY="15.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="DentCareModel.Stanowiska" Width="1.5" PointX="1.5" PointY="2" IsExpanded="true" />
-        <EntityTypeShape EntityType="DentCareModel.sysdiagrams" Width="1.5" PointX="8.75" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="DentCareModel.Uslugi" Width="1.5" PointX="3.75" PointY="19.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="DentCareModel.UzytkownicySystemu" Width="1.5" PointX="6" PointY="18.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="DentCareModel.Wizyty" Width="1.5" PointX="6" PointY="4.5" IsExpanded="true" />
+      <Diagram DiagramId="50a805f5714046d1841d910f90536352" Name="Diagram1">
+        <EntityTypeShape EntityType="DentCareModel.Dokumenty" Width="1.5" PointX="8.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentCareModel.GrafikPracownikow" Width="1.5" PointX="5.25" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentCareModel.HistoriaLeczenia" Width="1.5" PointX="8.25" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentCareModel.Leki" Width="1.5" PointX="8.25" PointY="23.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentCareModel.LogiAktywnosci" Width="1.5" PointX="7.5" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentCareModel.Notatki" Width="1.5" PointX="8.25" PointY="17" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentCareModel.Pacjenci" Width="1.5" PointX="6" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentCareModel.Platnosci" Width="1.5" PointX="10.5" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentCareModel.Pracownicy" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentCareModel.Recepty" Width="1.5" PointX="8.25" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentCareModel.ReceptyLeki" Width="1.5" PointX="10.5" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentCareModel.Stanowiska" Width="1.5" PointX="0.75" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentCareModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentCareModel.Uslugi" Width="1.5" PointX="6" PointY="17" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentCareModel.UzytkownicySystemu" Width="1.5" PointX="5.25" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentCareModel.Wizyty" Width="1.5" PointX="8.25" PointY="4.125" IsExpanded="true" />
         <AssociationConnector Association="DentCareModel.FK_Dokumenty_Pacjenci" ManuallyRouted="false" />
         <AssociationConnector Association="DentCareModel.FK_GrafikPracowników_Pracownicy" ManuallyRouted="false" />
         <AssociationConnector Association="DentCareModel.FK_HistoriaLeczenia_Pacjenci" ManuallyRouted="false" />
@@ -33,6 +33,7 @@
         <AssociationConnector Association="DentCareModel.FK_Płatności_Wizyty" ManuallyRouted="false" />
         <AssociationConnector Association="DentCareModel.FK_Płatności_Wizyty1" ManuallyRouted="false" />
         <AssociationConnector Association="DentCareModel.FK_Pracownicy_Stanowiska" ManuallyRouted="false" />
+        <AssociationConnector Association="DentCareModel.FK_UzytkownicySystemu_Pracownicy" ManuallyRouted="false" />
         <AssociationConnector Association="DentCareModel.FK_UżytkownicySystemu_Pracownicy" ManuallyRouted="false" />
         <AssociationConnector Association="DentCareModel.FK_Wizyty_Pracownicy" ManuallyRouted="false" />
         <AssociationConnector Association="DentCareModel.FK__ReceptyLe__IdRec__1332DBDC" ManuallyRouted="false" />

@@ -28,7 +28,7 @@ namespace DentClinicApp.Models.Entities
         public System.DateTime Data { get; set; }
         public System.TimeSpan Godzina { get; set; }
         public string Status { get; set; }
-        public int CzasTrwaniaWizyty { get; set; }
+        public int CzasTrwaniaWMinutach { get; set; }
     
         public virtual Pacjenci Pacjenci { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

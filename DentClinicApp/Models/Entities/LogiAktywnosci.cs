@@ -15,7 +15,7 @@ namespace DentClinicApp.Models.Entities
     public partial class LogiAktywnosci
     {
         public int LogID { get; set; }
-        public int IdUżytkownika { get; set; }
+        public int IdUzytkownika { get; set; }
         public string Akcja { get; set; }
         public System.DateTime Data { get; set; }
         public System.TimeSpan Godzina { get; set; }

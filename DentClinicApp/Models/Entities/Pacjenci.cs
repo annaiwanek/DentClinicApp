@@ -25,7 +25,7 @@ namespace DentClinicApp.Models.Entities
         }
     
         public int IdPacjenta { get; set; }
-        public string Imię { get; set; }
+        public string Imie { get; set; }
         public string Nazwisko { get; set; }
         public System.DateTime DataUrodzenia { get; set; }
         public string Adres { get; set; }

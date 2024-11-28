@@ -7,7 +7,19 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid Background="White">
-        <Label Content="To jest UC Wszyscy Pacjenci"></Label>
+        <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding List}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding IdPacjenta}"/>
+                <DataGridTextColumn Header="Pesel" Binding="{Binding PESEL}"/>
+                <DataGridTextColumn Header="Imię" Binding="{Binding Imie}"/>
+                <DataGridTextColumn Header="Nazwisko" Binding="{Binding Nazwisko}"/>
+                <DataGridTextColumn Header="Data urodzenia" Binding="{Binding DataUrodzenia, StringFormat={}{0:dd.MM.yyyy}}"/>
+                <DataGridTextColumn Header="Adres" Binding="{Binding Adres}"/>
+                <DataGridTextColumn Header="Telefon" Binding="{Binding Telefon}"/>
+                <DataGridTextColumn Header="Email" Binding="{Binding Email}"/>
+                
+            </DataGrid.Columns>
+        </DataGrid>
 
     </Grid>
 </local:WszystkieViewBase>

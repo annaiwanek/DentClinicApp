@@ -15,7 +15,7 @@
           <Property Name="TypDokumentu" Type="nvarchar" MaxLength="50" />
           <Property Name="Opis" Type="nvarchar(max)" />
           <Property Name="DataDodania" Type="date" Nullable="false" />
-          <Property Name="ŚcieżkaDoPliku" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="ŚcieżkaDoPliku" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="GrafikPracownikow">
           <Key>
@@ -53,7 +53,7 @@
             <PropertyRef Name="LogID" />
           </Key>
           <Property Name="LogID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="IdUżytkownika" Type="int" Nullable="false" />
+          <Property Name="IdUzytkownika" Type="int" Nullable="false" />
           <Property Name="Akcja" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="Data" Type="date" Nullable="false" />
           <Property Name="Godzina" Type="time" Precision="3" Nullable="false" />
@@ -66,14 +66,14 @@
           <Property Name="IdNotatki" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdPacjenta" Type="int" Nullable="false" />
           <Property Name="Data" Type="date" Nullable="false" />
-          <Property Name="Treść" Type="text" />
+          <Property Name="Tekst" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="Pacjenci">
           <Key>
             <PropertyRef Name="IdPacjenta" />
           </Key>
           <Property Name="IdPacjenta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Imię" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Imie" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Nazwisko" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="DataUrodzenia" Type="date" Nullable="false" />
           <Property Name="Adres" Type="nvarchar" MaxLength="255" />
@@ -87,7 +87,7 @@
           </Key>
           <Property Name="IdPlatnosci" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdWizyty" Type="int" Nullable="false" />
-          <Property Name="DataPatnosci" Type="date" Nullable="false" />
+          <Property Name="DataPlatnosci" Type="date" Nullable="false" />
           <Property Name="Kwota" Type="decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="MetodaPlatnosci" Type="varchar" MaxLength="50" />
           <Property Name="Status" Type="bit" />
@@ -173,7 +173,7 @@
           <Property Name="Data" Type="date" Nullable="false" />
           <Property Name="Godzina" Type="time" Precision="0" Nullable="false" />
           <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="CzasTrwaniaWizyty" Type="int" Nullable="false" />
+          <Property Name="CzasTrwaniaWMinutach" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK__ReceptyLe__IdLek__14270015">
           <End Role="Leki" Type="Self.Leki" Multiplicity="1" />
@@ -255,7 +255,7 @@
               <PropertyRef Name="IdUzytkownika" />
             </Principal>
             <Dependent Role="LogiAktywnosci">
-              <PropertyRef Name="IdUżytkownika" />
+              <PropertyRef Name="IdUzytkownika" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -316,6 +316,20 @@
             </Principal>
             <Dependent Role="Recepty">
               <PropertyRef Name="IdPacjenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UzytkownicySystemu_Pracownicy">
+          <End Role="Pracownicy" Type="Self.Pracownicy" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UzytkownicySystemu" Type="Self.UzytkownicySystemu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pracownicy">
+              <PropertyRef Name="IdPracownika" />
+            </Principal>
+            <Dependent Role="UzytkownicySystemu">
+              <PropertyRef Name="IdPracownika" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -432,6 +446,10 @@
             <End Role="Pacjenci" EntitySet="Pacjenci" />
             <End Role="Recepty" EntitySet="Recepty" />
           </AssociationSet>
+          <AssociationSet Name="FK_UzytkownicySystemu_Pracownicy" Association="Self.FK_UzytkownicySystemu_Pracownicy">
+            <End Role="Pracownicy" EntitySet="Pracownicy" />
+            <End Role="UzytkownicySystemu" EntitySet="UzytkownicySystemu" />
+          </AssociationSet>
           <AssociationSet Name="FK_UżytkownicySystemu_Pracownicy" Association="Self.FK_UżytkownicySystemu_Pracownicy">
             <End Role="Pracownicy" EntitySet="Pracownicy" />
             <End Role="UzytkownicySystemu" EntitySet="UzytkownicySystemu" />
@@ -464,7 +482,7 @@
           <Property Name="TypDokumentu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Opis" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="DataDodania" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="ŚcieżkaDoPliku" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ŚcieżkaDoPliku" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Pacjenci" Relationship="Self.FK_Dokumenty_Pacjenci" FromRole="Dokumenty" ToRole="Pacjenci" />
         </EntityType>
         <EntityType Name="GrafikPracownikow">
@@ -507,7 +525,7 @@
             <PropertyRef Name="LogID" />
           </Key>
           <Property Name="LogID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdUżytkownika" Type="Int32" Nullable="false" />
+          <Property Name="IdUzytkownika" Type="Int32" Nullable="false" />
           <Property Name="Akcja" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Data" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Godzina" Type="Time" Nullable="false" Precision="3" />
@@ -521,7 +539,7 @@
           <Property Name="IdNotatki" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdPacjenta" Type="Int32" Nullable="false" />
           <Property Name="Data" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Treść" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Tekst" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Pacjenci" Relationship="Self.FK_Notatki_Pacjenci" FromRole="Notatki" ToRole="Pacjenci" />
         </EntityType>
         <EntityType Name="Pacjenci">
@@ -529,7 +547,7 @@
             <PropertyRef Name="IdPacjenta" />
           </Key>
           <Property Name="IdPacjenta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Imię" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Imie" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Nazwisko" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="DataUrodzenia" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Adres" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
@@ -548,7 +566,7 @@
           </Key>
           <Property Name="IdPlatnosci" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdWizyty" Type="Int32" Nullable="false" />
-          <Property Name="DataPatnosci" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DataPlatnosci" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Kwota" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="MetodaPlatnosci" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Status" Type="Boolean" />
@@ -569,7 +587,8 @@
           <NavigationProperty Name="GrafikPracownikow" Relationship="Self.FK_GrafikPracowników_Pracownicy" FromRole="Pracownicy" ToRole="GrafikPracownikow" />
           <NavigationProperty Name="HistoriaLeczenia" Relationship="Self.FK_HistoriaLeczenia_Pracownicy" FromRole="Pracownicy" ToRole="HistoriaLeczenia" />
           <NavigationProperty Name="Stanowiska" Relationship="Self.FK_Pracownicy_Stanowiska" FromRole="Pracownicy" ToRole="Stanowiska" />
-          <NavigationProperty Name="UzytkownicySystemu" Relationship="Self.FK_UżytkownicySystemu_Pracownicy" FromRole="Pracownicy" ToRole="UzytkownicySystemu" />
+          <NavigationProperty Name="UzytkownicySystemu" Relationship="Self.FK_UzytkownicySystemu_Pracownicy" FromRole="Pracownicy" ToRole="UzytkownicySystemu" />
+          <NavigationProperty Name="UzytkownicySystemu1" Relationship="Self.FK_UżytkownicySystemu_Pracownicy" FromRole="Pracownicy" ToRole="UzytkownicySystemu" />
           <NavigationProperty Name="Wizyty" Relationship="Self.FK_Wizyty_Pracownicy" FromRole="Pracownicy" ToRole="Wizyty" />
         </EntityType>
         <EntityType Name="Recepty">
@@ -636,7 +655,8 @@
           <Property Name="Haslo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Rola" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="LogiAktywnosci" Relationship="Self.FK_LogiAktywności_UżytkownicySystemu" FromRole="UzytkownicySystemu" ToRole="LogiAktywnosci" />
-          <NavigationProperty Name="Pracownicy" Relationship="Self.FK_UżytkownicySystemu_Pracownicy" FromRole="UzytkownicySystemu" ToRole="Pracownicy" />
+          <NavigationProperty Name="Pracownicy" Relationship="Self.FK_UzytkownicySystemu_Pracownicy" FromRole="UzytkownicySystemu" ToRole="Pracownicy" />
+          <NavigationProperty Name="Pracownicy1" Relationship="Self.FK_UżytkownicySystemu_Pracownicy" FromRole="UzytkownicySystemu" ToRole="Pracownicy" />
         </EntityType>
         <EntityType Name="Wizyty">
           <Key>
@@ -649,7 +669,7 @@
           <Property Name="Data" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Godzina" Type="Time" Nullable="false" Precision="0" />
           <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="CzasTrwaniaWizyty" Type="Int32" Nullable="false" />
+          <Property Name="CzasTrwaniaWMinutach" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Pacjenci" Relationship="Self.FK_Wizyty_Pacjenci" FromRole="Wizyty" ToRole="Pacjenci" />
           <NavigationProperty Name="Platnosci" Relationship="Self.FK_Płatności_Wizyty" FromRole="Wizyty" ToRole="Platnosci" />
           <NavigationProperty Name="Platnosci1" Relationship="Self.FK_Płatności_Wizyty1" FromRole="Wizyty" ToRole="Platnosci" />
@@ -724,7 +744,7 @@
               <PropertyRef Name="IdUzytkownika" />
             </Principal>
             <Dependent Role="LogiAktywnosci">
-              <PropertyRef Name="IdUżytkownika" />
+              <PropertyRef Name="IdUzytkownika" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -797,6 +817,20 @@
             </Principal>
             <Dependent Role="Pracownicy">
               <PropertyRef Name="IdStanowiska" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UzytkownicySystemu_Pracownicy">
+          <End Role="Pracownicy" Type="Self.Pracownicy" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UzytkownicySystemu" Type="Self.UzytkownicySystemu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pracownicy">
+              <PropertyRef Name="IdPracownika" />
+            </Principal>
+            <Dependent Role="UzytkownicySystemu">
+              <PropertyRef Name="IdPracownika" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -913,6 +947,10 @@
             <End Role="Stanowiska" EntitySet="Stanowiska" />
             <End Role="Pracownicy" EntitySet="Pracownicy" />
           </AssociationSet>
+          <AssociationSet Name="FK_UzytkownicySystemu_Pracownicy" Association="Self.FK_UzytkownicySystemu_Pracownicy">
+            <End Role="Pracownicy" EntitySet="Pracownicy" />
+            <End Role="UzytkownicySystemu" EntitySet="UzytkownicySystemu" />
+          </AssociationSet>
           <AssociationSet Name="FK_UżytkownicySystemu_Pracownicy" Association="Self.FK_UżytkownicySystemu_Pracownicy">
             <End Role="Pracownicy" EntitySet="Pracownicy" />
             <End Role="UzytkownicySystemu" EntitySet="UzytkownicySystemu" />
@@ -987,7 +1025,7 @@
             <EntityTypeMapping TypeName="DentCareModel.LogiAktywnosci">
               <MappingFragment StoreEntitySet="LogiAktywnosci">
                 <ScalarProperty Name="LogID" ColumnName="LogID" />
-                <ScalarProperty Name="IdUżytkownika" ColumnName="IdUżytkownika" />
+                <ScalarProperty Name="IdUzytkownika" ColumnName="IdUzytkownika" />
                 <ScalarProperty Name="Akcja" ColumnName="Akcja" />
                 <ScalarProperty Name="Data" ColumnName="Data" />
                 <ScalarProperty Name="Godzina" ColumnName="Godzina" />
@@ -1001,7 +1039,7 @@
                 <ScalarProperty Name="IdNotatki" ColumnName="IdNotatki" />
                 <ScalarProperty Name="IdPacjenta" ColumnName="IdPacjenta" />
                 <ScalarProperty Name="Data" ColumnName="Data" />
-                <ScalarProperty Name="Treść" ColumnName="Treść" />
+                <ScalarProperty Name="Tekst" ColumnName="Tekst" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1009,7 +1047,7 @@
             <EntityTypeMapping TypeName="DentCareModel.Pacjenci">
               <MappingFragment StoreEntitySet="Pacjenci">
                 <ScalarProperty Name="IdPacjenta" ColumnName="IdPacjenta" />
-                <ScalarProperty Name="Imię" ColumnName="Imię" />
+                <ScalarProperty Name="Imie" ColumnName="Imie" />
                 <ScalarProperty Name="Nazwisko" ColumnName="Nazwisko" />
                 <ScalarProperty Name="DataUrodzenia" ColumnName="DataUrodzenia" />
                 <ScalarProperty Name="Adres" ColumnName="Adres" />
@@ -1024,7 +1062,7 @@
               <MappingFragment StoreEntitySet="Platnosci">
                 <ScalarProperty Name="IdPlatnosci" ColumnName="IdPlatnosci" />
                 <ScalarProperty Name="IdWizyty" ColumnName="IdWizyty" />
-                <ScalarProperty Name="DataPatnosci" ColumnName="DataPatnosci" />
+                <ScalarProperty Name="DataPlatnosci" ColumnName="DataPlatnosci" />
                 <ScalarProperty Name="Kwota" ColumnName="Kwota" />
                 <ScalarProperty Name="MetodaPlatnosci" ColumnName="MetodaPlatnosci" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
@@ -1118,7 +1156,7 @@
                 <ScalarProperty Name="Data" ColumnName="Data" />
                 <ScalarProperty Name="Godzina" ColumnName="Godzina" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="CzasTrwaniaWizyty" ColumnName="CzasTrwaniaWizyty" />
+                <ScalarProperty Name="CzasTrwaniaWMinutach" ColumnName="CzasTrwaniaWMinutach" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -29,5 +29,6 @@ namespace DentClinicApp.Models.Entities
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LogiAktywnosci> LogiAktywnosci { get; set; }
         public virtual Pracownicy Pracownicy { get; set; }
+        public virtual Pracownicy Pracownicy1 { get; set; }
     }
 }

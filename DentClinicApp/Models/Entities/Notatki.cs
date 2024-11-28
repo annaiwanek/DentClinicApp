@@ -17,7 +17,7 @@ namespace DentClinicApp.Models.Entities
         public int IdNotatki { get; set; }
         public int IdPacjenta { get; set; }
         public System.DateTime Data { get; set; }
-        public string Treść { get; set; }
+        public string Tekst { get; set; }
     
         public virtual Pacjenci Pacjenci { get; set; }
     }
