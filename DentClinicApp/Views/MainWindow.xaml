@@ -1,34 +1,59 @@
 ﻿<Window x:Class="DentClinicApp.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:local="clr-namespace:DentClinicApp"
-        Title="DentClinicApp" Height="450" Width="800"
-        xmlns:vm="clr-namespace:DentClinicApp.ViewModels"
-        DataContext="{DynamicResource MainWindowViewModel}">
-
+        Title="DentClinicApp" Height="300" Width="300" WindowState="Maximized"
+        xmlns:vm="clr-namespace:DentClinicApp.Views">
     <Window.Resources>
-        <ResourceDictionary Source="MainWindowResources.xaml" />
+        <ResourceDictionary Source="MainWindowResources.xaml"  />
     </Window.Resources>
-
-    <DockPanel>
-        <!-- Górne menu -->
-        <Menu DockPanel.Dock="Top">
-            <MenuItem Header="Plik">
-                <MenuItem Header="Wyjdź" Command="{Binding CloseCommand}" />
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <Menu Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Margin="2">
+            <MenuItem Header="_Wizyty"/>
+            <MenuItem Header="_Pacjenci">
+                <MenuItem Header="Wszyscy pacjenci"/>
+                <MenuItem Header="Dodaj pacjenta"/>
             </MenuItem>
-            <MenuItem Header="Pomoc">
-                <MenuItem Header="O aplikacji" />
-            </MenuItem>
+            <MenuItem Header="Moje konto"/>
         </Menu>
-
-        <!-- Boczne menu nawigacyjne -->
-        <StackPanel DockPanel.Dock="Left" Background="LightBlue" Width="200">
-            <Button Content="Strefa Pacjenta" Command="{Binding SwitchToPacjentSectionCommand}" Margin="5" />
-            <Button Content="Strefa Pracownika" Command="{Binding SwitchToPracownikSectionCommand}" Margin="5" />
-        </StackPanel>
-
-        <!-- Dynamiczny obszar -->
-        <ContentControl Content="{Binding ActiveSection}" Margin="10" />
-    </DockPanel>
-
+        <ToolBar Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Margin="2">
+            <ToggleButton Width="32" Height="32" Background="LightBlue" Margin="2"/>
+            <ToggleButton Width="32" Height="32" Background="White" Margin="2"/>
+        </ToolBar>
+        <Border Grid.Row="2" Grid.Column="0">
+            <HeaderedContentControl 
+                Header="Menu" 
+                Background="Aqua" 
+                Content="{Binding Path=Commands}" 
+                ContentTemplate="{StaticResource CommandsTemplate}"
+                Style="{StaticResource MainHCCStyle}"
+                />
+        </Border>
+        <Border Grid.Row="2" Grid.Column="1">
+            <HeaderedContentControl 
+                Header="Przestrzeń robocza"
+                Content="{Binding Path=Workspaces}"
+                ContentTemplate="{StaticResource WorkspacesTemplate}"
+                Style="{StaticResource MainHCCStyle}"
+                 />
+        </Border>
+        <StatusBar Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2">
+            <StatusBarItem>
+                <TextBlock>Anna Iwanek-Sikorska</TextBlock>
+            </StatusBarItem>
+            <Separator/>
+            <StatusBarItem>
+                <TextBlock>Programowanie Aplikacji Desktopowych</TextBlock>
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
 </Window>
