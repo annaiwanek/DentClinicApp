@@ -2,10 +2,12 @@
 using DentClinicApp.Models.Entities;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace DentClinicApp.ViewModels
@@ -108,10 +110,6 @@ namespace DentClinicApp.ViewModels
             }
         }
 
-
-
-
-
         public string Adres
         {
             get
@@ -140,19 +138,66 @@ namespace DentClinicApp.ViewModels
             }
         }
 
+        public string Email
+        {
+            get
+            {
+                return pacjenci.Email;
+            }
+
+            set
+            {
+                pacjenci.Email = value;
+                OnPropertyChanged(() => Email);
+            }
+        }
+
         #endregion
 
         #region Helpers
         public void Save()
         {
-            dentCareEntities.Pacjenci.Add(pacjenci); // dodawanie rekordu najpierw do lokalnej kolekcji
-            dentCareEntities.SaveChanges(); // zapisywanie do bazy danych 
+            if (string.IsNullOrWhiteSpace(pacjenci.Imie))
+                throw new InvalidOperationException("Pole 'Imię' jest wymagane.");
+
+            if (string.IsNullOrWhiteSpace(pacjenci.Nazwisko))
+                throw new InvalidOperationException("Pole 'Nazwisko' jest wymagane.");
+
+            if (pacjenci.DataUrodzenia == null || pacjenci.DataUrodzenia == DateTime.MinValue)
+                throw new InvalidOperationException("Pole 'Data Urodzenia' jest wymagane.");
+
+            savePatient();
+           
         }
 
         public void SaveAndClose()
         {
             Save();
             base.OnRequestClose(); // Zamknięcie zakładki 
+        }
+
+        private void savePatient() {
+            try {
+                Console.WriteLine("Adding patient");
+                dentCareEntities.Pacjenci.Add(pacjenci); // dodawanie rekordu najpierw do lokalnej kolekcji
+                dentCareEntities.SaveChanges(); // zapisywanie do bazy danych 
+                Console.WriteLine("Added patient successfuly");
+            }
+            catch (DbEntityValidationException e)
+            {
+                Console.WriteLine("Errors");
+                //Console.WriteLine(e.EntityValidationErrors.ToList);
+                foreach (DbEntityValidationResult entityError in e.EntityValidationErrors) {
+                    
+                    foreach (DbValidationError validationError in entityError.ValidationErrors)
+                    {
+                        Console.WriteLine(validationError.PropertyName + ": " + validationError.ErrorMessage);
+                    }
+                }
+            }
+            catch (Exception e) {
+                Console.WriteLine(e);
+            }
         }
         #endregion
     }
