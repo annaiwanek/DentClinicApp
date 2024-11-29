@@ -118,7 +118,6 @@ namespace DentClinicApp.ViewModels
             catch (DbEntityValidationException e)
             {
                 Console.WriteLine("Errors");
-                //Console.WriteLine(e.EntityValidationErrors.ToList);
                 foreach (DbEntityValidationResult entityError in e.EntityValidationErrors)
                 {
 

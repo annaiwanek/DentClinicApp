@@ -12,6 +12,9 @@
                 <DataGridTextColumn Header="Id" Binding="{Binding IdStanowiska}"/>
                 <DataGridTextColumn Header="Nazwa stanowiska" Binding="{Binding Nazwa}"/>
                 <DataGridTextColumn Header="Zakres obowiązków" Binding="{Binding ZakresObowiazkow}"/>
+                <DataGridCheckBoxColumn Header="Czy aktywne" Binding="{Binding CzyAktywne}"/>
+                <DataGridTextColumn Header="Wynagrodzenie minimalne" Binding="{Binding WynagrodzenieMin}"/>
+                <DataGridTextColumn Header="Wynagrodzenie maksymalne" Binding="{Binding WynagrodzenieMax}"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

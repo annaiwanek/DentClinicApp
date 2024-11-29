@@ -50,9 +50,53 @@ namespace DentClinicApp.ViewModels
                 OnPropertyChanged(() => ZakresObowiazkow);
             }
         }
+
+        public bool CzyAktywne
+        {
+            get
+            {
+                return item.CzyAktywne;
+            }
+
+            set
+            {
+                item.CzyAktywne = value;
+                OnPropertyChanged(() => CzyAktywne);
+            }
+        }
+
+        public decimal? WynagrodzenieMin
+        {
+            get
+            {
+                return item.WynagrodzenieMin;
+            }
+
+            set
+            {
+                item.WynagrodzenieMin = value;
+                OnPropertyChanged(() => WynagrodzenieMin);
+            }
+        }
+
+        public decimal? WynagrodzenieMax
+        {
+            get
+            {
+                return item.WynagrodzenieMax;
+            }
+
+            set
+            {
+                item.WynagrodzenieMax = value;
+                OnPropertyChanged(() => ZakresObowiazkow);
+            }
+        }
+
         #endregion
 
         #region Helpers
+
         public override void Save()
         {
             saveWorkStation();
@@ -69,7 +113,6 @@ namespace DentClinicApp.ViewModels
             catch (DbEntityValidationException e)
             {
                 Console.WriteLine("Errors");
-                //Console.WriteLine(e.EntityValidationErrors.ToList);
                 foreach (DbEntityValidationResult entityError in e.EntityValidationErrors)
                 {
 

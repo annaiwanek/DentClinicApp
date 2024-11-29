@@ -23,6 +23,9 @@ namespace DentClinicApp.Models.Entities
         public int IdStanowiska { get; set; }
         public string Nazwa { get; set; }
         public string ZakresObowiazkow { get; set; }
+        public bool CzyAktywne { get; set; }
+        public Nullable<decimal> WynagrodzenieMin { get; set; }
+        public Nullable<decimal> WynagrodzenieMax { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Pracownicy> Pracownicy { get; set; }
