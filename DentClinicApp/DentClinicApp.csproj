@@ -134,11 +134,15 @@
     <Compile Include="ViewModels\CommandViewModel.cs" />
     <Compile Include="ViewModels\JedenViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\NowaUslugaViewModel.cs" />
+    <Compile Include="ViewModels\NoweStanowiskoViewModel.cs" />
     <Compile Include="ViewModels\NowyLekViewModel.cs" />
     <Compile Include="ViewModels\NowyPacjentViewModel.cs" />
     <Compile Include="ViewModels\WorkspaceViewModel.cs" />
     <Compile Include="ViewModels\WszyscyPacjenciViewModel.cs" />
     <Compile Include="ViewModels\WszystkieLekiViewModel.cs" />
+    <Compile Include="ViewModels\WszystkieStanowiskaViewModel.cs" />
+    <Compile Include="ViewModels\WszystkieUslugiViewModel.cs" />
     <Compile Include="ViewModels\WszystkieViewModel.cs" />
     <Compile Include="Views\JedenViewBase.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
@@ -147,6 +151,12 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\NowaUslugaView.xaml.cs">
+      <DependentUpon>NowaUslugaView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NoweStanowiskoView.xaml.cs">
+      <DependentUpon>NoweStanowiskoView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\NowyLekView.xaml.cs">
       <DependentUpon>NowyLekView.xaml</DependentUpon>
@@ -160,6 +170,12 @@
     <Compile Include="Views\WszystkieLekiView.xaml.cs">
       <DependentUpon>WszystkieLekiView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\WszystkieStanowiskaView.xaml.cs">
+      <DependentUpon>WszystkieStanowiskaView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WszystkieUslugiView.xaml.cs">
+      <DependentUpon>WszystkieUslugiView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\WszystkieViewBase.cs" />
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -170,6 +186,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\MainWindowResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\NowaUslugaView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\NoweStanowiskoView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -186,6 +210,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\WszystkieLekiView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WszystkieStanowiskaView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WszystkieUslugiView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

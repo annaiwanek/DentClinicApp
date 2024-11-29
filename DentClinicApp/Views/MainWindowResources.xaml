@@ -19,6 +19,23 @@
         <vw:NowyLekView/>
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type vm:WszystkieStanowiskaViewModel}">
+        <vw:WszystkieStanowiskaView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:NoweStanowiskoViewModel}">
+        <vw:NoweStanowiskoView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:WszystkieUslugiViewModel}">
+        <vw:WszystkieUslugiView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:NowaUslugaViewModel}">
+        <vw:NowaUslugaView/>
+    </DataTemplate>
+
+
     <Style x:Key="MainHCCStyle" TargetType="{x:Type HeaderedContentControl}">
         <Setter Property="HeaderTemplate">
             <Setter.Value>
