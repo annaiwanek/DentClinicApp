@@ -11,6 +11,7 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding IdStanowiska}"/>
                 <DataGridTextColumn Header="Nazwa stanowiska" Binding="{Binding Nazwa}"/>
+                <DataGridTextColumn Header="Zakres obowiązków" Binding="{Binding ZakresObowiazkow}"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

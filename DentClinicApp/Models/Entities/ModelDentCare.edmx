@@ -131,6 +131,7 @@
           </Key>
           <Property Name="IdStanowiska" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nazwa" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ZakresObowiazkow" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -622,6 +623,7 @@
           <Property Name="IdStanowiska" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nazwa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Pracownicy" Relationship="Self.FK_Pracownicy_Stanowiska" FromRole="Stanowiska" ToRole="Pracownicy" />
+          <Property Name="ZakresObowiazkow" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -1107,6 +1109,7 @@
           <EntitySetMapping Name="Stanowiska">
             <EntityTypeMapping TypeName="DentCareModel.Stanowiska">
               <MappingFragment StoreEntitySet="Stanowiska">
+                <ScalarProperty Name="ZakresObowiazkow" ColumnName="ZakresObowiazkow" />
                 <ScalarProperty Name="IdStanowiska" ColumnName="IdStanowiska" />
                 <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
               </MappingFragment>

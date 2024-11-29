@@ -36,6 +36,20 @@ namespace DentClinicApp.ViewModels
                 OnPropertyChanged(() => Nazwa);
             }
         }
+
+        public string ZakresObowiazkow
+        {
+            get
+            {
+                return item.ZakresObowiazkow;
+            }
+
+            set
+            {
+                item.ZakresObowiazkow = value;
+                OnPropertyChanged(() => ZakresObowiazkow);
+            }
+        }
         #endregion
 
         #region Helpers
