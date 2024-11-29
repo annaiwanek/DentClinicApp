@@ -139,35 +139,37 @@ namespace DentClinicApp.ViewModels
             if (item    .DataUrodzenia == null || item.DataUrodzenia == DateTime.MinValue)
                 throw new InvalidOperationException("Pole 'Data Urodzenia' jest wymagane.");
 
-            //savePatient();
-           
+            savePatient();
+
         }
 
-      
+        private void savePatient()
+        {
+            try
+            {
+                Console.WriteLine("Adding patient");
+                dentCareEntities.Pacjenci.Add(item); // dodawanie rekordu najpierw do lokalnej kolekcji
+                dentCareEntities.SaveChanges(); // zapisywanie do bazy danych 
+                Console.WriteLine("Added patient successfuly");
+            }
+            catch (DbEntityValidationException e)
+            {
+                Console.WriteLine("Errors");
+                //Console.WriteLine(e.EntityValidationErrors.ToList);
+                foreach (DbEntityValidationResult entityError in e.EntityValidationErrors)
+                {
 
-        ////private void savePatient() {
-        ////    try {
-        ////        Console.WriteLine("Adding patient");
-        ////        dentCareEntities.Pacjenci.Add(item); // dodawanie rekordu najpierw do lokalnej kolekcji
-        ////        dentCareEntities.SaveChanges(); // zapisywanie do bazy danych 
-        ////        Console.WriteLine("Added patient successfuly");
-        ////    }
-        ////    catch (DbEntityValidationException e)
-        ////    {
-        ////        Console.WriteLine("Errors");
-        ////        //Console.WriteLine(e.EntityValidationErrors.ToList);
-        ////        foreach (DbEntityValidationResult entityError in e.EntityValidationErrors) {
-                    
-        ////            foreach (DbValidationError validationError in entityError.ValidationErrors)
-        ////            {
-        ////                Console.WriteLine(validationError.PropertyName + ": " + validationError.ErrorMessage);
-        ////            }
-        ////        }
-        ////    }
-        ////    catch (Exception e) {
-        ////        Console.WriteLine(e);
-        ////    }
-        //}
+                    foreach (DbValidationError validationError in entityError.ValidationErrors)
+                    {
+                        Console.WriteLine(validationError.PropertyName + ": " + validationError.ErrorMessage);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+        }
         #endregion
     }
 }

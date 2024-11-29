@@ -41,7 +41,15 @@ namespace DentClinicApp.ViewModels
 
                 new CommandViewModel(
                     "Pacjent",
-                    new BaseCommand(() => this.CreateView(new NowyPacjentViewModel())))
+                    new BaseCommand(() => this.CreateView(new NowyPacjentViewModel()))),
+
+                 new CommandViewModel(
+                    "Leki",
+                    new BaseCommand(() => this.ShowWorkspace<WszystkieLekiViewModel>())),
+
+                new CommandViewModel(
+                    "Lek",
+                    new BaseCommand(() => this.CreateView(new NowyLekViewModel())))
             };
         }
         #endregion

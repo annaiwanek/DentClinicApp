@@ -11,6 +11,14 @@
         <vw:NowyPacjentView/>
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type vm:WszystkieLekiViewModel}">
+        <vw:WszystkieLekiView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:NowyLekViewModel}">
+        <vw:NowyLekView/>
+    </DataTemplate>
+
     <Style x:Key="MainHCCStyle" TargetType="{x:Type HeaderedContentControl}">
         <Setter Property="HeaderTemplate">
             <Setter.Value>
