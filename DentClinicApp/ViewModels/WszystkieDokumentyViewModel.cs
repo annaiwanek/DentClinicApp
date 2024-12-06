@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DentClinicApp.ViewModels
-{ // Klasa, która dostarcza danych do widoku wyświetlającego wszystkich pacjentów
+{ // Klasa, która dostarcza danych do widoku wyświetlającego wszystkie dokumenty
     public class WszystkieDokumentyViewModel : WszystkieViewModel<DokumentForAllView> // tym razem nie wyświetlamy Dokumenty tylko DokumentForAllView
     {
         

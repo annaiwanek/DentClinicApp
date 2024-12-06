@@ -74,7 +74,15 @@ namespace DentClinicApp.ViewModels
 
                 new CommandViewModel(
                     "Dokument",
-                    new BaseCommand(() => this.CreateView(new NowyDokumentViewModel())))
+                    new BaseCommand(() => this.CreateView(new NowyDokumentViewModel()))),
+
+                 new CommandViewModel(
+                    "Grafiki",
+                    new BaseCommand(() => this.ShowWorkspace<WszystkieGrafikiViewModel>())),
+
+                new CommandViewModel(
+                    "Grafik",
+                    new BaseCommand(() => this.CreateView(new NowyGrafikViewModel())))
 
 
             };

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DentClinicApp.ViewModels
 {
-    public class NowyDokumentViewModel:WorkspaceViewModel // wszystkie zakładki dziedziczą po WorkspaceViewModel
+    public class NowyDokumentViewModel : WorkspaceViewModel // wszystkie zakładki dziedziczą po WorkspaceViewModel
     {
         public NowyDokumentViewModel() 
         {

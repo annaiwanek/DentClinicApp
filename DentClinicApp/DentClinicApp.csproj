@@ -68,6 +68,7 @@
     </ApplicationDefinition>
     <Compile Include="Helper\BaseCommand.cs" />
     <Compile Include="Models\EntitiesForView\DokumentForAllView.cs" />
+    <Compile Include="Models\EntitiesForView\GrafikForAllView.cs" />
     <Compile Include="Models\Entities\Dokumenty.cs">
       <DependentUpon>ModelDentCare.tt</DependentUpon>
     </Compile>
@@ -138,11 +139,13 @@
     <Compile Include="ViewModels\NowaUslugaViewModel.cs" />
     <Compile Include="ViewModels\NoweStanowiskoViewModel.cs" />
     <Compile Include="ViewModels\NowyDokumentViewModel.cs" />
+    <Compile Include="ViewModels\NowyGrafikViewModel.cs" />
     <Compile Include="ViewModels\NowyLekViewModel.cs" />
     <Compile Include="ViewModels\NowyPacjentViewModel.cs" />
     <Compile Include="ViewModels\WorkspaceViewModel.cs" />
     <Compile Include="ViewModels\WszyscyPacjenciViewModel.cs" />
     <Compile Include="ViewModels\WszystkieDokumentyViewModel.cs" />
+    <Compile Include="ViewModels\WszystkieGrafikiViewModel.cs" />
     <Compile Include="ViewModels\WszystkieLekiViewModel.cs" />
     <Compile Include="ViewModels\WszystkieStanowiskaViewModel.cs" />
     <Compile Include="ViewModels\WszystkieUslugiViewModel.cs" />
@@ -164,6 +167,9 @@
     <Compile Include="Views\NowyDokumentView.xaml.cs">
       <DependentUpon>NowyDokumentView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\NowyGrafikView.xaml.cs">
+      <DependentUpon>NowyGrafikView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\NowyLekView.xaml.cs">
       <DependentUpon>NowyLekView.xaml</DependentUpon>
     </Compile>
@@ -175,6 +181,9 @@
     </Compile>
     <Compile Include="Views\WszystkieDokumentyView.xaml.cs">
       <DependentUpon>WszystkieDokumentyView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WszystkieGrafikiView.xaml.cs">
+      <DependentUpon>WszystkieGrafikiView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\WszystkieLekiView.xaml.cs">
       <DependentUpon>WszystkieLekiView.xaml</DependentUpon>
@@ -210,6 +219,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\NowyGrafikView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\NowyLekView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -223,6 +236,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\WszystkieDokumentyView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WszystkieGrafikiView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
