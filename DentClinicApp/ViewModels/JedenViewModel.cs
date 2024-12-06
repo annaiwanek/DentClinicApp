@@ -9,6 +9,8 @@ using System.Windows.Input;
 
 namespace DentClinicApp.ViewModels
 {
+    // Klasa bazowa do zarządzania pojedynczym elementem danych typu T
+    // Mechanizmy zarządzania bazą danych, obsługa komendy do zapisywania danych
     public abstract class JedenViewModel<T> : WorkspaceViewModel
     {
         #region DB

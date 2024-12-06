@@ -10,7 +10,8 @@ using System.Windows.Data;
 using System.Windows.Input;
 
 namespace DentClinicApp.ViewModels
-{
+{ 
+    // Zarządzanie interakcjami użytkownika - otwieranie i zamykanie zakładek, obsługa komend
     public class MainWindowViewModel : BaseViewModel
     {
         #region Fields
