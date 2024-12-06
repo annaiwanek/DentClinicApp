@@ -35,6 +35,14 @@
         <vw:NowaUslugaView/>
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type vm:WszystkieDokumentyViewModel}">
+        <vw:WszystkieDokumentyView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:NowyDokumentViewModel}">
+        <vw:NowyDokumentView/>
+    </DataTemplate>
+
 
     <Style x:Key="MainHCCStyle" TargetType="{x:Type HeaderedContentControl}">
         <Setter Property="HeaderTemplate">
