@@ -71,6 +71,7 @@
     <Compile Include="Models\EntitiesForView\GrafikForAllView.cs" />
     <Compile Include="Models\EntitiesForView\HistoriaLeczeniaForAllView.cs" />
     <Compile Include="Models\EntitiesForView\LogForAllView.cs" />
+    <Compile Include="Models\EntitiesForView\NotatkaForAllView.cs" />
     <Compile Include="Models\Entities\Dokumenty.cs">
       <DependentUpon>ModelDentCare.tt</DependentUpon>
     </Compile>
@@ -139,6 +140,7 @@
     <Compile Include="ViewModels\JedenViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\NowaHistoriaLeczeniaViewModel.cs" />
+    <Compile Include="ViewModels\NowaNotatkaViewModel.cs" />
     <Compile Include="ViewModels\NowaUslugaViewModel.cs" />
     <Compile Include="ViewModels\NoweStanowiskoViewModel.cs" />
     <Compile Include="ViewModels\NowyDokumentViewModel.cs" />
@@ -153,6 +155,7 @@
     <Compile Include="ViewModels\WszystkieHistorieLeczeniaViewModel.cs" />
     <Compile Include="ViewModels\WszystkieLekiViewModel.cs" />
     <Compile Include="ViewModels\WszystkieLogiViewModel.cs" />
+    <Compile Include="ViewModels\WszystkieNotatkiViewModel.cs" />
     <Compile Include="ViewModels\WszystkieStanowiskaViewModel.cs" />
     <Compile Include="ViewModels\WszystkieUslugiViewModel.cs" />
     <Compile Include="ViewModels\WszystkieViewModel.cs" />
@@ -166,6 +169,9 @@
     </Compile>
     <Compile Include="Views\NowaHistoriaLeczeniaView.xaml.cs">
       <DependentUpon>NowaHistoriaLeczeniaView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NowaNotatkaView.xaml.cs">
+      <DependentUpon>NowaNotatkaView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\NowaUslugaView.xaml.cs">
       <DependentUpon>NowaUslugaView.xaml</DependentUpon>
@@ -206,6 +212,9 @@
     <Compile Include="Views\WszystkieLogiView.xaml.cs">
       <DependentUpon>WszystkieLogiView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\WszystkieNotatkiView.xaml.cs">
+      <DependentUpon>WszystkieNotatkiView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\WszystkieStanowiskaView.xaml.cs">
       <DependentUpon>WszystkieStanowiskaView.xaml</DependentUpon>
     </Compile>
@@ -226,6 +235,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\NowaHistoriaLeczeniaView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\NowaNotatkaView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -278,6 +291,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\WszystkieLogiView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WszystkieNotatkiView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

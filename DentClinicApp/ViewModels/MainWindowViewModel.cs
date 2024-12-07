@@ -98,7 +98,15 @@ namespace DentClinicApp.ViewModels
 
                 new CommandViewModel(
                     "Log aktywności",
-                    new BaseCommand(() => this.CreateView(new NowyLogViewModel())))
+                    new BaseCommand(() => this.CreateView(new NowyLogViewModel()))),
+
+                 new CommandViewModel(
+                    "Notatki",
+                    new BaseCommand(() => this.ShowWorkspace<WszystkieNotatkiViewModel>())),
+
+                new CommandViewModel(
+                    "Notatka",
+                    new BaseCommand(() => this.CreateView(new NowaNotatkaViewModel())))
 
 
             };

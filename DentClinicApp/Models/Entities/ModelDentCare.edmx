@@ -67,6 +67,7 @@
           <Property Name="IdPacjenta" Type="int" Nullable="false" />
           <Property Name="Data" Type="date" Nullable="false" />
           <Property Name="Tekst" Type="nvarchar" MaxLength="255" />
+          <Property Name="IdPracownika" Type="int" />
         </EntityType>
         <EntityType Name="Pacjenci">
           <Key>
@@ -275,6 +276,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Notatki_Pracownicy">
+          <End Role="Pracownicy" Type="Self.Pracownicy" Multiplicity="0..1" />
+          <End Role="Notatki" Type="Self.Notatki" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pracownicy">
+              <PropertyRef Name="IdPracownika" />
+            </Principal>
+            <Dependent Role="Notatki">
+              <PropertyRef Name="IdPracownika" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Płatności_Wizyty">
           <End Role="Wizyty" Type="Self.Wizyty" Multiplicity="1" />
           <End Role="Platnosci" Type="Self.Platnosci" Multiplicity="*" />
@@ -434,6 +447,10 @@
             <End Role="Pacjenci" EntitySet="Pacjenci" />
             <End Role="Notatki" EntitySet="Notatki" />
           </AssociationSet>
+          <AssociationSet Name="FK_Notatki_Pracownicy" Association="Self.FK_Notatki_Pracownicy">
+            <End Role="Pracownicy" EntitySet="Pracownicy" />
+            <End Role="Notatki" EntitySet="Notatki" />
+          </AssociationSet>
           <AssociationSet Name="FK_Płatności_Wizyty" Association="Self.FK_Płatności_Wizyty">
             <End Role="Wizyty" EntitySet="Wizyty" />
             <End Role="Platnosci" EntitySet="Platnosci" />
@@ -544,6 +561,8 @@
           <Property Name="Data" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Tekst" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Pacjenci" Relationship="Self.FK_Notatki_Pacjenci" FromRole="Notatki" ToRole="Pacjenci" />
+          <Property Name="IdPracownika" Type="Int32" />
+          <NavigationProperty Name="Pracownicy" Relationship="DentCareModel.FK_Notatki_Pracownicy" FromRole="Notatki" ToRole="Pracownicy" />
         </EntityType>
         <EntityType Name="Pacjenci">
           <Key>
@@ -593,6 +612,7 @@
           <NavigationProperty Name="UzytkownicySystemu" Relationship="Self.FK_UzytkownicySystemu_Pracownicy" FromRole="Pracownicy" ToRole="UzytkownicySystemu" />
           <NavigationProperty Name="UzytkownicySystemu1" Relationship="Self.FK_UżytkownicySystemu_Pracownicy" FromRole="Pracownicy" ToRole="UzytkownicySystemu" />
           <NavigationProperty Name="Wizyty" Relationship="Self.FK_Wizyty_Pracownicy" FromRole="Pracownicy" ToRole="Wizyty" />
+          <NavigationProperty Name="Notatki" Relationship="DentCareModel.FK_Notatki_Pracownicy" FromRole="Pracownicy" ToRole="Notatki" />
         </EntityType>
         <EntityType Name="Recepty">
           <Key>
@@ -974,7 +994,23 @@
             <End Role="Uslugi" EntitySet="Uslugi" />
             <End Role="Wizyty" EntitySet="Wizyty" />
           </AssociationSet>
+          <AssociationSet Name="FK_Notatki_Pracownicy" Association="DentCareModel.FK_Notatki_Pracownicy">
+            <End Role="Pracownicy" EntitySet="Pracownicy" />
+            <End Role="Notatki" EntitySet="Notatki" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_Notatki_Pracownicy">
+          <End Type="DentCareModel.Pracownicy" Role="Pracownicy" Multiplicity="0..1" />
+          <End Type="DentCareModel.Notatki" Role="Notatki" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pracownicy">
+              <PropertyRef Name="IdPracownika" />
+            </Principal>
+            <Dependent Role="Notatki">
+              <PropertyRef Name="IdPracownika" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1043,6 +1079,7 @@
           <EntitySetMapping Name="Notatki">
             <EntityTypeMapping TypeName="DentCareModel.Notatki">
               <MappingFragment StoreEntitySet="Notatki">
+                <ScalarProperty Name="IdPracownika" ColumnName="IdPracownika" />
                 <ScalarProperty Name="IdNotatki" ColumnName="IdNotatki" />
                 <ScalarProperty Name="IdPacjenta" ColumnName="IdPacjenta" />
                 <ScalarProperty Name="Data" ColumnName="Data" />

@@ -67,6 +67,14 @@
         <vw:NowyLogView/>
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type vm:WszystkieNotatkiViewModel}">
+        <vw:WszystkieNotatkiView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:NowaNotatkaViewModel}">
+        <vw:NowaNotatkaView/>
+    </DataTemplate>
+
 
     <Style x:Key="MainHCCStyle" TargetType="{x:Type HeaderedContentControl}">
         <Setter Property="HeaderTemplate">

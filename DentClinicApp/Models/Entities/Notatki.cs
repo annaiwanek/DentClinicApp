@@ -18,7 +18,9 @@ namespace DentClinicApp.Models.Entities
         public int IdPacjenta { get; set; }
         public System.DateTime Data { get; set; }
         public string Tekst { get; set; }
+        public Nullable<int> IdPracownika { get; set; }
     
         public virtual Pacjenci Pacjenci { get; set; }
+        public virtual Pracownicy Pracownicy { get; set; }
     }
 }
