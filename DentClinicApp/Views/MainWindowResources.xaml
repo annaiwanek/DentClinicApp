@@ -51,6 +51,14 @@
         <vw:NowyGrafikView/>
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type vm:WszystkieHistorieLeczeniaViewModel}">
+        <vw:WszystkieHistorieLeczeniaView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:NowaHistoriaLeczeniaViewModel}">
+        <vw:NowaHistoriaLeczeniaView/>
+    </DataTemplate>
+
 
     <Style x:Key="MainHCCStyle" TargetType="{x:Type HeaderedContentControl}">
         <Setter Property="HeaderTemplate">

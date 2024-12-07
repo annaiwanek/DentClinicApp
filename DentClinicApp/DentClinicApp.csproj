@@ -69,6 +69,7 @@
     <Compile Include="Helper\BaseCommand.cs" />
     <Compile Include="Models\EntitiesForView\DokumentForAllView.cs" />
     <Compile Include="Models\EntitiesForView\GrafikForAllView.cs" />
+    <Compile Include="Models\EntitiesForView\HistoriaLeczeniaForAllView.cs" />
     <Compile Include="Models\Entities\Dokumenty.cs">
       <DependentUpon>ModelDentCare.tt</DependentUpon>
     </Compile>
@@ -136,6 +137,7 @@
     <Compile Include="ViewModels\CommandViewModel.cs" />
     <Compile Include="ViewModels\JedenViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\NowaHistoriaLeczeniaViewModel.cs" />
     <Compile Include="ViewModels\NowaUslugaViewModel.cs" />
     <Compile Include="ViewModels\NoweStanowiskoViewModel.cs" />
     <Compile Include="ViewModels\NowyDokumentViewModel.cs" />
@@ -146,6 +148,7 @@
     <Compile Include="ViewModels\WszyscyPacjenciViewModel.cs" />
     <Compile Include="ViewModels\WszystkieDokumentyViewModel.cs" />
     <Compile Include="ViewModels\WszystkieGrafikiViewModel.cs" />
+    <Compile Include="ViewModels\WszystkieHistorieLeczeniaViewModel.cs" />
     <Compile Include="ViewModels\WszystkieLekiViewModel.cs" />
     <Compile Include="ViewModels\WszystkieStanowiskaViewModel.cs" />
     <Compile Include="ViewModels\WszystkieUslugiViewModel.cs" />
@@ -157,6 +160,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\NowaHistoriaLeczeniaView.xaml.cs">
+      <DependentUpon>NowaHistoriaLeczeniaView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\NowaUslugaView.xaml.cs">
       <DependentUpon>NowaUslugaView.xaml</DependentUpon>
@@ -173,6 +179,9 @@
     <Compile Include="Views\NowyLekView.xaml.cs">
       <DependentUpon>NowyLekView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\NowyLogView.xaml.cs">
+      <DependentUpon>NowyLogView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\NowyPacjentView.xaml.cs">
       <DependentUpon>NowyPacjentView.xaml</DependentUpon>
     </Compile>
@@ -185,8 +194,14 @@
     <Compile Include="Views\WszystkieGrafikiView.xaml.cs">
       <DependentUpon>WszystkieGrafikiView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\WszystkieHistorieLeczeniaView.xaml.cs">
+      <DependentUpon>WszystkieHistorieLeczeniaView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\WszystkieLekiView.xaml.cs">
       <DependentUpon>WszystkieLekiView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WszystkieLogiView.xaml.cs">
+      <DependentUpon>WszystkieLogiView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\WszystkieStanowiskaView.xaml.cs">
       <DependentUpon>WszystkieStanowiskaView.xaml</DependentUpon>
@@ -204,6 +219,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\MainWindowResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\NowaHistoriaLeczeniaView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -227,6 +246,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\NowyLogView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\NowyPacjentView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -243,7 +266,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\WszystkieHistorieLeczeniaView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\WszystkieLekiView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WszystkieLogiView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
