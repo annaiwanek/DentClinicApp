@@ -70,6 +70,7 @@
     <Compile Include="Models\EntitiesForView\DokumentForAllView.cs" />
     <Compile Include="Models\EntitiesForView\GrafikForAllView.cs" />
     <Compile Include="Models\EntitiesForView\HistoriaLeczeniaForAllView.cs" />
+    <Compile Include="Models\EntitiesForView\LogForAllView.cs" />
     <Compile Include="Models\Entities\Dokumenty.cs">
       <DependentUpon>ModelDentCare.tt</DependentUpon>
     </Compile>
@@ -143,6 +144,7 @@
     <Compile Include="ViewModels\NowyDokumentViewModel.cs" />
     <Compile Include="ViewModels\NowyGrafikViewModel.cs" />
     <Compile Include="ViewModels\NowyLekViewModel.cs" />
+    <Compile Include="ViewModels\NowyLogViewModel.cs" />
     <Compile Include="ViewModels\NowyPacjentViewModel.cs" />
     <Compile Include="ViewModels\WorkspaceViewModel.cs" />
     <Compile Include="ViewModels\WszyscyPacjenciViewModel.cs" />
@@ -150,6 +152,7 @@
     <Compile Include="ViewModels\WszystkieGrafikiViewModel.cs" />
     <Compile Include="ViewModels\WszystkieHistorieLeczeniaViewModel.cs" />
     <Compile Include="ViewModels\WszystkieLekiViewModel.cs" />
+    <Compile Include="ViewModels\WszystkieLogiViewModel.cs" />
     <Compile Include="ViewModels\WszystkieStanowiskaViewModel.cs" />
     <Compile Include="ViewModels\WszystkieUslugiViewModel.cs" />
     <Compile Include="ViewModels\WszystkieViewModel.cs" />

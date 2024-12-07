@@ -7,6 +7,14 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Background="White">
-            
+        <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding List}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Log ID" Binding="{Binding IdLog}"/>
+                <DataGridTextColumn Header="Data i godzina" Binding="{Binding Data}"/>
+                <DataGridTextColumn Header="Akcja" Binding="{Binding Akcja}"/>
+                <DataGridTextColumn Header="Opis" Binding="{Binding Opis}"/>
+                <DataGridTextColumn Header="Login użytkownika" Binding="{Binding LoginUzytkownika}"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </local:WszystkieViewBase>
