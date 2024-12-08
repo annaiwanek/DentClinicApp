@@ -93,6 +93,14 @@
         <vw:NowyPracownikView/>
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type vm:WszystkieReceptyViewModel}">
+        <vw:WszystkieReceptyView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:NowaReceptaViewModel}">
+        <vw:NowaReceptaView/>
+    </DataTemplate>
+
 
     <Style x:Key="MainHCCStyle" TargetType="{x:Type HeaderedContentControl}">
         <Setter Property="HeaderTemplate">

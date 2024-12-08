@@ -29,5 +29,6 @@ namespace DentClinicApp.Models.Entities
         public virtual Pacjenci Pacjenci { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ReceptyLeki> ReceptyLeki { get; set; }
+        public virtual Pracownicy Pracownicy { get; set; }
     }
 }

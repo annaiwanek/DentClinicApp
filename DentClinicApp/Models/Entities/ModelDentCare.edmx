@@ -389,6 +389,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Recepty_Pracownicy">
+          <End Role="Pracownicy" Type="Self.Pracownicy" Multiplicity="1" />
+          <End Role="Recepty" Type="Self.Recepty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pracownicy">
+              <PropertyRef Name="IdPracownika" />
+            </Principal>
+            <Dependent Role="Recepty">
+              <PropertyRef Name="IdPracownika" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_UzytkownicySystemu_Pracownicy">
           <End Role="Pracownicy" Type="Self.Pracownicy" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
@@ -534,6 +546,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_Recepty_Pacjenci" Association="Self.FK_Recepty_Pacjenci">
             <End Role="Pacjenci" EntitySet="Pacjenci" />
+            <End Role="Recepty" EntitySet="Recepty" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recepty_Pracownicy" Association="Self.FK_Recepty_Pracownicy">
+            <End Role="Pracownicy" EntitySet="Pracownicy" />
             <End Role="Recepty" EntitySet="Recepty" />
           </AssociationSet>
           <AssociationSet Name="FK_UzytkownicySystemu_Pracownicy" Association="Self.FK_UzytkownicySystemu_Pracownicy">
@@ -692,6 +708,7 @@
           <NavigationProperty Name="Platnosci" Relationship="DentCareModel.FK_Platnosci_Pracownicy" FromRole="Pracownicy" ToRole="Platnosci" />
           <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="DataZwolnienia" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Recepty" Relationship="DentCareModel.FK_Recepty_Pracownicy" FromRole="Pracownicy" ToRole="Recepty" />
         </EntityType>
         <EntityType Name="Recepty">
           <Key>
@@ -704,6 +721,7 @@
           <Property Name="Uwagi" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Pacjenci" Relationship="Self.FK_Recepty_Pacjenci" FromRole="Recepty" ToRole="Pacjenci" />
           <NavigationProperty Name="ReceptyLeki" Relationship="Self.FK__ReceptyLe__IdRec__1332DBDC" FromRole="Recepty" ToRole="ReceptyLeki" />
+          <NavigationProperty Name="Pracownicy" Relationship="DentCareModel.FK_Recepty_Pracownicy" FromRole="Recepty" ToRole="Pracownicy" />
         </EntityType>
         <EntityType Name="ReceptyLeki">
           <Key>
@@ -1090,6 +1108,10 @@
             <End Role="UzytkownicySystemu" EntitySet="UzytkownicySystemu" />
             <End Role="Platnosci" EntitySet="Platnosci" />
           </AssociationSet>
+          <AssociationSet Name="FK_Recepty_Pracownicy" Association="DentCareModel.FK_Recepty_Pracownicy">
+            <End Role="Pracownicy" EntitySet="Pracownicy" />
+            <End Role="Recepty" EntitySet="Recepty" />
+          </AssociationSet>
         </EntityContainer>
         <Association Name="FK_Notatki_Pracownicy">
           <End Type="DentCareModel.Pracownicy" Role="Pracownicy" Multiplicity="0..1" />
@@ -1136,6 +1158,18 @@
             </Principal>
             <Dependent Role="Platnosci">
               <PropertyRef Name="IdUzytkownika" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recepty_Pracownicy">
+          <End Type="DentCareModel.Pracownicy" Role="Pracownicy" Multiplicity="1" />
+          <End Type="DentCareModel.Recepty" Role="Recepty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pracownicy">
+              <PropertyRef Name="IdPracownika" />
+            </Principal>
+            <Dependent Role="Recepty">
+              <PropertyRef Name="IdPracownika" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
