@@ -1,0 +1,26 @@
+﻿<local:WszystkieViewBase x:Class="DentClinicApp.Views.WszystkiePlatnosciView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DentClinicApp.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Background="White">
+        <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding List}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID płatności" Binding="{Binding IdPlatnosci}"/>
+            
+                <DataGridTextColumn Header="Imię pacjenta" Binding="{Binding Pacjent.Imie}"/>
+                <DataGridTextColumn Header="Nazwisko pacjenta" Binding="{Binding Pacjent.Nazwisko}"/>
+                <DataGridTextColumn Header="Nr wizyty" Binding="{Binding NumerWizyty}"/>
+                <DataGridTextColumn Header="Data wizyty" Binding="{Binding DataWizyty}"/>
+                <DataGridTextColumn Header="Kwota" Binding="{Binding Kwota}"/>
+                <DataGridTextColumn Header="Metoda płatności" Binding="{Binding MetodaPlatnosci }"/>
+                <DataGridTextColumn Header="Data płatności" Binding="{Binding DataPlatnosci }"/>
+                <DataGridCheckBoxColumn Header="Czy zapłacono" Binding="{Binding Status }"/>
+                <DataGridTextColumn Header="Użytkownik" Binding="{Binding UzytkownikSystemu.Login}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</local:WszystkieViewBase>

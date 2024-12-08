@@ -106,7 +106,15 @@ namespace DentClinicApp.ViewModels
 
                 new CommandViewModel(
                     "Notatka",
-                    new BaseCommand(() => this.CreateView(new NowaNotatkaViewModel())))
+                    new BaseCommand(() => this.CreateView(new NowaNotatkaViewModel()))),
+
+                new CommandViewModel(
+                    "Płatnosci",
+                    new BaseCommand(() => this.ShowWorkspace<WszystkiePlatnosciViewModel>())),
+
+                new CommandViewModel(
+                    "Płatnosc",
+                    new BaseCommand(() => this.CreateView(new NowaPlatnoscViewModel())))
 
 
             };

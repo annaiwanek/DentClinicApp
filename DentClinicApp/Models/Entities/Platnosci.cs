@@ -20,8 +20,14 @@ namespace DentClinicApp.Models.Entities
         public decimal Kwota { get; set; }
         public string MetodaPlatnosci { get; set; }
         public Nullable<bool> Status { get; set; }
+        public Nullable<int> IdPacjenta { get; set; }
+        public Nullable<int> IdPracownika { get; set; }
+        public Nullable<int> IdUzytkownika { get; set; }
     
         public virtual Wizyty Wizyty { get; set; }
         public virtual Wizyty Wizyty1 { get; set; }
+        public virtual Pacjenci Pacjenci { get; set; }
+        public virtual Pracownicy Pracownicy { get; set; }
+        public virtual UzytkownicySystemu UzytkownicySystemu { get; set; }
     }
 }

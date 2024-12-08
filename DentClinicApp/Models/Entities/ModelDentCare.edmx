@@ -92,6 +92,9 @@
           <Property Name="Kwota" Type="decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="MetodaPlatnosci" Type="varchar" MaxLength="50" />
           <Property Name="Status" Type="bit" />
+          <Property Name="IdPacjenta" Type="int" />
+          <Property Name="IdPracownika" Type="int" />
+          <Property Name="IdUzytkownika" Type="int" />
         </EntityType>
         <EntityType Name="Pracownicy">
           <Key>
@@ -288,6 +291,54 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Platnosci_Pacjenci">
+          <End Role="Pacjenci" Type="Self.Pacjenci" Multiplicity="0..1" />
+          <End Role="Platnosci" Type="Self.Platnosci" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pacjenci">
+              <PropertyRef Name="IdPacjenta" />
+            </Principal>
+            <Dependent Role="Platnosci">
+              <PropertyRef Name="IdPacjenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Platnosci_Pracownicy">
+          <End Role="Pracownicy" Type="Self.Pracownicy" Multiplicity="0..1" />
+          <End Role="Platnosci" Type="Self.Platnosci" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pracownicy">
+              <PropertyRef Name="IdPracownika" />
+            </Principal>
+            <Dependent Role="Platnosci">
+              <PropertyRef Name="IdPracownika" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Platnosci_Uzytkownicy">
+          <End Role="UzytkownicySystemu" Type="Self.UzytkownicySystemu" Multiplicity="0..1" />
+          <End Role="Platnosci" Type="Self.Platnosci" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UzytkownicySystemu">
+              <PropertyRef Name="IdUzytkownika" />
+            </Principal>
+            <Dependent Role="Platnosci">
+              <PropertyRef Name="IdUzytkownika" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Platnosci_Wizyty">
+          <End Role="Wizyty" Type="Self.Wizyty" Multiplicity="1" />
+          <End Role="Platnosci" Type="Self.Platnosci" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Wizyty">
+              <PropertyRef Name="IdWizyty" />
+            </Principal>
+            <Dependent Role="Platnosci">
+              <PropertyRef Name="IdWizyty" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Płatności_Wizyty">
           <End Role="Wizyty" Type="Self.Wizyty" Multiplicity="1" />
           <End Role="Platnosci" Type="Self.Platnosci" Multiplicity="*" />
@@ -451,6 +502,22 @@
             <End Role="Pracownicy" EntitySet="Pracownicy" />
             <End Role="Notatki" EntitySet="Notatki" />
           </AssociationSet>
+          <AssociationSet Name="FK_Platnosci_Pacjenci" Association="Self.FK_Platnosci_Pacjenci">
+            <End Role="Pacjenci" EntitySet="Pacjenci" />
+            <End Role="Platnosci" EntitySet="Platnosci" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Platnosci_Pracownicy" Association="Self.FK_Platnosci_Pracownicy">
+            <End Role="Pracownicy" EntitySet="Pracownicy" />
+            <End Role="Platnosci" EntitySet="Platnosci" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Platnosci_Uzytkownicy" Association="Self.FK_Platnosci_Uzytkownicy">
+            <End Role="UzytkownicySystemu" EntitySet="UzytkownicySystemu" />
+            <End Role="Platnosci" EntitySet="Platnosci" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Platnosci_Wizyty" Association="Self.FK_Platnosci_Wizyty">
+            <End Role="Wizyty" EntitySet="Wizyty" />
+            <End Role="Platnosci" EntitySet="Platnosci" />
+          </AssociationSet>
           <AssociationSet Name="FK_Płatności_Wizyty" Association="Self.FK_Płatności_Wizyty">
             <End Role="Wizyty" EntitySet="Wizyty" />
             <End Role="Platnosci" EntitySet="Platnosci" />
@@ -581,6 +648,7 @@
           <NavigationProperty Name="Notatki" Relationship="Self.FK_Notatki_Pacjenci" FromRole="Pacjenci" ToRole="Notatki" />
           <NavigationProperty Name="Recepty" Relationship="Self.FK_Recepty_Pacjenci" FromRole="Pacjenci" ToRole="Recepty" />
           <NavigationProperty Name="Wizyty" Relationship="Self.FK_Wizyty_Pacjenci" FromRole="Pacjenci" ToRole="Wizyty" />
+          <NavigationProperty Name="Platnosci" Relationship="DentCareModel.FK_Platnosci_Pacjenci" FromRole="Pacjenci" ToRole="Platnosci" />
         </EntityType>
         <EntityType Name="Platnosci">
           <Key>
@@ -594,6 +662,12 @@
           <Property Name="Status" Type="Boolean" />
           <NavigationProperty Name="Wizyty" Relationship="Self.FK_Płatności_Wizyty" FromRole="Platnosci" ToRole="Wizyty" />
           <NavigationProperty Name="Wizyty1" Relationship="Self.FK_Płatności_Wizyty1" FromRole="Platnosci" ToRole="Wizyty" />
+          <Property Name="IdPacjenta" Type="Int32" />
+          <Property Name="IdPracownika" Type="Int32" />
+          <NavigationProperty Name="Pacjenci" Relationship="DentCareModel.FK_Platnosci_Pacjenci" FromRole="Platnosci" ToRole="Pacjenci" />
+          <NavigationProperty Name="Pracownicy" Relationship="DentCareModel.FK_Platnosci_Pracownicy" FromRole="Platnosci" ToRole="Pracownicy" />
+          <Property Name="IdUzytkownika" Type="Int32" />
+          <NavigationProperty Name="UzytkownicySystemu" Relationship="DentCareModel.FK_Platnosci_Uzytkownicy" FromRole="Platnosci" ToRole="UzytkownicySystemu" />
         </EntityType>
         <EntityType Name="Pracownicy">
           <Key>
@@ -613,6 +687,7 @@
           <NavigationProperty Name="UzytkownicySystemu1" Relationship="Self.FK_UżytkownicySystemu_Pracownicy" FromRole="Pracownicy" ToRole="UzytkownicySystemu" />
           <NavigationProperty Name="Wizyty" Relationship="Self.FK_Wizyty_Pracownicy" FromRole="Pracownicy" ToRole="Wizyty" />
           <NavigationProperty Name="Notatki" Relationship="DentCareModel.FK_Notatki_Pracownicy" FromRole="Pracownicy" ToRole="Notatki" />
+          <NavigationProperty Name="Platnosci" Relationship="DentCareModel.FK_Platnosci_Pracownicy" FromRole="Pracownicy" ToRole="Platnosci" />
         </EntityType>
         <EntityType Name="Recepty">
           <Key>
@@ -684,6 +759,7 @@
           <NavigationProperty Name="LogiAktywnosci" Relationship="Self.FK_LogiAktywności_UżytkownicySystemu" FromRole="UzytkownicySystemu" ToRole="LogiAktywnosci" />
           <NavigationProperty Name="Pracownicy" Relationship="Self.FK_UzytkownicySystemu_Pracownicy" FromRole="UzytkownicySystemu" ToRole="Pracownicy" />
           <NavigationProperty Name="Pracownicy1" Relationship="Self.FK_UżytkownicySystemu_Pracownicy" FromRole="UzytkownicySystemu" ToRole="Pracownicy" />
+          <NavigationProperty Name="Platnosci" Relationship="DentCareModel.FK_Platnosci_Uzytkownicy" FromRole="UzytkownicySystemu" ToRole="Platnosci" />
         </EntityType>
         <EntityType Name="Wizyty">
           <Key>
@@ -998,6 +1074,18 @@
             <End Role="Pracownicy" EntitySet="Pracownicy" />
             <End Role="Notatki" EntitySet="Notatki" />
           </AssociationSet>
+          <AssociationSet Name="FK_Platnosci_Pacjenci" Association="DentCareModel.FK_Platnosci_Pacjenci">
+            <End Role="Pacjenci" EntitySet="Pacjenci" />
+            <End Role="Platnosci" EntitySet="Platnosci" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Platnosci_Pracownicy" Association="DentCareModel.FK_Platnosci_Pracownicy">
+            <End Role="Pracownicy" EntitySet="Pracownicy" />
+            <End Role="Platnosci" EntitySet="Platnosci" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Platnosci_Uzytkownicy" Association="DentCareModel.FK_Platnosci_Uzytkownicy">
+            <End Role="UzytkownicySystemu" EntitySet="UzytkownicySystemu" />
+            <End Role="Platnosci" EntitySet="Platnosci" />
+          </AssociationSet>
         </EntityContainer>
         <Association Name="FK_Notatki_Pracownicy">
           <End Type="DentCareModel.Pracownicy" Role="Pracownicy" Multiplicity="0..1" />
@@ -1008,6 +1096,42 @@
             </Principal>
             <Dependent Role="Notatki">
               <PropertyRef Name="IdPracownika" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Platnosci_Pacjenci">
+          <End Type="DentCareModel.Pacjenci" Role="Pacjenci" Multiplicity="0..1" />
+          <End Type="DentCareModel.Platnosci" Role="Platnosci" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pacjenci">
+              <PropertyRef Name="IdPacjenta" />
+            </Principal>
+            <Dependent Role="Platnosci">
+              <PropertyRef Name="IdPacjenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Platnosci_Pracownicy">
+          <End Type="DentCareModel.Pracownicy" Role="Pracownicy" Multiplicity="0..1" />
+          <End Type="DentCareModel.Platnosci" Role="Platnosci" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pracownicy">
+              <PropertyRef Name="IdPracownika" />
+            </Principal>
+            <Dependent Role="Platnosci">
+              <PropertyRef Name="IdPracownika" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Platnosci_Uzytkownicy">
+          <End Type="DentCareModel.UzytkownicySystemu" Role="UzytkownicySystemu" Multiplicity="0..1" />
+          <End Type="DentCareModel.Platnosci" Role="Platnosci" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UzytkownicySystemu">
+              <PropertyRef Name="IdUzytkownika" />
+            </Principal>
+            <Dependent Role="Platnosci">
+              <PropertyRef Name="IdUzytkownika" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1104,6 +1228,9 @@
           <EntitySetMapping Name="Platnosci">
             <EntityTypeMapping TypeName="DentCareModel.Platnosci">
               <MappingFragment StoreEntitySet="Platnosci">
+                <ScalarProperty Name="IdUzytkownika" ColumnName="IdUzytkownika" />
+                <ScalarProperty Name="IdPracownika" ColumnName="IdPracownika" />
+                <ScalarProperty Name="IdPacjenta" ColumnName="IdPacjenta" />
                 <ScalarProperty Name="IdPlatnosci" ColumnName="IdPlatnosci" />
                 <ScalarProperty Name="IdWizyty" ColumnName="IdWizyty" />
                 <ScalarProperty Name="DataPlatnosci" ColumnName="DataPlatnosci" />

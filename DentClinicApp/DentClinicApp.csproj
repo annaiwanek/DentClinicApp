@@ -72,6 +72,7 @@
     <Compile Include="Models\EntitiesForView\HistoriaLeczeniaForAllView.cs" />
     <Compile Include="Models\EntitiesForView\LogForAllView.cs" />
     <Compile Include="Models\EntitiesForView\NotatkaForAllView.cs" />
+    <Compile Include="Models\EntitiesForView\PlatnoscForAllView.cs" />
     <Compile Include="Models\Entities\Dokumenty.cs">
       <DependentUpon>ModelDentCare.tt</DependentUpon>
     </Compile>
@@ -141,6 +142,7 @@
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\NowaHistoriaLeczeniaViewModel.cs" />
     <Compile Include="ViewModels\NowaNotatkaViewModel.cs" />
+    <Compile Include="ViewModels\NowaPlatnoscViewModel.cs" />
     <Compile Include="ViewModels\NowaUslugaViewModel.cs" />
     <Compile Include="ViewModels\NoweStanowiskoViewModel.cs" />
     <Compile Include="ViewModels\NowyDokumentViewModel.cs" />
@@ -156,6 +158,7 @@
     <Compile Include="ViewModels\WszystkieLekiViewModel.cs" />
     <Compile Include="ViewModels\WszystkieLogiViewModel.cs" />
     <Compile Include="ViewModels\WszystkieNotatkiViewModel.cs" />
+    <Compile Include="ViewModels\WszystkiePlatnosciViewModel.cs" />
     <Compile Include="ViewModels\WszystkieStanowiskaViewModel.cs" />
     <Compile Include="ViewModels\WszystkieUslugiViewModel.cs" />
     <Compile Include="ViewModels\WszystkieViewModel.cs" />
@@ -172,6 +175,9 @@
     </Compile>
     <Compile Include="Views\NowaNotatkaView.xaml.cs">
       <DependentUpon>NowaNotatkaView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NowaPlatnoscView.xaml.cs">
+      <DependentUpon>NowaPlatnoscView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\NowaUslugaView.xaml.cs">
       <DependentUpon>NowaUslugaView.xaml</DependentUpon>
@@ -215,6 +221,9 @@
     <Compile Include="Views\WszystkieNotatkiView.xaml.cs">
       <DependentUpon>WszystkieNotatkiView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\WszystkiePlatnosciView.xaml.cs">
+      <DependentUpon>WszystkiePlatnosciView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\WszystkieStanowiskaView.xaml.cs">
       <DependentUpon>WszystkieStanowiskaView.xaml</DependentUpon>
     </Compile>
@@ -239,6 +248,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\NowaNotatkaView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\NowaPlatnoscView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -295,6 +308,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\WszystkieNotatkiView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WszystkiePlatnosciView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

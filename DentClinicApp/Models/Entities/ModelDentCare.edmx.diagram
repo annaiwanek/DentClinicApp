@@ -39,6 +39,9 @@
         <AssociationConnector Association="DentCareModel.FK__ReceptyLe__IdRec__1332DBDC" ManuallyRouted="false" />
         <AssociationConnector Association="DentCareModel.FK_Wizyty_Usługi" ManuallyRouted="false" />
         <AssociationConnector Association="DentCareModel.FK_Notatki_Pracownicy" />
+        <AssociationConnector Association="DentCareModel.FK_Platnosci_Pacjenci" />
+        <AssociationConnector Association="DentCareModel.FK_Platnosci_Pracownicy" />
+        <AssociationConnector Association="DentCareModel.FK_Platnosci_Uzytkownicy" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

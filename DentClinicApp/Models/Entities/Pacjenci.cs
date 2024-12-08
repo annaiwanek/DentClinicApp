@@ -22,6 +22,7 @@ namespace DentClinicApp.Models.Entities
             this.Notatki = new HashSet<Notatki>();
             this.Recepty = new HashSet<Recepty>();
             this.Wizyty = new HashSet<Wizyty>();
+            this.Platnosci = new HashSet<Platnosci>();
         }
     
         public int IdPacjenta { get; set; }
@@ -43,5 +44,7 @@ namespace DentClinicApp.Models.Entities
         public virtual ICollection<Recepty> Recepty { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Wizyty> Wizyty { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Platnosci> Platnosci { get; set; }
     }
 }
