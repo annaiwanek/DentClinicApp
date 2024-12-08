@@ -33,6 +33,8 @@ namespace DentClinicApp.Models.Entities
         public string Email { get; set; }
         public Nullable<int> IdStanowiska { get; set; }
         public System.DateTime DataZatrudnienia { get; set; }
+        public string Status { get; set; }
+        public Nullable<System.DateTime> DataZwolnienia { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GrafikPracownikow> GrafikPracownikow { get; set; }

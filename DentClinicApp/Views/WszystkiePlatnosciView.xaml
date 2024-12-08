@@ -10,7 +10,6 @@
         <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding List}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID płatności" Binding="{Binding IdPlatnosci}"/>
-            
                 <DataGridTextColumn Header="Imię pacjenta" Binding="{Binding Pacjent.Imie}"/>
                 <DataGridTextColumn Header="Nazwisko pacjenta" Binding="{Binding Pacjent.Nazwisko}"/>
                 <DataGridTextColumn Header="Nr wizyty" Binding="{Binding NumerWizyty}"/>

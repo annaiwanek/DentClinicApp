@@ -16,7 +16,7 @@ namespace DentClinicApp.Models.Entities
     {
         public int IdPlatnosci { get; set; }
         public int IdWizyty { get; set; }
-        public System.DateTime DataPlatnosci { get; set; }
+        public Nullable<System.DateTime> DataPlatnosci { get; set; }
         public decimal Kwota { get; set; }
         public string MetodaPlatnosci { get; set; }
         public Nullable<bool> Status { get; set; }

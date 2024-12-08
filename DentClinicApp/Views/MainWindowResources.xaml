@@ -85,6 +85,15 @@
     </DataTemplate>
 
 
+    <DataTemplate DataType="{x:Type vm:WszyscyPracownicyViewModel}">
+        <vw:WszyscyPracownicyView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:NowyPracownikViewModel}">
+        <vw:NowyPracownikView/>
+    </DataTemplate>
+
+
     <Style x:Key="MainHCCStyle" TargetType="{x:Type HeaderedContentControl}">
         <Setter Property="HeaderTemplate">
             <Setter.Value>

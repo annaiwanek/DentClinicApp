@@ -88,7 +88,7 @@
           </Key>
           <Property Name="IdPlatnosci" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdWizyty" Type="int" Nullable="false" />
-          <Property Name="DataPlatnosci" Type="date" Nullable="false" />
+          <Property Name="DataPlatnosci" Type="datetime" />
           <Property Name="Kwota" Type="decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="MetodaPlatnosci" Type="varchar" MaxLength="50" />
           <Property Name="Status" Type="bit" />
@@ -107,6 +107,8 @@
           <Property Name="Email" Type="nvarchar" MaxLength="50" />
           <Property Name="IdStanowiska" Type="int" />
           <Property Name="DataZatrudnienia" Type="date" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="DataZwolnienia" Type="date" />
         </EntityType>
         <EntityType Name="Recepty">
           <Key>
@@ -656,7 +658,7 @@
           </Key>
           <Property Name="IdPlatnosci" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdWizyty" Type="Int32" Nullable="false" />
-          <Property Name="DataPlatnosci" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DataPlatnosci" Type="DateTime" Precision="3" />
           <Property Name="Kwota" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="MetodaPlatnosci" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Status" Type="Boolean" />
@@ -688,6 +690,8 @@
           <NavigationProperty Name="Wizyty" Relationship="Self.FK_Wizyty_Pracownicy" FromRole="Pracownicy" ToRole="Wizyty" />
           <NavigationProperty Name="Notatki" Relationship="DentCareModel.FK_Notatki_Pracownicy" FromRole="Pracownicy" ToRole="Notatki" />
           <NavigationProperty Name="Platnosci" Relationship="DentCareModel.FK_Platnosci_Pracownicy" FromRole="Pracownicy" ToRole="Platnosci" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DataZwolnienia" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="Recepty">
           <Key>
@@ -1243,6 +1247,8 @@
           <EntitySetMapping Name="Pracownicy">
             <EntityTypeMapping TypeName="DentCareModel.Pracownicy">
               <MappingFragment StoreEntitySet="Pracownicy">
+                <ScalarProperty Name="DataZwolnienia" ColumnName="DataZwolnienia" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="IdPracownika" ColumnName="IdPracownika" />
                 <ScalarProperty Name="Imie" ColumnName="Imie" />
                 <ScalarProperty Name="Nazwisko" ColumnName="Nazwisko" />

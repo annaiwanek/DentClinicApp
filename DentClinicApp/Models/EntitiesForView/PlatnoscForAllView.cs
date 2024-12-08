@@ -22,6 +22,7 @@ namespace DentClinicApp.Models.EntitiesForView
         public UzytkownicySystemu UzytkownikSystemu { get; set; }
 
         // Właściwość do wyświetlania daty płatności
+        // wyświetlanie daty płatności po zatwierdzeniu płatności 
         public string WidocznaDataPlatnosci
         {
             get
