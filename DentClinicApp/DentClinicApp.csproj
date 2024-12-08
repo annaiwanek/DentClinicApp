@@ -75,6 +75,7 @@
     <Compile Include="Models\EntitiesForView\PlatnoscForAllView.cs" />
     <Compile Include="Models\EntitiesForView\PracownikForAllView.cs" />
     <Compile Include="Models\EntitiesForView\ReceptaForAllView.cs" />
+    <Compile Include="Models\EntitiesForView\ReceptaLekForAllView.cs" />
     <Compile Include="Models\Entities\Dokumenty.cs">
       <DependentUpon>ModelDentCare.tt</DependentUpon>
     </Compile>
@@ -145,6 +146,7 @@
     <Compile Include="ViewModels\NowaHistoriaLeczeniaViewModel.cs" />
     <Compile Include="ViewModels\NowaNotatkaViewModel.cs" />
     <Compile Include="ViewModels\NowaPlatnoscViewModel.cs" />
+    <Compile Include="ViewModels\NowaReceptaLekViewModel.cs" />
     <Compile Include="ViewModels\NowaReceptaViewModel.cs" />
     <Compile Include="ViewModels\NowaUslugaViewModel.cs" />
     <Compile Include="ViewModels\NoweStanowiskoViewModel.cs" />
@@ -164,6 +166,7 @@
     <Compile Include="ViewModels\WszystkieLogiViewModel.cs" />
     <Compile Include="ViewModels\WszystkieNotatkiViewModel.cs" />
     <Compile Include="ViewModels\WszystkiePlatnosciViewModel.cs" />
+    <Compile Include="ViewModels\WszystkieReceptyLekiViewModel.cs" />
     <Compile Include="ViewModels\WszystkieReceptyViewModel.cs" />
     <Compile Include="ViewModels\WszystkieStanowiskaViewModel.cs" />
     <Compile Include="ViewModels\WszystkieUslugiViewModel.cs" />
@@ -184,6 +187,9 @@
     </Compile>
     <Compile Include="Views\NowaPlatnoscView.xaml.cs">
       <DependentUpon>NowaPlatnoscView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NowaReceptaLekView.xaml.cs">
+      <DependentUpon>NowaReceptaLekView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\NowaReceptaView.xaml.cs">
       <DependentUpon>NowaReceptaView.xaml</DependentUpon>
@@ -239,6 +245,9 @@
     <Compile Include="Views\WszystkiePlatnosciView.xaml.cs">
       <DependentUpon>WszystkiePlatnosciView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\WszystkieReceptyLekiView.xaml.cs">
+      <DependentUpon>WszystkieReceptyLekiView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\WszystkieReceptyView.xaml.cs">
       <DependentUpon>WszystkieReceptyView.xaml</DependentUpon>
     </Compile>
@@ -270,6 +279,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\NowaPlatnoscView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\NowaReceptaLekView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -342,6 +355,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\WszystkiePlatnosciView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WszystkieReceptyLekiView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

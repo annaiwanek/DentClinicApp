@@ -101,6 +101,14 @@
         <vw:NowaReceptaView/>
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type vm:WszystkieReceptyLekiViewModel}">
+        <vw:WszystkieReceptyLekiView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:NowaReceptaLekViewModel}">
+        <vw:NowaReceptaLekView/>
+    </DataTemplate>
+
 
     <Style x:Key="MainHCCStyle" TargetType="{x:Type HeaderedContentControl}">
         <Setter Property="HeaderTemplate">
