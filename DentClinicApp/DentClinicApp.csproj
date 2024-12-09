@@ -77,6 +77,7 @@
     <Compile Include="Models\EntitiesForView\ReceptaForAllView.cs" />
     <Compile Include="Models\EntitiesForView\ReceptaLekForAllView.cs" />
     <Compile Include="Models\EntitiesForView\UzytkownikForAllView.cs" />
+    <Compile Include="Models\EntitiesForView\WizytaForAllView.cs" />
     <Compile Include="Models\Entities\Dokumenty.cs">
       <DependentUpon>ModelDentCare.tt</DependentUpon>
     </Compile>
@@ -150,6 +151,7 @@
     <Compile Include="ViewModels\NowaReceptaLekViewModel.cs" />
     <Compile Include="ViewModels\NowaReceptaViewModel.cs" />
     <Compile Include="ViewModels\NowaUslugaViewModel.cs" />
+    <Compile Include="ViewModels\NowaWizytaViewModel.cs" />
     <Compile Include="ViewModels\NoweStanowiskoViewModel.cs" />
     <Compile Include="ViewModels\NowyDokumentViewModel.cs" />
     <Compile Include="ViewModels\NowyGrafikViewModel.cs" />
@@ -174,6 +176,7 @@
     <Compile Include="ViewModels\WszystkieStanowiskaViewModel.cs" />
     <Compile Include="ViewModels\WszystkieUslugiViewModel.cs" />
     <Compile Include="ViewModels\WszystkieViewModel.cs" />
+    <Compile Include="ViewModels\WszystkieWizytyViewModel.cs" />
     <Compile Include="Views\JedenViewBase.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -199,6 +202,9 @@
     </Compile>
     <Compile Include="Views\NowaUslugaView.xaml.cs">
       <DependentUpon>NowaUslugaView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NowaWizytaView.xaml.cs">
+      <DependentUpon>NowaWizytaView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\NoweStanowiskoView.xaml.cs">
       <DependentUpon>NoweStanowiskoView.xaml</DependentUpon>
@@ -267,6 +273,9 @@
       <DependentUpon>WszystkieUslugiView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\WszystkieViewBase.cs" />
+    <Compile Include="Views\WszystkieWizytyView.xaml.cs">
+      <DependentUpon>WszystkieWizytyView.xaml</DependentUpon>
+    </Compile>
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -300,6 +309,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\NowaUslugaView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\NowaWizytaView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -388,6 +401,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\WszystkieUslugiView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WszystkieWizytyView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

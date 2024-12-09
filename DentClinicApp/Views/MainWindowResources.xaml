@@ -117,6 +117,14 @@
         <vw:NowyUzytkownikView/>
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type vm:WszystkieWizytyViewModel}">
+        <vw:WszystkieWizytyView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:NowaWizytaViewModel}">
+        <vw:NowaWizytaView/>
+    </DataTemplate>
+
 
     <Style x:Key="MainHCCStyle" TargetType="{x:Type HeaderedContentControl}">
         <Setter Property="HeaderTemplate">
