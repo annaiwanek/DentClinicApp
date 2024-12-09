@@ -109,6 +109,14 @@
         <vw:NowaReceptaLekView/>
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type vm:WszyscyUzytkownicyViewModel}">
+        <vw:WszyscyUzytkownicyView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:NowyUzytkownikViewModel}">
+        <vw:NowyUzytkownikView/>
+    </DataTemplate>
+
 
     <Style x:Key="MainHCCStyle" TargetType="{x:Type HeaderedContentControl}">
         <Setter Property="HeaderTemplate">

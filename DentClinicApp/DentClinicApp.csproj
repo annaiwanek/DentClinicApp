@@ -76,6 +76,7 @@
     <Compile Include="Models\EntitiesForView\PracownikForAllView.cs" />
     <Compile Include="Models\EntitiesForView\ReceptaForAllView.cs" />
     <Compile Include="Models\EntitiesForView\ReceptaLekForAllView.cs" />
+    <Compile Include="Models\EntitiesForView\UzytkownikForAllView.cs" />
     <Compile Include="Models\Entities\Dokumenty.cs">
       <DependentUpon>ModelDentCare.tt</DependentUpon>
     </Compile>
@@ -156,9 +157,11 @@
     <Compile Include="ViewModels\NowyLogViewModel.cs" />
     <Compile Include="ViewModels\NowyPacjentViewModel.cs" />
     <Compile Include="ViewModels\NowyPracownikViewModel.cs" />
+    <Compile Include="ViewModels\NowyUzytkownikViewModel.cs" />
     <Compile Include="ViewModels\WorkspaceViewModel.cs" />
     <Compile Include="ViewModels\WszyscyPacjenciViewModel.cs" />
     <Compile Include="ViewModels\WszyscyPracownicyViewModel.cs" />
+    <Compile Include="ViewModels\WszyscyUzytkownicyViewModel.cs" />
     <Compile Include="ViewModels\WszystkieDokumentyViewModel.cs" />
     <Compile Include="ViewModels\WszystkieGrafikiViewModel.cs" />
     <Compile Include="ViewModels\WszystkieHistorieLeczeniaViewModel.cs" />
@@ -218,11 +221,17 @@
     <Compile Include="Views\NowyPracownikView.xaml.cs">
       <DependentUpon>NowyPracownikView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\NowyUzytkownikView.xaml.cs">
+      <DependentUpon>NowyUzytkownikView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\WszyscyPacjenciView.xaml.cs">
       <DependentUpon>WszyscyPacjenciView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\WszyscyPracownicyView.xaml.cs">
       <DependentUpon>WszyscyPracownicyView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WszyscyUzytkownicyView.xaml.cs">
+      <DependentUpon>WszyscyUzytkownicyView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\WszystkieDokumentyView.xaml.cs">
       <DependentUpon>WszystkieDokumentyView.xaml</DependentUpon>
@@ -322,11 +331,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\NowyUzytkownikView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\WszyscyPacjenciView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\WszyscyPracownicyView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WszyscyUzytkownicyView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

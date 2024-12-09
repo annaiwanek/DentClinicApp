@@ -138,7 +138,15 @@ namespace DentClinicApp.ViewModels
 
                 new CommandViewModel(
                     "ReceptaLek",
-                    new BaseCommand(() => this.CreateView(new NowaReceptaLekViewModel())))
+                    new BaseCommand(() => this.CreateView(new NowaReceptaLekViewModel()))),
+
+                   new CommandViewModel(
+                    "Uzytkownicy",
+                    new BaseCommand(() => this.ShowWorkspace<WszyscyUzytkownicyViewModel>())),
+
+                new CommandViewModel(
+                    "Uzytkownik",
+                    new BaseCommand(() => this.CreateView(new NowyUzytkownikViewModel())))
 
 
             };
