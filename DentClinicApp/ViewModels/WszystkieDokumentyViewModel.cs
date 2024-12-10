@@ -40,7 +40,7 @@ namespace DentClinicApp.ViewModels
                         TypDokumentu = dokumenty.TypDokumentu,
                         Opis = dokumenty.Opis,
                         DataDodania = dokumenty.DataDodania,
-                        SciezkaDoPliku = dokumenty.ŚcieżkaDoPliku
+                        SciezkaDoPliku = dokumenty.SciezkaDoPliku
 
                     }
                 );

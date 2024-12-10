@@ -20,7 +20,7 @@ namespace DentClinicApp.Models.Entities
         public string TypDokumentu { get; set; }
         public string Opis { get; set; }
         public System.DateTime DataDodania { get; set; }
-        public string ŚcieżkaDoPliku { get; set; }
+        public string SciezkaDoPliku { get; set; }
     
         public virtual Pacjenci Pacjenci { get; set; }
     }

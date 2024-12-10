@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="DentClinicApp.Views.NowyDokumentView"
+﻿<local:JedenViewBase x:Class="DentClinicApp.Views.NowyDokumentView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -7,7 +7,59 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Background="White">
-        <Label>Tu będzie dodawanie nowego dokumentu</Label>
-            
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="200"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+
+        <!-- Pesel -->
+        <Label Grid.Column="0" Grid.Row="0" Margin="0,8,0,8" Content="PESEL"/>
+        <ComboBox Grid.Column="1" Grid.Row="0" Margin="0,8,0,8"
+                  ItemsSource="{Binding PacjenciItems}" 
+                  SelectedValue="{Binding WybranyPacjentId}" 
+                  SelectedValuePath="Key" 
+                  DisplayMemberPath="Value"/>
+
+        <!-- Nazwisko -->
+        <Label Grid.Column="0" Grid.Row="1" Margin="0,8,0,8" Content="Nazwisko"/>
+        <TextBox Grid.Column="1" Grid.Row="1" Margin="0,8,0,8" 
+                 Text="{Binding WybranyPacjent.Nazwisko}" 
+                 IsReadOnly="True"/>
+
+        <!-- Imię -->
+        <Label Grid.Column="0" Grid.Row="2" Margin="0,8,0,8" Content="Imię"/>
+        <TextBox Grid.Column="1" Grid.Row="2" Margin="0,8,0,8" 
+                 Text="{Binding WybranyPacjent.Imie}" 
+                 IsReadOnly="True"/>
+
+        <!-- Nazwa pliku -->
+        <Label Grid.Column="0" Grid.Row="3" Margin="0,8,0,8" Content="Nazwa pliku"/>
+        <TextBox Grid.Column="1" Grid.Row="3" Margin="0,8,0,8" 
+                 Text="{Binding NazwaPliku}"/>
+
+        <!-- Rodzaj pliku -->
+        <Label Grid.Column="0" Grid.Row="4" Margin="0,8,0,8" Content="Rodzaj pliku"/>
+        <TextBox Grid.Column="1" Grid.Row="4" Margin="0,8,0,8" 
+                 Text="{Binding TypDokumentu}"/>
+
+        <!-- Data dodania -->
+        <Label Grid.Column="0" Grid.Row="5" Margin="0,8,0,8" Content="Data dodania"/>
+        <DatePicker Grid.Column="1" Grid.Row="5" Margin="0,8,0,8" 
+                    SelectedDate="{Binding DataDodania}"/>
+
+        <!-- Ścieżka do pliku -->
+        <Label Grid.Column="0" Grid.Row="6" Margin="0,8,0,8" Content="Ścieżka do pliku"/>
+        <TextBox Grid.Column="1" Grid.Row="6" Margin="0,8,0,8" 
+                 Text="{Binding SciezkaDoPliku}"/>
     </Grid>
-</UserControl>
+</local:JedenViewBase>

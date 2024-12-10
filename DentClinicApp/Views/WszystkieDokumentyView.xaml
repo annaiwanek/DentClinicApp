@@ -11,8 +11,8 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding IdDokumentu}"/>
                 <DataGridTextColumn Header="Pesel" Binding="{Binding PESEL}"/>
-                <DataGridTextColumn Header="Imię" Binding="{Binding Imie}"/>
                 <DataGridTextColumn Header="Nazwisko" Binding="{Binding Nazwisko}"/>
+                <DataGridTextColumn Header="Imię" Binding="{Binding Imie}"/>
                 <DataGridTextColumn Header="Nazwa pliku" Binding="{Binding NazwaDokumentu}"/>
                 <DataGridTextColumn Header="Rodzaj pliku" Binding="{Binding TypDokumentu}"/>
                 <DataGridTextColumn Header="Data dodania" Binding="{Binding DataUrodzenia, StringFormat={}{0:dd.MM.yyyy}}"/>

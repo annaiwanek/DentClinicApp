@@ -15,7 +15,7 @@
           <Property Name="TypDokumentu" Type="nvarchar" MaxLength="50" />
           <Property Name="Opis" Type="nvarchar(max)" />
           <Property Name="DataDodania" Type="date" Nullable="false" />
-          <Property Name="ŚcieżkaDoPliku" Type="nvarchar" MaxLength="255" />
+          <Property Name="SciezkaDoPliku" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="GrafikPracownikow">
           <Key>
@@ -587,8 +587,8 @@
           <Property Name="TypDokumentu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Opis" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="DataDodania" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="ŚcieżkaDoPliku" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Pacjenci" Relationship="Self.FK_Dokumenty_Pacjenci" FromRole="Dokumenty" ToRole="Pacjenci" />
+          <Property Name="SciezkaDoPliku" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="GrafikPracownikow">
           <Key>
@@ -1182,13 +1182,13 @@
           <EntitySetMapping Name="Dokumenty">
             <EntityTypeMapping TypeName="DentCareModel.Dokumenty">
               <MappingFragment StoreEntitySet="Dokumenty">
+                <ScalarProperty Name="SciezkaDoPliku" ColumnName="SciezkaDoPliku" />
                 <ScalarProperty Name="IdDokumentu" ColumnName="IdDokumentu" />
                 <ScalarProperty Name="IdPacjenta" ColumnName="IdPacjenta" />
                 <ScalarProperty Name="NazwaDokumentu" ColumnName="NazwaDokumentu" />
                 <ScalarProperty Name="TypDokumentu" ColumnName="TypDokumentu" />
                 <ScalarProperty Name="Opis" ColumnName="Opis" />
                 <ScalarProperty Name="DataDodania" ColumnName="DataDodania" />
-                <ScalarProperty Name="ŚcieżkaDoPliku" ColumnName="ŚcieżkaDoPliku" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
