@@ -14,7 +14,7 @@ namespace DentClinicApp.ViewModels
         #region Constructor
 
         public WszystkieUslugiViewModel()
-            : base("Uslugi")
+            : base("Usługi")
         {
 
         }

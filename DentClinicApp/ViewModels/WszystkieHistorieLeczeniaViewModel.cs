@@ -13,7 +13,7 @@ namespace DentClinicApp.ViewModels
         #region Constructor
 
         public WszystkieHistorieLeczeniaViewModel()
-            : base("Historia Leczenia")
+            : base("Historie leczenia")
         {
         }
 

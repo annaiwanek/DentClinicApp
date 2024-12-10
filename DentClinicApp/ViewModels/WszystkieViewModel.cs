@@ -1,5 +1,6 @@
 ﻿using DentClinicApp.Helper;
 using DentClinicApp.Models.Entities;
+using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -19,16 +20,27 @@ namespace DentClinicApp.ViewModels
 
         #endregion
 
-        #region LoadCommand
+        #region Command
 
-        private BaseCommand _LoadComand; // to jest komenda, która będzie wywoływała funkcję Load pobierającą z bazy danych
-        public ICommand LoadComand
+        private BaseCommand _LoadCommand; // to jest komenda, która będzie wywoływała funkcję Load pobierającą z bazy danych
+        public ICommand LoadCommand
         {
             get
             {
-                if (_LoadComand == null)
-                    _LoadComand = new BaseCommand(() => Load()); // jeśli komenda nie została skojarzona, to pod LoadCommand podstawiamy funkcję load
-                return _LoadComand;
+                if (_LoadCommand == null)
+                    _LoadCommand = new BaseCommand(() => Load()); // jeśli komenda nie została skojarzona, to pod LoadCommand podstawiamy funkcję load
+                return _LoadCommand;
+            }
+        }
+
+        private BaseCommand _AddCommand; // to jest komenda, która będzie wywoływała funkcję Add wywołującą okno do dodawania i zostanie podpięta pod przycisk dodaj
+        public ICommand AddCommand
+        {
+            get
+            {
+                if (_AddCommand == null)
+                    _AddCommand = new BaseCommand(() => add()); 
+                return _AddCommand;
             }
         }
         #endregion
@@ -67,6 +79,12 @@ namespace DentClinicApp.ViewModels
         #region Helpers
 
         public abstract void Load();
+        private void add()
+        {
+            // Dzięki messengerowi wysyłamy do innych obiektów komunikat DisplayName add, gdzie DisplayName jest nazwą widoku 
+            // Ten komunikat odbierze MainWindowViewModel, który odpowiada za otwieranie zakładek (okien)
+            Messenger.Default.Send(DisplayName + "Add"); //messenger z biblioteki MVVMLight
+        }
         #endregion
 
     }

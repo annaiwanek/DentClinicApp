@@ -13,7 +13,7 @@ namespace DentClinicApp.ViewModels
         #region Constructor
 
         public WszystkieWizytyViewModel()
-            : base("Wizyta")
+            : base("Wizyty")
         {
         }
 

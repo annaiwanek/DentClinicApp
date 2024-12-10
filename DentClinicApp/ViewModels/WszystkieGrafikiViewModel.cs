@@ -13,7 +13,7 @@ namespace DentClinicApp.ViewModels
         #region Constructor
 
         public WszystkieGrafikiViewModel()
-            : base("Grafik")
+            : base("Grafiki")
         {
         }
 

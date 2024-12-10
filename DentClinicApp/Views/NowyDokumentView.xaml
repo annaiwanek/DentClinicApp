@@ -26,40 +26,40 @@
         <Label Grid.Column="0" Grid.Row="0" Margin="0,8,0,8" Content="PESEL"/>
         <ComboBox Grid.Column="1" Grid.Row="0" Margin="0,8,0,8"
                   ItemsSource="{Binding PacjenciItems}" 
-                  SelectedValue="{Binding WybranyPacjentId}" 
-                  SelectedValuePath="Key" 
-                  DisplayMemberPath="Value"/>
+                  DisplayMemberPath="Value"
+                  SelectedValuePath="Key"
+                  SelectedValue="{Binding Path=WybranyPacjentId, Mode=TwoWay}"/>
 
         <!-- Nazwisko -->
         <Label Grid.Column="0" Grid.Row="1" Margin="0,8,0,8" Content="Nazwisko"/>
         <TextBox Grid.Column="1" Grid.Row="1" Margin="0,8,0,8" 
-                 Text="{Binding WybranyPacjent.Nazwisko}" 
+                 Text="{Binding Path=WybranyPacjent.Nazwisko}" 
                  IsReadOnly="True"/>
 
         <!-- Imię -->
         <Label Grid.Column="0" Grid.Row="2" Margin="0,8,0,8" Content="Imię"/>
         <TextBox Grid.Column="1" Grid.Row="2" Margin="0,8,0,8" 
-                 Text="{Binding WybranyPacjent.Imie}" 
+                 Text="{Binding Path=WybranyPacjent.Imie}" 
                  IsReadOnly="True"/>
 
         <!-- Nazwa pliku -->
         <Label Grid.Column="0" Grid.Row="3" Margin="0,8,0,8" Content="Nazwa pliku"/>
         <TextBox Grid.Column="1" Grid.Row="3" Margin="0,8,0,8" 
-                 Text="{Binding NazwaPliku}"/>
+                 Text="{Binding Path=NazwaPliku}"/>
 
         <!-- Rodzaj pliku -->
         <Label Grid.Column="0" Grid.Row="4" Margin="0,8,0,8" Content="Rodzaj pliku"/>
         <TextBox Grid.Column="1" Grid.Row="4" Margin="0,8,0,8" 
-                 Text="{Binding TypDokumentu}"/>
+                 Text="{Binding Path=TypDokumentu}"/>
 
         <!-- Data dodania -->
         <Label Grid.Column="0" Grid.Row="5" Margin="0,8,0,8" Content="Data dodania"/>
         <DatePicker Grid.Column="1" Grid.Row="5" Margin="0,8,0,8" 
-                    SelectedDate="{Binding DataDodania}"/>
+                    SelectedDate="{Binding Path=DataDodania, UpdateSourceTrigger=PropertyChanged}"/>
 
         <!-- Ścieżka do pliku -->
         <Label Grid.Column="0" Grid.Row="6" Margin="0,8,0,8" Content="Ścieżka do pliku"/>
         <TextBox Grid.Column="1" Grid.Row="6" Margin="0,8,0,8" 
-                 Text="{Binding SciezkaDoPliku}"/>
+                 Text="{Binding Path=SciezkaDoPliku}"/>
     </Grid>
 </local:JedenViewBase>

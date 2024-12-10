@@ -1,4 +1,5 @@
 ﻿using DentClinicApp.Helper;
+using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -34,6 +35,9 @@ namespace DentClinicApp.ViewModels
         }
         private List<CommandViewModel> CreateCommands()
         {
+            // to jest messenger, który oczekuje na stringa i jak go "złapie" to wywołuje metodę open, która jest zdefinowana w regionie prywatnych helpersów
+            Messenger.Default.Register<string>(this, open);
+            
             return new List<CommandViewModel>
             {
                 new CommandViewModel(
@@ -217,6 +221,40 @@ namespace DentClinicApp.ViewModels
             ICollectionView collectionView = CollectionViewSource.GetDefaultView(this.Workspaces);
             if (collectionView != null)
                 collectionView.MoveCurrentTo(workspace);
+        }
+
+        private void open(string name) // name to jest ten wysłany komunikat
+        {
+            if (name == "PacjenciAdd")
+                CreateView(new NowyPacjentViewModel()); // to wywołujemy zakładkę do dodawania nowego pacjenta
+            if (name == "PracownicyAdd")
+                CreateView(new NowyPracownikViewModel());
+            if (name == "UzytkownicyAdd")
+                CreateView(new NowyUzytkownikViewModel());
+            if (name == "DokumentyAdd")
+                CreateView(new NowyDokumentViewModel());
+            if (name == "GrafikiAdd")
+                CreateView(new NowyGrafikViewModel());
+            if (name == "Historie leczeniaAdd")
+                CreateView(new NowaHistoriaLeczeniaViewModel());
+            if (name == "LekiAdd")
+                CreateView(new NowyLekViewModel());
+            if (name == "Logi aktywnościAdd")
+                CreateView(new NowyLogViewModel());
+            if (name == "NotatkiAdd")
+                CreateView(new NowaNotatkaViewModel());
+            if (name == "PłatnościAdd")
+                CreateView(new NowaPlatnoscViewModel());
+            if (name == "ReceptyLekiAdd")
+                CreateView(new NowaReceptaLekViewModel());
+            if (name == "ReceptyAdd")
+                CreateView(new NowaReceptaViewModel());
+            if (name == "StanowiskaAdd")
+                CreateView(new NoweStanowiskoViewModel());
+            if (name == "UsługiAdd")
+                CreateView(new NowaUslugaViewModel());
+            if (name == "WizytyAdd")
+                CreateView(new NowaWizytaViewModel());
         }
         #endregion
     }
