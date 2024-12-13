@@ -84,6 +84,8 @@
     <Compile Include="Helper\BaseCommand.cs" />
     <Compile Include="Models\BusinessLogic\DatabaseClass.cs" />
     <Compile Include="Models\BusinessLogic\PacjentB.cs" />
+    <Compile Include="Models\BusinessLogic\PrzychodB.cs" />
+    <Compile Include="Models\BusinessLogic\UslugaB.cs" />
     <Compile Include="Models\EntitiesForView\DokumentForAllView.cs" />
     <Compile Include="Models\EntitiesForView\GrafikForAllView.cs" />
     <Compile Include="Models\EntitiesForView\HistoriaLeczeniaForAllView.cs" />
@@ -178,6 +180,7 @@
     <Compile Include="ViewModels\NowyPacjentViewModel.cs" />
     <Compile Include="ViewModels\NowyPracownikViewModel.cs" />
     <Compile Include="ViewModels\NowyUzytkownikViewModel.cs" />
+    <Compile Include="ViewModels\RaportPrzychodowViewModel.cs" />
     <Compile Include="ViewModels\WorkspaceViewModel.cs" />
     <Compile Include="ViewModels\WszyscyPacjenciViewModel.cs" />
     <Compile Include="ViewModels\WszyscyPracownicyViewModel.cs" />
@@ -249,6 +252,9 @@
     </Compile>
     <Compile Include="Views\NowyUzytkownikView.xaml.cs">
       <DependentUpon>NowyUzytkownikView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RaportPrzychodowView.xaml.cs">
+      <DependentUpon>RaportPrzychodowView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\WszyscyPacjenciView.xaml.cs">
       <DependentUpon>WszyscyPacjenciView.xaml</DependentUpon>
@@ -365,6 +371,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\NowyUzytkownikView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RaportPrzychodowView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
