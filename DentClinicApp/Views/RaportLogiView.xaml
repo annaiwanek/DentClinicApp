@@ -1,0 +1,54 @@
+﻿<UserControl x:Class="DentClinicApp.Views.RaportLogiView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DentClinicApp.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450">
+    <Grid Background="White" Width="600" HorizontalAlignment="Left">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Tytuł raportu -->
+        <Label Grid.Row="0" Content="Raport logów aktywności" 
+               FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" 
+               Margin="5" />
+
+        <!-- Zakres dat -->
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="10">
+            <Label Content="Od:" VerticalAlignment="Center" Margin="5"/>
+            <DatePicker SelectedDate="{Binding DataOd}" Margin="5" />
+            <Label Content="Do:" VerticalAlignment="Center" Margin="5"/>
+            <DatePicker SelectedDate="{Binding DataDo}" Margin="5" />
+        </StackPanel>
+
+        <!-- Wybór użytkownika -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="10">
+            <Label Content="Użytkownik:" VerticalAlignment="Center" Margin="5"/>
+            <ComboBox ItemsSource="{Binding UzytkownicyItems}" 
+                      DisplayMemberPath="Value" 
+                      SelectedValuePath="Key"
+                      SelectedValue="{Binding Path=IdUzytkownika, Mode=TwoWay}" 
+                      Width="200" Margin="5" />
+        </StackPanel>
+
+        <!-- Przycisk do generowania logów -->
+        <Button Grid.Row="3" Content="Wygeneruj logi" 
+                Command="{Binding WygenerujCommand}" 
+                HorizontalAlignment="Center" 
+                Margin="10" />
+
+        <!-- Tabela z logami -->
+        <DataGrid Grid.Row="4" ItemsSource="{Binding Logi}" 
+                  AutoGenerateColumns="True" 
+                  Margin="10"
+                  IsReadOnly="True" />
+    </Grid>
+
+</UserControl>

@@ -28,15 +28,18 @@
         <ToolBar Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Margin="2">
             <ToggleButton Width="32" Height="32" Background="LightBlue" Margin="2"/>
             <ToggleButton Width="32" Height="32" Background="White" Margin="2"/>
+           
         </ToolBar>
         <Border Grid.Row="2" Grid.Column="0">
-            <HeaderedContentControl 
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <HeaderedContentControl 
                 Header="Menu" 
                 Background="Aqua" 
                 Content="{Binding Path=Commands}" 
                 ContentTemplate="{StaticResource CommandsTemplate}"
                 Style="{StaticResource MainHCCStyle}"
                 />
+            </ScrollViewer>
         </Border>
         <Border Grid.Row="2" Grid.Column="1">
             <HeaderedContentControl 

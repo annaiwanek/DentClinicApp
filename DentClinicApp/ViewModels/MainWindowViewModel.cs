@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.ComponentModel.Design;
 using System.Diagnostics;
 using System.Linq;
 using System.Windows.Data;
@@ -38,7 +39,7 @@ namespace DentClinicApp.ViewModels
             // to jest messenger, który oczekuje na stringa i jak go "złapie" to wywołuje metodę open, która jest zdefinowana w regionie prywatnych helpersów
             Messenger.Default.Register<string>(this, open);
             
-            return new List<CommandViewModel>
+           return new List<CommandViewModel>
             {
                 new CommandViewModel(
                     "Pacjenci",
@@ -162,10 +163,13 @@ namespace DentClinicApp.ViewModels
 
                    new CommandViewModel(
                     "Raport przychodów",
-                    new BaseCommand(() => this.CreateView(new RaportPrzychodowViewModel())))
+                    new BaseCommand(() => this.CreateView(new RaportPrzychodowViewModel()))),
 
-             
+                   new CommandViewModel(
+                    "Raport logi aktywności",
+                    new BaseCommand(() => this.CreateView(new RaportLogiViewModel())))
             };
+           
         }
         #endregion
 
@@ -204,6 +208,7 @@ namespace DentClinicApp.ViewModels
         #region Private Helpers
         private void CreateView(WorkspaceViewModel nowy)
         {
+         
             this.Workspaces.Add(nowy);
             this.SetActiveWorkspace(nowy);
         }

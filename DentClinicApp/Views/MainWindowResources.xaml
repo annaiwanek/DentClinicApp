@@ -129,6 +129,9 @@
         <vw:RaportPrzychodowView/>
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type vm:RaportLogiViewModel}">
+        <vw:RaportLogiView/>
+    </DataTemplate>
 
     <Style x:Key="MainHCCStyle" TargetType="{x:Type HeaderedContentControl}">
         <Setter Property="HeaderTemplate">
