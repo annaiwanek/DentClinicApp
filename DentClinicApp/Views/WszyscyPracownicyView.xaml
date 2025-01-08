@@ -15,9 +15,9 @@
                 <DataGridTextColumn Header="Telefon" Binding="{Binding Pracownik.Telefon}"/>
                 <DataGridTextColumn Header="Email" Binding="{Binding Pracownik.Email}"/>
                 <DataGridTextColumn Header="Stanowisko" Binding="{Binding Stanowisko.Nazwa}"/>
-                <DataGridTextColumn Header="Data zatrudnienia" Binding="{Binding Pracownik.DataZatrudnienia}"/>
+                <DataGridTextColumn Header="Data zatrudnienia" Binding="{Binding Pracownik.DataZatrudnienia, StringFormat={}{0:dd.MM.yyyy}}"/>
                 <DataGridCheckBoxColumn Header="Status" Binding="{Binding IsPracownikActive}"/>
-                <DataGridTextColumn Header="Data zwolnienia" Binding="{Binding Pracownik.DataZwolnienia}"/>
+                <DataGridTextColumn Header="Data zwolnienia" Binding="{Binding Pracownik.DataZwolnienia, StringFormat={}{0:dd.MM.yyyy}}"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
