@@ -18,7 +18,7 @@ namespace DentClinicApp.Views
     /// <summary>
     /// Interaction logic for NowyGrafikView.xaml
     /// </summary>
-    public partial class NowyGrafikView : UserControl
+    public partial class NowyGrafikView : JedenViewBase
     {
         public NowyGrafikView()
         {

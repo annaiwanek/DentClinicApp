@@ -81,9 +81,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\TimePicker.xaml.cs">
+      <DependentUpon>TimePicker.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Helper\BaseCommand.cs" />
     <Compile Include="Models\BusinessLogic\DatabaseClass.cs" />
     <Compile Include="Models\BusinessLogic\PacjentB.cs" />
+    <Compile Include="Models\BusinessLogic\PracownikB.cs" />
     <Compile Include="Models\BusinessLogic\PrzychodB.cs" />
     <Compile Include="Models\BusinessLogic\UslugaB.cs" />
     <Compile Include="Models\EntitiesForView\DokumentForAllView.cs" />
@@ -302,6 +306,10 @@
     <Compile Include="Views\WszystkieWizytyView.xaml.cs">
       <DependentUpon>WszystkieWizytyView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Controls\TimePicker.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

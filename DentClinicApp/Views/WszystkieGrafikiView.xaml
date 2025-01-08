@@ -12,7 +12,7 @@
                 <DataGridTextColumn Header="IdGrafiku" Binding="{Binding IdGrafiku}"/>
                 <DataGridTextColumn Header="Imię pracownika" Binding="{Binding Imie}"/>
                 <DataGridTextColumn Header="Nazwisko pracownika" Binding="{Binding Nazwisko}"/>
-                <DataGridTextColumn Header="Data" Binding="{Binding Data}"/>
+                <DataGridTextColumn Header="Data" Binding="{Binding Data, StringFormat={}{0:dd.MM.yyyy}}"/>
                 <DataGridTextColumn Header="Godzina rozpoczęcia" Binding="{Binding GodzinaRozpoczecia}"/>
                 <DataGridTextColumn Header="Godzina zakończenia" Binding="{Binding GodzinaZakonczenia}"/>
             </DataGrid.Columns>
