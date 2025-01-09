@@ -102,15 +102,24 @@ namespace DentClinicApp.ViewModels
                 Console.WriteLine("Adding drug");
                 dentCareEntities.Leki.Add(item); // dodawanie rekordu najpierw do lokalnej kolekcji
                 dentCareEntities.SaveChanges(); // zapisywanie do bazy danych 
-                Console.WriteLine("Added drug successfuly");
+
+                // Dodawanie logów aktywności
+                LogiAktywnosci logi = new LogiAktywnosci();
+                logi.IdUzytkownika = 3; // Aktualnie brak systemu zalogowanego użytkownika
+                logi.Akcja = $"Dodano nowy lek o ID: {item.IdLeku}";
+                logi.Data = DateTime.Now;
+                logi.Godzina = logi.Data.TimeOfDay;
+                logi.Opis = $"Dodano lek '{item.Nazwa}' z substancją czynną '{item.SubstancjaCzynna}'";
+                dentCareEntities.LogiAktywnosci.Add(logi);
+                dentCareEntities.SaveChanges(); // Zapisywanie logów do bazy
+
+                Console.WriteLine("Added drug successfully");
             }
             catch (DbEntityValidationException e)
             {
                 Console.WriteLine("Errors");
-                //Console.WriteLine(e.EntityValidationErrors.ToList);
                 foreach (DbEntityValidationResult entityError in e.EntityValidationErrors)
                 {
-
                     foreach (DbValidationError validationError in entityError.ValidationErrors)
                     {
                         Console.WriteLine(validationError.PropertyName + ": " + validationError.ErrorMessage);
@@ -122,6 +131,7 @@ namespace DentClinicApp.ViewModels
                 Console.WriteLine(e);
             }
         }
+
         #endregion
     }
 }

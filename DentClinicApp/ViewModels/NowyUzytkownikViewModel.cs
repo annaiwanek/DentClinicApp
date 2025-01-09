@@ -95,9 +95,17 @@ namespace DentClinicApp.ViewModels
         public override void Save()
         {
             dentCareEntities.UzytkownicySystemu.Add(item);
+
+            // dodawanie logów aktywności 
+            LogiAktywnosci logi = new LogiAktywnosci();
+            logi.IdUzytkownika = 3; //Aktualnie nie ma dostępu do zalogowanego użytkownika
+            logi.Akcja = "Dodanie nowego użytkownika o ID: " + item.IdPracownika;
+            logi.Data = DateTime.Now;
+            logi.Godzina = logi.Data.TimeOfDay;
+            logi.Opis = "Dodanie nowego nowego użytkownika o ID: " + item.IdPracownika;
+            dentCareEntities.LogiAktywnosci.Add(logi);
+            
             dentCareEntities.SaveChanges();
-
-
         }
 
         #endregion

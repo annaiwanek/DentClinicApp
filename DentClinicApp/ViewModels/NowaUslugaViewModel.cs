@@ -111,16 +111,31 @@ namespace DentClinicApp.ViewModels
             try
             {
                 Console.WriteLine("Adding service");
-                dentCareEntities.Uslugi.Add(item); // dodawanie rekordu najpierw do lokalnej kolekcji
-                dentCareEntities.SaveChanges(); // zapisywanie do bazy danych 
-                Console.WriteLine("Added service successfuly");
+                // Najpierw zapisujemy usługę do bazy danych, aby wygenerować IdUslugi
+                dentCareEntities.Uslugi.Add(item);
+                dentCareEntities.SaveChanges(); // Zapisywanie zmian i generowanie IdUslugi
+
+                // Dodawanie logów aktywności
+                LogiAktywnosci logi = new LogiAktywnosci
+                {
+                    IdUzytkownika = 3, // Aktualnie brak mechanizmu autentykacji
+                    Akcja = "Dodano nową usługę o ID: " + item.IdUslugi,
+                    Data = DateTime.Now,
+                    Godzina = DateTime.Now.TimeOfDay,
+                    Opis = "Dodano nową usługę o ID: " + item.IdUslugi
+                };
+
+                // Zapisujemy logi do bazy danych
+                dentCareEntities.LogiAktywnosci.Add(logi);
+                dentCareEntities.SaveChanges();
+
+                Console.WriteLine("Added service successfully");
             }
             catch (DbEntityValidationException e)
             {
                 Console.WriteLine("Errors");
                 foreach (DbEntityValidationResult entityError in e.EntityValidationErrors)
                 {
-
                     foreach (DbValidationError validationError in entityError.ValidationErrors)
                     {
                         Console.WriteLine(validationError.PropertyName + ": " + validationError.ErrorMessage);
@@ -129,9 +144,10 @@ namespace DentClinicApp.ViewModels
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                Console.WriteLine(e.Message);
             }
         }
+
         #endregion
     }
 }

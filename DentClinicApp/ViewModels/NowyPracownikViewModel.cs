@@ -177,7 +177,17 @@ namespace DentClinicApp.ViewModels
             dentCareEntities.Pracownicy.Add(item);
             dentCareEntities.SaveChanges();
 
-            OnPropertyChanged(() => CzyZwolniony);
+            // Dodawanie logów aktywności
+            LogiAktywnosci logi = new LogiAktywnosci
+            {
+                IdUzytkownika = 3, 
+                Akcja = $"Dodano pracownika o ID: {item.IdPracownika}",
+                Data = DateTime.Now,
+                Godzina = DateTime.Now.TimeOfDay,
+                Opis = $"Dodano pracownika {item.Imie} {item.Nazwisko}"
+            };
+            dentCareEntities.LogiAktywnosci.Add(logi);
+            dentCareEntities.SaveChanges();
         }
 
 

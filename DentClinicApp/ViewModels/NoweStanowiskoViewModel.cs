@@ -108,14 +108,27 @@ namespace DentClinicApp.ViewModels
                 Console.WriteLine("Adding WorkStation");
                 dentCareEntities.Stanowiska.Add(item); // dodawanie rekordu najpierw do lokalnej kolekcji
                 dentCareEntities.SaveChanges(); // zapisywanie do bazy danych 
-                Console.WriteLine("Added WorkStation successfuly");
+
+                // Dodawanie logów aktywności
+                LogiAktywnosci logi = new LogiAktywnosci
+                {
+                    IdUzytkownika = 3, // Przykładowe ID użytkownika - powinno być dynamiczne w przypadku logowania
+                    Akcja = "Dodano nowe stanowisko",
+                    Data = DateTime.Now,
+                    Godzina = DateTime.Now.TimeOfDay,
+                    Opis = $"Dodano nowe stanowisko: {item.Nazwa}, Zakres obowiązków: {item.ZakresObowiazkow}"
+                };
+
+                dentCareEntities.LogiAktywnosci.Add(logi); // Dodanie logu aktywności
+                dentCareEntities.SaveChanges(); // Zapisanie logu do bazy danych
+
+                Console.WriteLine("Added WorkStation successfully");
             }
             catch (DbEntityValidationException e)
             {
                 Console.WriteLine("Errors");
                 foreach (DbEntityValidationResult entityError in e.EntityValidationErrors)
                 {
-
                     foreach (DbValidationError validationError in entityError.ValidationErrors)
                     {
                         Console.WriteLine(validationError.PropertyName + ": " + validationError.ErrorMessage);
@@ -126,6 +139,7 @@ namespace DentClinicApp.ViewModels
             {
                 Console.WriteLine(e);
             }
+        
         }
         #endregion
     }

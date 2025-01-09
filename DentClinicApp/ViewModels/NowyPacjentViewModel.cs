@@ -142,7 +142,6 @@ namespace DentClinicApp.ViewModels
             savePatient();
 
         }
-
         private void savePatient()
         {
             try
@@ -150,15 +149,25 @@ namespace DentClinicApp.ViewModels
                 Console.WriteLine("Adding patient");
                 dentCareEntities.Pacjenci.Add(item); // dodawanie rekordu najpierw do lokalnej kolekcji
                 dentCareEntities.SaveChanges(); // zapisywanie do bazy danych 
-                Console.WriteLine("Added patient successfuly");
+                Console.WriteLine("Added patient successfully");
+
+                // Dodawanie logów aktywności
+                LogiAktywnosci logi = new LogiAktywnosci();
+                logi.IdUzytkownika = 3; // Ustawienie identyfikatora zalogowanego użytkownika
+                logi.Akcja = "Dodano pacjenta o ID: " + item.IdPacjenta;
+                logi.Data = DateTime.Now;
+                logi.Godzina = logi.Data.TimeOfDay;
+                logi.Opis = "Dodano pacjenta: " + item.Imie + " " + item.Nazwisko;
+                dentCareEntities.LogiAktywnosci.Add(logi);
+
+                dentCareEntities.SaveChanges(); // Zapisywanie logów
+                Console.WriteLine("Added activity log successfully");
             }
             catch (DbEntityValidationException e)
             {
                 Console.WriteLine("Errors");
-                //Console.WriteLine(e.EntityValidationErrors.ToList);
                 foreach (DbEntityValidationResult entityError in e.EntityValidationErrors)
                 {
-
                     foreach (DbValidationError validationError in entityError.ValidationErrors)
                     {
                         Console.WriteLine(validationError.PropertyName + ": " + validationError.ErrorMessage);
@@ -170,6 +179,8 @@ namespace DentClinicApp.ViewModels
                 Console.WriteLine(e);
             }
         }
+
+
         #endregion
     }
 }
