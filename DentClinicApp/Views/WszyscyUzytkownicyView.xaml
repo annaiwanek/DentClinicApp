@@ -15,7 +15,7 @@
                 <DataGridTextColumn Header="Login" Binding="{Binding UzytkownikSystemu.Login}"/>
                 <DataGridTextColumn Header="Hasło" Binding="{Binding UzytkownikSystemu.Haslo}"/>
                 <DataGridTextColumn Header="Rola" Binding="{Binding UzytkownikSystemu.Rola}"/>
-                <DataGridCheckBoxColumn Header="Status" Binding="{Binding IsPracownikActive}"/>
+               
 
             </DataGrid.Columns>
         </DataGrid>
