@@ -13,7 +13,7 @@
                 <DataGridTextColumn Header="PESEL" Binding="{Binding Pacjent.PESEL}"/>
                 <DataGridTextColumn Header="Imię pacjenta" Binding="{Binding Pacjent.Imie}"/>
                 <DataGridTextColumn Header="Nazwisko pacjenta" Binding="{Binding Pacjent.Nazwisko}"/>
-                <DataGridTextColumn Header="Data dodania" Binding="{Binding Data}"/>
+                <DataGridTextColumn Header="Data dodania" Binding="{Binding Data, StringFormat=d}"/>
                 <DataGridTextColumn Header="Opis leczenia" Binding="{Binding OpisLeczenia}"/>
                 <DataGridTextColumn Header="Zalecenia" Binding="{Binding Zalecenia}"/>
     
@@ -31,7 +31,6 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Zmodyfikował" Binding="{Binding Pracownik.Nazwisko}"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

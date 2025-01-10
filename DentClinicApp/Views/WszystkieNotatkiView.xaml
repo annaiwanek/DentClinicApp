@@ -13,9 +13,9 @@
                 <DataGridTextColumn Header="PESEL" Binding="{Binding Pacjent.PESEL}"/>
                 <DataGridTextColumn Header="Imię pacjenta" Binding="{Binding Pacjent.Imie}"/>
                 <DataGridTextColumn Header="Nazwisko pacjenta" Binding="{Binding Pacjent.Nazwisko}"/>
-                <DataGridTextColumn Header="Data i godzina" Binding="{Binding Data}"/>
-                <DataGridTextColumn Header="Treść notatki" Binding="{Binding TrescNotatki}"/>
-                <DataGridTextColumn Header="Zmodyfikował" Binding="{Binding Pracownik.Nazwisko}"/>
+                <DataGridTextColumn Header="Data dodania" Binding="{Binding Data, StringFormat=d}"/>
+                <DataGridTextColumn Header="Treść notatki" Binding="{Binding Tekst}"/>
+            
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

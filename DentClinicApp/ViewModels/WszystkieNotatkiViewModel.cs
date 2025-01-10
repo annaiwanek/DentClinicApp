@@ -31,7 +31,7 @@ namespace DentClinicApp.ViewModels
                         IdNotatki = notatki.IdNotatki,
                         Pacjent = notatki.Pacjenci, 
                         Data = notatki.Data,
-                        TrescNotatki = notatki.Tekst,
+                        Tekst = notatki.Tekst,
                         Pracownik = notatki.Pracownicy
 
 
