@@ -43,6 +43,7 @@
         <AssociationConnector Association="DentCareModel.FK_Platnosci_Pracownicy" />
         <AssociationConnector Association="DentCareModel.FK_Platnosci_Uzytkownicy" />
         <AssociationConnector Association="DentCareModel.FK_Recepty_Pracownicy" />
+        <AssociationConnector Association="DentCareModel.FK_Platnosci_Uslugi" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

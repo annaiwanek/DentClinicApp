@@ -13,12 +13,11 @@
                 <DataGridTextColumn Header="Imię pacjenta" Binding="{Binding Pacjent.Imie}"/>
                 <DataGridTextColumn Header="Nazwisko pacjenta" Binding="{Binding Pacjent.Nazwisko}"/>
                 <DataGridTextColumn Header="Nr wizyty" Binding="{Binding NumerWizyty}"/>
-                <DataGridTextColumn Header="Data wizyty" Binding="{Binding DataWizyty}"/>
+                <DataGridTextColumn Header="Data wizyty" Binding="{Binding DataWizyty, StringFormat=d}"/>
                 <DataGridTextColumn Header="Kwota" Binding="{Binding Kwota}"/>
                 <DataGridTextColumn Header="Metoda płatności" Binding="{Binding MetodaPlatnosci }"/>
-                <DataGridTextColumn Header="Data płatności" Binding="{Binding DataPlatnosci }"/>
+                <DataGridTextColumn Header="Data płatności" Binding="{Binding DataPlatnosci, StringFormat=d }"/>
                 <DataGridCheckBoxColumn Header="Czy zapłacono" Binding="{Binding Status }"/>
-                <DataGridTextColumn Header="Użytkownik" Binding="{Binding UzytkownikSystemu.Login}"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

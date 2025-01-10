@@ -18,7 +18,7 @@ namespace DentClinicApp.Views
     /// <summary>
     /// Interaction logic for NowaWizytaView.xaml
     /// </summary>
-    public partial class NowaWizytaView : UserControl
+    public partial class NowaWizytaView : JedenViewBase
     {
         public NowaWizytaView()
         {

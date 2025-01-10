@@ -18,6 +18,7 @@ namespace DentClinicApp.Models.Entities
         public Uslugi()
         {
             this.Wizyty = new HashSet<Wizyty>();
+            this.Platnosci = new HashSet<Platnosci>();
         }
     
         public int IdUslugi { get; set; }
@@ -28,5 +29,7 @@ namespace DentClinicApp.Models.Entities
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Wizyty> Wizyty { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Platnosci> Platnosci { get; set; }
     }
 }

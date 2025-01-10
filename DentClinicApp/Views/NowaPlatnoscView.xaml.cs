@@ -18,7 +18,7 @@ namespace DentClinicApp.Views
     /// <summary>
     /// Interaction logic for NowaPlatnoscView.xaml
     /// </summary>
-    public partial class NowaPlatnoscView : UserControl
+    public partial class NowaPlatnoscView : JedenViewBase
     {
         public NowaPlatnoscView()
         {
