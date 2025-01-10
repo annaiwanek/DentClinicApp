@@ -17,6 +17,6 @@ namespace DentClinicApp.Models.EntitiesForView
         public string TypDokumentu { get; set; }
         public string Opis { get; set; }
         public  DateTime DataDodania { get; set; }
-        public string SciezkaDoPliku { get; set; }
+        //public string SciezkaDoPliku { get; set; }
     }
 }

@@ -1,11 +1,14 @@
-﻿using DentClinicApp.Models.Entities;
+﻿using DentClinicApp.Helper;
+using DentClinicApp.Models.Entities;
 using DentClinicApp.Models.EntitiesForView;
+using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace DentClinicApp.ViewModels
 { // Klasa, która dostarcza danych do widoku wyświetlającego wszystkie dokumenty
@@ -16,10 +19,18 @@ namespace DentClinicApp.ViewModels
 
         public WszystkieDokumentyViewModel()
             : base("Dokumenty")
-        {   
+        {
+            // Rejestracja wiadomości do odświeżania danych
+            Messenger.Default.Register<string>(this, message =>
+            {
+                if (message == "RefreshDocuments")
+                    Load();
+            });
         }
 
         #endregion
+
+ 
 
         #region Helpers
 
@@ -37,10 +48,10 @@ namespace DentClinicApp.ViewModels
                         PESEL = dokumenty.Pacjenci.PESEL,
                         Imie = dokumenty.Pacjenci.Imie,
                         Nazwisko = dokumenty.Pacjenci.Nazwisko,
+                        NazwaDokumentu = dokumenty.NazwaDokumentu,
                         TypDokumentu = dokumenty.TypDokumentu,
                         Opis = dokumenty.Opis,
-                        DataDodania = dokumenty.DataDodania,
-                        SciezkaDoPliku = dokumenty.SciezkaDoPliku
+                        DataDodania = dokumenty.DataDodania
 
                     }
                 );

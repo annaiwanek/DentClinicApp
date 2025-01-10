@@ -1,9 +1,12 @@
-﻿using DentClinicApp.Models.BusinessLogic;
+﻿using DentClinicApp.Helper;
+using DentClinicApp.Models.BusinessLogic;
 using DentClinicApp.Models.Entities;
 using DentClinicApp.Models.EntitiesForView;
+using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text;
@@ -19,52 +22,60 @@ namespace DentClinicApp.ViewModels
         public NowyDokumentViewModel()
             : base("Dokument")
         {
-            item = new Dokumenty
-            {
-                DataDodania = DateTime.Now // Domyślna data dodania
-            };
+            item = new Dokumenty();
+
+            DataDodania = DateTime.Now; // Domyślna data dodania
+
+            //to jest Messenger, który oczekuje na pacjenta z widoku PacienciWindow
+            //jak go złapiemy to wywoływana jest metoda getWybranyPacjent
+            Messenger.Default.Register<Pacjenci>(this, getWybranyPacjent);
+            
         }
 
         #endregion
 
         #region Properties
 
-        // Właściwość dla ComboBox z pacjentami
-        public IQueryable<KeyAndValue> PacjenciItems
+    
+
+        #region Command
+
+        private BaseCommand _ShowPacjenciWindow; 
+        public ICommand ShowPacjenciWindow
         {
             get
             {
-                PacjentB pacjentB = new PacjentB(dentCareEntities);
-                return pacjentB.GetPacjentKeyAndValueItems();
+                if (_ShowPacjenciWindow == null)
+                    _ShowPacjenciWindow = new BaseCommand(() => showPacjenciWindow());
+                return _ShowPacjenciWindow;
             }
         }
-
-        // Właściwość dla wybranego pacjenta
-        private int? _wybranyPacjentId;
-        public int? WybranyPacjentId
+        public void showPacjenciWindow()
         {
-            get => _wybranyPacjentId;
+            Messenger.Default.Send<string>("PacjenciWindowAll");
+
+        }
+        #endregion
+
+        public string WybranyPacjent
+        {
+            get
+            {
+                if (item.Pacjenci != null)
+                    return $"{item.Pacjenci.Imie} {item.Pacjenci.Nazwisko}";
+                return string.Empty;
+            }
             set
             {
-                _wybranyPacjentId = value;
-
-                if (_wybranyPacjentId.HasValue)
-                {
-                    var pacjent = dentCareEntities.Pacjenci.FirstOrDefault(p => p.IdPacjenta == _wybranyPacjentId.Value);
-                    if (pacjent != null)
-                    {
-                        item.Pacjenci = pacjent;
-                        Pesel = pacjent.PESEL;
-                        Imie = pacjent.Imie;
-                        Nazwisko = pacjent.Nazwisko;
-                    }
-                }
-
-                OnPropertyChanged(() => WybranyPacjentId);
+                // Nie zmieniamy tego pola bezpośrednio
+                OnPropertyChanged(() => WybranyPacjent);
             }
         }
 
-        public string Pesel
+
+
+
+        public string WybranyPacjentPESEL
         {
             get => item.Pacjenci?.PESEL;
             set
@@ -73,55 +84,36 @@ namespace DentClinicApp.ViewModels
                     item.Pacjenci = new Pacjenci();
 
                 item.Pacjenci.PESEL = value;
-                OnPropertyChanged(() => Pesel);
+                OnPropertyChanged(() => WybranyPacjentPESEL);
             }
         }
 
-        public string Nazwisko
-        {
-            get => item.Pacjenci?.Nazwisko;
-            set
-            {
-                if (item.Pacjenci == null)
-                    item.Pacjenci = new Pacjenci();
 
-                item.Pacjenci.Nazwisko = value;
-                OnPropertyChanged(() => Nazwisko);
-            }
-        }
+     
 
-        public string Imie
-        {
-            get => item.Pacjenci?.Imie;
-            set
-            {
-                if (item.Pacjenci == null)
-                    item.Pacjenci = new Pacjenci();
-
-                item.Pacjenci.Imie = value;
-                OnPropertyChanged(() => Imie);
-            }
-        }
-
-        public string NazwaPliku
+        public string NazwaDokumentu
         {
             get => item.NazwaDokumentu;
             set
             {
                 item.NazwaDokumentu = value;
-                OnPropertyChanged(() => NazwaPliku);
+                OnPropertyChanged(() => NazwaDokumentu);
             }
         }
 
-        public string TypDokumentu
+      public string TypDokumentu
+{
+    get => item.TypDokumentu;
+    set
+    {
+        if (item.TypDokumentu != value)
         {
-            get => item.TypDokumentu;
-            set
-            {
-                item.TypDokumentu = value;
-                OnPropertyChanged(() => TypDokumentu);
-            }
+            item.TypDokumentu = value;
+            OnPropertyChanged(() => TypDokumentu);
         }
+    }
+}
+
 
         public DateTime DataDodania
         {
@@ -133,40 +125,91 @@ namespace DentClinicApp.ViewModels
             }
         }
 
-        public string SciezkaDoPliku
+        public string Opis
         {
-            get => item.SciezkaDoPliku;
+            get => item.Opis;
             set
             {
-                item.SciezkaDoPliku = value;
-                OnPropertyChanged(() => SciezkaDoPliku);
+                if (item.Opis != value)
+                {
+                    item.Opis = value;
+                    OnPropertyChanged(() => Opis);
+                }
             }
         }
+
+
+
+        //public string SciezkaDoPliku
+        //{
+        //    get => item.SciezkaDoPliku;
+        //    set
+        //    {
+        //        item.SciezkaDoPliku = value;
+        //        OnPropertyChanged(() => SciezkaDoPliku);
+        //    }
+        //}
 
         #endregion
 
         #region Helpers
 
+        private void getWybranyPacjent(Pacjenci pacjent)
+        {
+            if (pacjent != null)
+            {
+                // Pobierz obiekt pacjenta z aktualnego kontekstu
+                var pacjentFromDb = dentCareEntities.Pacjenci.SingleOrDefault(p => p.IdPacjenta == pacjent.IdPacjenta);
+
+                if (pacjentFromDb != null)
+                {
+                    item.Pacjenci = pacjentFromDb;
+                    item.IdPacjenta = pacjentFromDb.IdPacjenta;
+                    OnPropertyChanged(() => WybranyPacjent);
+                    OnPropertyChanged(() => WybranyPacjentPESEL);
+                }
+            }
+        }
+
+
+
+
         public override void Save()
         {
+            if (item.Pacjenci == null || item.IdPacjenta <= 0)
+                throw new InvalidOperationException("Nie wybrano poprawnego pacjenta.");
+
             if (string.IsNullOrWhiteSpace(item.NazwaDokumentu))
                 throw new InvalidOperationException("Pole 'Nazwa pliku' jest wymagane.");
 
             if (string.IsNullOrWhiteSpace(item.TypDokumentu))
                 throw new InvalidOperationException("Pole 'Typ dokumentu' jest wymagane.");
 
-            if (item.DataDodania == null || item.DataDodania == DateTime.MinValue)
-                throw new InvalidOperationException("Pole 'Data dodania' jest wymagane.");
+            if (string.IsNullOrWhiteSpace(item.Opis))
+                throw new InvalidOperationException("Pole 'Opis' jest wymagane."); // Opcjonalnie
+
+            Console.WriteLine($"Opis: {item.Opis}"); // Debugowanie
 
             saveDokument();
         }
+
+
 
         private void saveDokument()
         {
             try
             {
-                dentCareEntities.Dokumenty.Add(item); // Dodanie dokumentu do kolekcji lokalnej
-                dentCareEntities.SaveChanges(); // Zapisanie do bazy danych
+                // Debugowanie danych przed zapisem
+                Console.WriteLine($"IdPacjenta: {item.IdPacjenta}, TypDokumentu: {item.TypDokumentu}, NazwaDokumentu: {item.NazwaDokumentu}");
+                if (item.Pacjenci == null)
+                {
+                    Console.WriteLine("Pacjenci jest null.");
+                    throw new InvalidOperationException("Nie przypisano pacjenta do dokumentu.");
+                }
+
+                dentCareEntities.Dokumenty.Add(item);
+                dentCareEntities.SaveChanges();
+                Console.WriteLine("Dokument zapisany pomyślnie.");
             }
             catch (DbEntityValidationException e)
             {
@@ -183,6 +226,8 @@ namespace DentClinicApp.ViewModels
                 Console.WriteLine($"Wystąpił błąd: {e.Message}");
             }
         }
+
+
 
         #endregion
     }

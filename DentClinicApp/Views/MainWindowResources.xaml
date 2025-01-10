@@ -129,6 +129,9 @@
         <vw:RaportPrzychodowView/>
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type vm:PacjenciWindowViewModel}">
+        <vw:PacjenciWindowView/>
+    </DataTemplate>
 
     <Style x:Key="MainHCCStyle" TargetType="{x:Type HeaderedContentControl}">
         <Setter Property="HeaderTemplate">

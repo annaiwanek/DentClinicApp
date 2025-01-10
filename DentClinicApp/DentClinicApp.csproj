@@ -186,6 +186,7 @@
     <Compile Include="ViewModels\NowyPacjentViewModel.cs" />
     <Compile Include="ViewModels\NowyPracownikViewModel.cs" />
     <Compile Include="ViewModels\NowyUzytkownikViewModel.cs" />
+    <Compile Include="ViewModels\PacjenciWindowViewModel.cs" />
     <Compile Include="ViewModels\RaportPrzychodowViewModel.cs" />
     <Compile Include="ViewModels\WorkspaceViewModel.cs" />
     <Compile Include="ViewModels\WszyscyPacjenciViewModel.cs" />
@@ -258,6 +259,9 @@
     </Compile>
     <Compile Include="Views\NowyUzytkownikView.xaml.cs">
       <DependentUpon>NowyUzytkownikView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PacjenciWindowView.xaml.cs">
+      <DependentUpon>PacjenciWindowView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\RaportPrzychodowView.xaml.cs">
       <DependentUpon>RaportPrzychodowView.xaml</DependentUpon>
@@ -381,6 +385,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\NowyUzytkownikView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PacjenciWindowView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

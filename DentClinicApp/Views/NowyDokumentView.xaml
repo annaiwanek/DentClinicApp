@@ -10,6 +10,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="150"/>
             <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="50"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
@@ -18,48 +19,34 @@
             <RowDefinition Height="40"/>
             <RowDefinition Height="40"/>
             <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
 
-        <!-- Pesel -->
-        <Label Grid.Column="0" Grid.Row="0" Margin="0,8,0,8" Content="PESEL"/>
-        <ComboBox Grid.Column="1" Grid.Row="0" Margin="0,8,0,8"
-                  ItemsSource="{Binding PacjenciItems}" 
-                  DisplayMemberPath="Value"
-                  SelectedValuePath="Key"
-                  SelectedValue="{Binding Path=WybranyPacjentId, Mode=TwoWay}"/>
+        <!-- Imię i nazwisko pacjenta -->
+        <Label Grid.Column="0" Grid.Row="0" Margin="0,8,0,8" Content="Pacjent"/>
+        <TextBox Grid.Column="1" Grid.Row="0" Margin="0,8,0,8"
+                 Text="{Binding WybranyPacjent}" 
+                 IsReadOnly="True"/>
+        <Button Content="..." Grid.Column="2" Grid.Row="0" Margin="8,8,0,8" Command="{Binding ShowPacjenciWindow}"/>
 
-        <!-- Nazwisko -->
-        <Label Grid.Column="0" Grid.Row="1" Margin="0,8,0,8" Content="Nazwisko"/>
-        <TextBox Grid.Column="1" Grid.Row="1" Margin="0,8,0,8" 
-                 Text="{Binding Path=WybranyPacjent.Nazwisko}" 
+        <!-- PESEL -->
+        <Label Grid.Column="0" Grid.Row="1" Margin="0,8,0,8" Content="PESEL"/>
+        <TextBox Grid.Column="1" Grid.Row="1" Margin="0,8,0,8"
+                 Text="{Binding WybranyPacjentPESEL}" 
                  IsReadOnly="True"/>
 
-        <!-- Imię -->
-        <Label Grid.Column="0" Grid.Row="2" Margin="0,8,0,8" Content="Imię"/>
-        <TextBox Grid.Column="1" Grid.Row="2" Margin="0,8,0,8" 
-                 Text="{Binding Path=WybranyPacjent.Imie}" 
-                 IsReadOnly="True"/>
+      
+        <Label Grid.Column="0" Grid.Row="2" Margin="0,8,0,8" Content="Nazwa pliku"/>
+        <TextBox Grid.Column="1" Grid.Row="2" Margin="0,8,0,8" Text="{Binding NazwaDokumentu}"/>
 
-        <!-- Nazwa pliku -->
-        <Label Grid.Column="0" Grid.Row="3" Margin="0,8,0,8" Content="Nazwa pliku"/>
-        <TextBox Grid.Column="1" Grid.Row="3" Margin="0,8,0,8" 
-                 Text="{Binding Path=NazwaPliku}"/>
+        <Label Grid.Column="0" Grid.Row="3" Margin="0,8,0,8" Content="Rodzaj pliku"/>
+        <TextBox Grid.Column="1" Grid.Row="3" Margin="0,8,0,8" Text="{Binding TypDokumentu, UpdateSourceTrigger=PropertyChanged}"/>
 
-        <!-- Rodzaj pliku -->
-        <Label Grid.Column="0" Grid.Row="4" Margin="0,8,0,8" Content="Rodzaj pliku"/>
-        <TextBox Grid.Column="1" Grid.Row="4" Margin="0,8,0,8" 
-                 Text="{Binding Path=TypDokumentu}"/>
+        <Label Grid.Column="0" Grid.Row="4" Margin="0,8,0,8" Content="Data dodania"/>
+        <DatePicker Grid.Column="1" Grid.Row="4" Margin="0,8,0,8" SelectedDate="{Binding DataDodania}"/>
 
-        <!-- Data dodania -->
-        <Label Grid.Column="0" Grid.Row="5" Margin="0,8,0,8" Content="Data dodania"/>
-        <DatePicker Grid.Column="1" Grid.Row="5" Margin="0,8,0,8" 
-                    SelectedDate="{Binding Path=DataDodania, UpdateSourceTrigger=PropertyChanged}"/>
+        <Label Grid.Column="0" Grid.Row="5" Margin="0,8,0,8" Content="Opis"/>
+        <TextBox Grid.Column="1" Grid.Row="5" Margin="0,8,0,8" Text="{Binding Opis, UpdateSourceTrigger=PropertyChanged}"/>
 
-        <!-- Ścieżka do pliku -->
-        <Label Grid.Column="0" Grid.Row="6" Margin="0,8,0,8" Content="Ścieżka do pliku"/>
-        <TextBox Grid.Column="1" Grid.Row="6" Margin="0,8,0,8" 
-                 Text="{Binding Path=SciezkaDoPliku}"/>
+
     </Grid>
 </local:JedenViewBase>

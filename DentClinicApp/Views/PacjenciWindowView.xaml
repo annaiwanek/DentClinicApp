@@ -1,0 +1,22 @@
+﻿<local:WszystkieViewBase x:Class="DentClinicApp.Views.PacjenciWindowView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DentClinicApp.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid>
+            <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding List}" SelectionMode="Single" SelectedItem="{Binding Path=WybranyPacjent, Mode=TwoWay}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Id" Binding="{Binding IdPacjenta}"/>
+                    <DataGridTextColumn Header="Pesel" Binding="{Binding PESEL}"/>
+                    <DataGridTextColumn Header="Imię" Binding="{Binding Imie}"/>
+                    <DataGridTextColumn Header="Nazwisko" Binding="{Binding Nazwisko}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+
+    </Grid>
+</local:WszystkieViewBase>
