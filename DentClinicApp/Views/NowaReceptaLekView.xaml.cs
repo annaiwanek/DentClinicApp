@@ -18,7 +18,7 @@ namespace DentClinicApp.Views
     /// <summary>
     /// Interaction logic for NowaReceptaLekView.xaml
     /// </summary>
-    public partial class NowaReceptaLekView : UserControl
+    public partial class NowaReceptaLekView : JedenViewBase
     {
         public NowaReceptaLekView()
         {

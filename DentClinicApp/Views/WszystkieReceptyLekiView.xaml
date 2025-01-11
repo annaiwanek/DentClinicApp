@@ -15,10 +15,12 @@
                 <DataGridTextColumn Header="Nazwa leku" Binding="{Binding Lek.Nazwa}"/>
                 <DataGridTextColumn Header="Dawka" Binding="{Binding Lek.Dawka}"/>
                 <DataGridTextColumn Header="Postać" Binding="{Binding Lek.Postac}"/>
-               
-             
+                <DataGridTextColumn Header="Ilość" Binding="{Binding Ilosc}" />
 
-               
+
+
+
+
 
             </DataGrid.Columns>
         </DataGrid>

@@ -152,6 +152,12 @@
     <Compile Include="Models\Entities\ReceptyLeki.cs">
       <DependentUpon>ModelDentCare.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Entities\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>ModelDentCare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entities\sp_helpdiagrams_Result.cs">
+      <DependentUpon>ModelDentCare.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Entities\Stanowiska.cs">
       <DependentUpon>ModelDentCare.tt</DependentUpon>
     </Compile>

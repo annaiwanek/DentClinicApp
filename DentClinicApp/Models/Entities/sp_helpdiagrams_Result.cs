@@ -10,17 +10,13 @@
 namespace DentClinicApp.Models.Entities
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class ReceptyLeki
+    public partial class sp_helpdiagrams_Result
     {
-        public int IdReceptyLeki { get; set; }
-        public int IdRecepty { get; set; }
-        public int IdLeku { get; set; }
-        public int Ilosc { get; set; }
-        public System.DateTime DataDodania { get; set; }
-    
-        public virtual Leki Leki { get; set; }
-        public virtual Recepty Recepty { get; set; }
+        public string Database { get; set; }
+        public string Name { get; set; }
+        public int ID { get; set; }
+        public string Owner { get; set; }
+        public int OwnerID { get; set; }
     }
 }

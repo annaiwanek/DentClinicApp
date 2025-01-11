@@ -14,5 +14,7 @@ namespace DentClinicApp.Models.EntitiesForView
         public ReceptyLeki ReceptaLek { get; set; }
         public Leki Lek { get; set; }
 
+        public int Ilosc { get; set; }
+
     }
 }

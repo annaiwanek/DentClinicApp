@@ -34,7 +34,8 @@ namespace DentClinicApp.ViewModels
                         Recepta = recepta,
                         Lek = lek.Leki,
                         ReceptaLek = lek,
-                      
+                        Ilosc = lek.Ilosc
+
 
 
                     }
