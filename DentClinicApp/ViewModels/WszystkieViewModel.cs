@@ -76,6 +76,62 @@ namespace DentClinicApp.ViewModels
         }
         #endregion
 
+        #region Sort And Filtr
+
+        // do sortowania
+        // wynik działania comboboxa (po czym sortować) zapisuje w SortField
+        public string SortField { get; set; } 
+
+        public List<string> SortComboboxItems
+
+        { get
+            {
+                return GetComboboxSortList();
+            }
+                
+        }
+        public abstract List<string> GetComboboxSortList();
+        private BaseCommand _SortCommand; // to jest komenda, która będzie wywoływana po naciścięciu na przycisk sortuj w sortowaniu (Generic.xaml)
+        public ICommand SortCommand
+        {
+            get
+            {
+                if (_SortCommand == null)
+                    _SortCommand = new BaseCommand(() => Sort()); 
+                return _SortCommand;
+            }
+        }
+        public abstract void Sort();
+
+
+        // do filtrowania 
+        public string FindField { get; set; }
+
+        public List<string> FindComboboxItems
+
+        {
+            get
+            {
+                return GetComboboxFindList();
+            }
+
+        }
+        public abstract List<string> GetComboboxFindList();
+        public string FindTextBox { get; set; }
+        private BaseCommand _FindCommand; // to jest komenda, która będzie wywoływana po naciścięciu na przycisk szukaj w wyszukiwaniu (Generic.xaml)
+        public ICommand FindCommand
+        {
+            get
+            {
+                if (_FindCommand == null)
+                    _FindCommand = new BaseCommand(() => Find()); 
+                return _FindCommand;
+            }
+        }
+        public abstract void Find();
+
+        #endregion
+
         #region Helpers
 
         public abstract void Load();

@@ -19,6 +19,67 @@ namespace DentClinicApp.ViewModels
 
         #endregion
 
+        #region Sort And Find 
+        // tu decydujemy po czym sortować do combobox
+        public override List<string> GetComboboxSortList()
+        {
+            return new List<string> { "nazwisko", "imię", "data", "godzina rozpoczęcia", "godzina zakończenia" };
+
+        }
+
+        // tu decydujemy jak sortować
+        public override void Sort()
+        {
+            if (SortField == "nazwisko")
+                List = new ObservableCollection<GrafikForAllView>(List.OrderBy(item => item.Nazwisko));
+            if (SortField == "imię")
+                List = new ObservableCollection<GrafikForAllView>(List.OrderBy(item => item.Imie));
+            if (SortField == "data")
+                List = new ObservableCollection<GrafikForAllView>(List.OrderBy(item => item.Data));
+            if (SortField == "godzina rozpoczęcia")
+                List = new ObservableCollection<GrafikForAllView>(List.OrderBy(item => item.GodzinaRozpoczecia));
+            if (SortField == "godzina zakończenia")
+                List = new ObservableCollection<GrafikForAllView>(List.OrderBy(item => item.GodzinaZakonczenia));
+        }
+
+        // tu decydujemy po czym wyszukiwać do combobox 
+        public override List<string> GetComboboxFindList()
+        {
+            return new List<string> { "nazwisko", "imię", "data", "godzina rozpoczęcia", "godzina zakończenia"};
+
+        }
+
+        // tu decydujemy jak wyszukiwać 
+        public override void Find()
+        {
+            if (FindField == "nazwisko")
+                List = new ObservableCollection<GrafikForAllView>(List.Where(item => item.Nazwisko != null && item.Nazwisko.StartsWith(FindTextBox)));
+            if (FindField == "imię")
+                List = new ObservableCollection<GrafikForAllView>(List.Where(item => item.Imie != null && item.Imie.StartsWith(FindTextBox)));
+            if (FindField == "data")
+            {
+                List = new ObservableCollection<GrafikForAllView>(
+                    List.Where(item => item.Data.ToString("dd-MM-yyyy").StartsWith(FindTextBox))
+                );
+            }
+            if (FindField == "godzina rozpoczęcia")
+            {
+                List = new ObservableCollection<GrafikForAllView>(
+                    List.Where(item => item.GodzinaRozpoczecia.ToString(@"hh\:mm\:ss").Contains(FindTextBox))
+                );
+            }
+
+            if (FindField == "godzina zakończenia")
+            {
+                List = new ObservableCollection<GrafikForAllView>(
+                    List.Where(item => item.GodzinaZakonczenia.ToString(@"hh\:mm\:ss").StartsWith(FindTextBox))
+                );
+            }
+
+        }
+
+        #endregion
+
         #region Helpers
 
         // metoda load pobiera wszystkich pacjentów z bazy danych 

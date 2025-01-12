@@ -30,7 +30,54 @@ namespace DentClinicApp.ViewModels
 
         #endregion
 
- 
+        #region Sort And Find 
+        // tu decydujemy po czym sortować do combobox
+        public override List<string> GetComboboxSortList()
+        {
+            return new List<string> { "PESEL", "nazwisko", "data"};
+
+        }
+
+        // tu decydujemy jak sortować
+        public override void Sort()
+        {
+            if (SortField == "PESEL")
+                List = new ObservableCollection<DokumentForAllView>(List.OrderBy(item => item.PESEL));
+            if (SortField == "nazwisko")
+                List = new ObservableCollection<DokumentForAllView>(List.OrderBy(item => item.Nazwisko));
+            if (SortField == "data")
+                List = new ObservableCollection<DokumentForAllView>(List.OrderBy(item => item.DataDodania));
+
+        }
+
+        // tu decydujemy po czym wyszukiwać do combobox 
+        public override List<string> GetComboboxFindList()
+        {
+            return new List<string> { "PESEL", "nazwisko", "imię", "data"};
+
+        }
+
+        // tu decydujemy jak wyszukiwać 
+        public override void Find()
+        {
+            if (FindField == "PESEL")
+                List = new ObservableCollection<DokumentForAllView>(List.Where(item => item.PESEL != null && item.PESEL.StartsWith(FindTextBox)));
+            if (FindField == "nazwisko")
+                List = new ObservableCollection<DokumentForAllView>(List.Where(item => item.Nazwisko != null && item.Nazwisko.StartsWith(FindTextBox)));
+            if (FindField == "imię")
+                List = new ObservableCollection<DokumentForAllView>(List.Where(item => item.Imie != null && item.Imie.StartsWith(FindTextBox)));
+
+            if (FindField == "data")
+            {
+                List = new ObservableCollection<DokumentForAllView>(
+                    List.Where(item => item.DataDodania.ToString("dd-MM-yyyy").StartsWith(FindTextBox))
+                );
+            }
+        }
+
+        #endregion
+
+
 
         #region Helpers
 

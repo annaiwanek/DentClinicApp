@@ -12,6 +12,9 @@ namespace DentClinicApp.Models.EntitiesForView
         public int IdNotatki { get; set; }
         public Pacjenci Pacjent { get; set; }
         public Pracownicy Pracownik { get; set; }
+        public string PESEL { get; set; }
+        public string Nazwisko { get; set; }
+        public string Imie { get; set; }
         public DateTime Data { get; set; }
         public string Tekst { get; set; }
 

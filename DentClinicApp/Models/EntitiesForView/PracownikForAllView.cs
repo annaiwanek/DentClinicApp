@@ -13,6 +13,22 @@ namespace DentClinicApp.Models.EntitiesForView
         public Pracownicy Pracownik { get; set; }
         public Stanowiska Stanowisko { get; set; }
 
+        public string Nazwisko
+        {
+            get => Pracownik?.Nazwisko;
+        }
+
+        public string Imie
+        {
+            get => Pracownik?.Imie;
+        }
+
+        public string Stanowiska
+        {
+            get => Stanowisko?.Nazwa;
+        }
+
+
         public bool IsPracownikActive {
             get {
                 return Pracownik != null && Pracownik.Status == "Aktywny";

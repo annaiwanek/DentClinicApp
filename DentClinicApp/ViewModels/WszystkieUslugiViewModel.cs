@@ -27,6 +27,34 @@ namespace DentClinicApp.ViewModels
 
         #endregion
 
+        #region Sort And Find 
+        // tu decydujemy po czym sortować do combobox
+        public override List<string> GetComboboxSortList()
+        {
+            return null;
+
+        }
+
+        // tu decydujemy jak sortować
+        public override void Sort()
+        {
+
+        }
+
+        // tu decydujemy po czym wyszukiwać do combobox 
+        public override List<string> GetComboboxFindList()
+        {
+            return null;
+
+        }
+
+        // tu decydujemy jak wyszukiwać 
+        public override void Find()
+        {
+
+        }
+
+        #endregion
 
         #region Helpers
 

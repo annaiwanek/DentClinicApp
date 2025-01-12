@@ -20,6 +20,57 @@ namespace DentClinicApp.ViewModels
 
         #endregion
 
+        #region Sort And Find 
+        // tu decydujemy po czym sortować do combobox
+        public override List<string> GetComboboxSortList()
+        {
+            return new List<string> {"login", "data"};
+
+
+        }
+
+        // tu decydujemy jak sortować
+        public override void Sort()
+        {
+            if (SortField == "login")
+                List = new ObservableCollection<LogForAllView>(List.OrderBy(item => item.LoginUzytkownika));
+
+            if (SortField == "data")
+            {
+                List = new ObservableCollection<LogForAllView>(
+                    List.Where(item => item.Data != null) // Sprawdzenie, czy Data nie jest null
+                        .OrderBy(item => item.Data)
+                );
+            }
+
+        }
+
+        // tu decydujemy po czym wyszukiwać do combobox 
+        public override List<string> GetComboboxFindList()
+        {
+            return new List<string> {"login", "akcja", "data" };
+
+        }
+
+        // tu decydujemy jak wyszukiwać 
+        public override void Find()
+        {
+            if (FindField == "login")
+                List = new ObservableCollection<LogForAllView>(List.Where(item => item.LoginUzytkownika != null && item.LoginUzytkownika.StartsWith(FindTextBox)));
+
+            if (FindField == "akcja")
+                List = new ObservableCollection<LogForAllView>(List.Where(item => item.Akcja!= null && item.Akcja.StartsWith(FindTextBox)));
+
+            if (FindField == "data")
+            {
+                List = new ObservableCollection<LogForAllView>(
+                    List.Where(item => item.Data.ToString("dd-MM-yyyy").StartsWith(FindTextBox))
+                );
+            }
+        }
+
+        #endregion
+
         #region Helpers
         public override void Load()
         {

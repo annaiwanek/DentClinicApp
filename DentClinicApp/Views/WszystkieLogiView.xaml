@@ -10,7 +10,7 @@
         <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding List}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Log ID" Binding="{Binding IdLog}"/>
-                <DataGridTextColumn Header="Data i godzina" Binding="{Binding Data}"/>
+                <DataGridTextColumn Header="Data" Binding="{Binding Data, StringFormat=dd-MM-yyyy}"/>
                 <DataGridTextColumn Header="Akcja" Binding="{Binding Akcja}"/>
                 <DataGridTextColumn Header="Opis" Binding="{Binding Opis}"/>
                 <DataGridTextColumn Header="Login użytkownika" Binding="{Binding LoginUzytkownika}"/>

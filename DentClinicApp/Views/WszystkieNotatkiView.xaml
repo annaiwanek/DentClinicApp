@@ -13,7 +13,7 @@
                 <DataGridTextColumn Header="PESEL" Binding="{Binding Pacjent.PESEL}"/>
                 <DataGridTextColumn Header="Imię pacjenta" Binding="{Binding Pacjent.Imie}"/>
                 <DataGridTextColumn Header="Nazwisko pacjenta" Binding="{Binding Pacjent.Nazwisko}"/>
-                <DataGridTextColumn Header="Data dodania" Binding="{Binding Data, StringFormat=d}"/>
+                <DataGridTextColumn Header="Data dodania" Binding="{Binding Data, StringFormat=dd-MM-yyyy}"/>
                 <DataGridTextColumn Header="Treść notatki" Binding="{Binding Tekst}"/>
             
             </DataGrid.Columns>
