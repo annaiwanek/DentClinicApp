@@ -24,26 +24,76 @@ namespace DentClinicApp.ViewModels
         // tu decydujemy po czym sortować do combobox
         public override List<string> GetComboboxSortList()
         {
-            return null;
+            return new List<string> { "data wystawienia", "nazwisko"};
 
         }
 
         // tu decydujemy jak sortować
         public override void Sort()
         {
+            if (SortField == "data wystawienia")
+            {
+                List = new ObservableCollection<ReceptaForAllView>(
+                    List.Where(item => item.DataWystawienia != null) // Sprawdzenie, czy Data nie jest null
+                        .OrderBy(item => item.DataWystawienia)
+                );
+            }
+
+            if (SortField == "nazwisko")
+            {
+                List = new ObservableCollection<ReceptaForAllView>(
+                    List.OrderBy(item => item.Nazwisko ?? string.Empty) // Zastąp null pustym stringiem
+                );
+            }
+
 
         }
 
         // tu decydujemy po czym wyszukiwać do combobox 
         public override List<string> GetComboboxFindList()
         {
-            return null;
+            return new List<string> { "kod recepty", "PESEL", "nazwisko", "data wystawienia", "wystawił" };
 
         }
 
         // tu decydujemy jak wyszukiwać 
         public override void Find()
         {
+            if (FindField == "kod recepty")
+            {
+                List = new ObservableCollection<ReceptaForAllView>(
+                    List.Where(item => item.IdRecepty.ToString().Contains(FindTextBox))
+                );
+            }
+
+            if (FindField == "PESEL")
+            {
+                List = new ObservableCollection<ReceptaForAllView>(
+                    List.Where(item => !string.IsNullOrEmpty(item.PESEL) && item.PESEL.Contains(FindTextBox))
+                );
+            }
+
+            if (FindField == "nazwisko")
+            {
+                List = new ObservableCollection<ReceptaForAllView>(
+                    List.Where(item => !string.IsNullOrEmpty(item.Nazwisko) && item.Nazwisko.Contains(FindTextBox))
+                );
+            }
+
+
+            if (FindField == "data wystawienia")
+            {
+                List = new ObservableCollection<ReceptaForAllView>(
+                    List.Where(item => item.DataWystawienia.ToString("dd-MM-yyyy").Contains(FindTextBox))
+                );
+            }
+
+            if (FindField == "wystawił")
+            {
+                List = new ObservableCollection<ReceptaForAllView>(
+                    List.Where(item => !string.IsNullOrEmpty(item.LekarzImieNazwisko) && item.LekarzImieNazwisko.Contains(FindTextBox))
+                );
+            }
 
         }
 
@@ -60,8 +110,13 @@ namespace DentClinicApp.ViewModels
                     {
                         Recepta = recepty,
                         Pacjent = recepty.Pacjenci,
-                        Pracownik = recepty.Pracownicy
-                      
+                        Pracownik = recepty.Pracownicy,
+                        IdRecepty = recepty.IdRecepty,
+                        DataWystawienia = recepty.DataWystawienia,
+                        Nazwisko = recepty.Pacjenci.Nazwisko,
+                        Imie = recepty.Pacjenci.Imie,
+                        PESEL = recepty.Pacjenci.PESEL
+
                     }
                 );
         }

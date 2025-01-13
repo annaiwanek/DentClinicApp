@@ -12,9 +12,10 @@ namespace DentClinicApp.Models.EntitiesForView
         public int IdPlatnosci { get; set; }
 
         public Pacjenci Pacjent { get; set; }
+        public string Nazwisko { get; set; }
         public DateTime? DataPlatnosci { get; set; }
         public DateTime DataWizyty { get; set; }
-        public decimal Kwota { get; set; }
+        public decimal? Kwota { get; set; }
         public int NumerWizyty { get; set; }
         public string MetodaPlatnosci { get; set; }
         public bool? Status { get; set; }

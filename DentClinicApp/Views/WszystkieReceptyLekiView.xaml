@@ -10,7 +10,7 @@
         <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding List}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Kod recepty" Binding="{Binding Recepta.IdRecepty}"/>
-                <DataGridTextColumn Header="Data wystawienia" Binding="{Binding Recepta.DataWystawienia, StringFormat=\{0:dd-MM-yyyy\}}"/>
+                <DataGridTextColumn Header="Data wystawienia" Binding="{Binding Recepta.DataWystawienia, StringFormat= dd-MM-yyyy}"/>
                 <DataGridTextColumn Header="PESEL" Binding="{Binding Pacjent.PESEL}"/>
                 <DataGridTextColumn Header="Nazwa leku" Binding="{Binding Lek.Nazwa}"/>
                 <DataGridTextColumn Header="Dawka" Binding="{Binding Lek.Dawka}"/>

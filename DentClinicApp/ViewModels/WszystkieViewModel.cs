@@ -141,6 +141,15 @@ namespace DentClinicApp.ViewModels
             // Ten komunikat odbierze MainWindowViewModel, który odpowiada za otwieranie zakładek (okien)
             Messenger.Default.Send(DisplayName + "Add"); //messenger z biblioteki MVVMLight
         }
+
+        // Metoda pomocnicza do porównywania ignorującego wielkość liter
+        protected bool MatchesIgnoreCase(string source, string searchText)
+        {
+            if (string.IsNullOrEmpty(source) || string.IsNullOrEmpty(searchText))
+                return false;
+
+            return source.ToLower().Contains(searchText.ToLower());
+        }
         #endregion
 
     }

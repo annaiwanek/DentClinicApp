@@ -11,7 +11,20 @@ namespace DentClinicApp.Models.EntitiesForView
     {
         public Pacjenci Pacjent { get; set; }
         public Recepty Recepta { get; set; }
+        public int IdRecepty { get; set; }
+
+        public string PESEL { get; set; }
+        public string Nazwisko { get; set; }
+        public string Imie { get; set; }
+
+        public DateTime DataWystawienia { get; set; }
+        public string Uwagi { get; set; }
         public Pracownicy Pracownik { get; set; } // Lekarz związany z pracownikiem 
-      
+        public string LekarzImieNazwisko //potrzebne do sortowania filtrowania
+        {
+            get => $"{Pracownik?.Imie} {Pracownik?.Nazwisko}";
+        }
+
     }
 }
+
