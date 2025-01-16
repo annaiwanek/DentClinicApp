@@ -21,7 +21,13 @@ namespace DentClinicApp.ViewModels
 
             // Załaduj listy do comboboxów
             Uslugi = new ObservableCollection<Uslugi>(dentCareEntities.Uslugi.ToList());
-            Lekarze = new ObservableCollection<Pracownicy>(dentCareEntities.Pracownicy.ToList());
+            //Lekarze = new ObservableCollection<Pracownicy>(dentCareEntities.Pracownicy.ToList());
+
+            Lekarze = new ObservableCollection<Pracownicy>(
+               dentCareEntities.Pracownicy
+                   .Where(p => p.Status == "Aktywny") // Filtrowanie tylko aktywnych pracowników
+                   .ToList()
+           );
             StatusyWizyt = new ObservableCollection<string> { "Zaplanowana", "Zakończona", "Anulowana" };
             Godzina = GenerateTimeSlots();
             CzasTrwaniaWMinutach = new ObservableCollection<int> { 15, 30, 45, 60 };

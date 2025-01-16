@@ -20,7 +20,14 @@ namespace DentClinicApp.ViewModels
             DataWystawienia = DateTime.Now;
 
             // Załaduj listy
-            Lekarze = new ObservableCollection<Pracownicy>(dentCareEntities.Pracownicy.ToList());
+            Lekarze = new ObservableCollection<Pracownicy>(
+                dentCareEntities.Pracownicy
+                    .Where(p => p.Status == "Aktywny") // Filtrowanie tylko aktywnych pracowników
+                    .ToList()
+            );
+
+
+
 
             // Rejestracja komunikatora
             Messenger.Default.Register<Pacjenci>(this, getWybranyPacjent);
