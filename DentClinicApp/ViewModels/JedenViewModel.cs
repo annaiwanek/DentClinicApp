@@ -52,12 +52,31 @@ namespace DentClinicApp.ViewModels
 
         #endregion
 
+        #region Validation
+        public virtual bool IsValid()
+        {
+            return true;
+        }
+        #endregion  
+
+
+
+
+
         #region Helpers
         public abstract void Save();
-        public void SaveAndClose()
+        private void SaveAndClose()
         {
-            Save();
-            base.OnRequestClose(); // Zamknięcie zakładki 
+            if (IsValid())
+            {
+                Save();
+                ShowMessageBoxInformation("Dokument został zapisany do bazy");
+                OnRequestClose(); // Zamknięcie widoku
+            }
+            else
+            {
+                ShowMessageBoxError("Popraw błędy przed zapisaniem.");
+            }
         }
         #endregion
 

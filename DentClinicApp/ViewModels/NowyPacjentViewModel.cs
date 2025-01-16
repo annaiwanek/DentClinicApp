@@ -1,7 +1,9 @@
 ﻿using DentClinicApp.Helper;
 using DentClinicApp.Models.Entities;
+using DentClinicApp.Validators;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data.Entity.Validation;
 using System.Diagnostics;
 using System.Linq;
@@ -12,7 +14,7 @@ using System.Windows.Input;
 
 namespace DentClinicApp.ViewModels
 {
-    public class NowyPacjentViewModel : JedenViewModel<Pacjenci>
+    public class NowyPacjentViewModel : JedenViewModel<Pacjenci>, IDataErrorInfo
     {
         
         #region Constructor
@@ -127,48 +129,113 @@ namespace DentClinicApp.ViewModels
 
         #endregion
 
+        #region Validation (IDataErrorInfo)
+
+        // Implementacja interfejsu IDataErrorInfo
+        public string Error => null;
+
+        public string this[string name]
+        {
+            get
+            {
+                string komunikat = null;
+
+                if (name == nameof(Imie))
+                {
+                    komunikat = StringValidator.SprawdzCzyZaczynaSieOdDuzej(Imie);
+                }
+                else if (name == nameof(Nazwisko))
+                {
+                    komunikat = StringValidator.SprawdzCzyZaczynaSieOdDuzej(Nazwisko);
+                }
+                else if (name == nameof(Pesel))
+                {
+                    if (string.IsNullOrEmpty(Pesel) || Pesel.Length != 11 || !Pesel.All(char.IsDigit))
+                    {
+                        komunikat = "PESEL musi składać się z 11 cyfr.";
+                    }
+                }
+                else if (name == nameof(DataUrodzenia))
+                {
+                    if (DataUrodzenia == null || DataUrodzenia == DateTime.MinValue)
+                    {
+                        komunikat = "Data urodzenia jest wymagana.";
+                    }
+                }
+                else if (name == nameof(Adres))
+                {
+                    komunikat = StringValidator.SprawdzAdres(Adres);
+                }
+                else if (name == nameof(Telefon))
+                {
+                    if (string.IsNullOrEmpty(Telefon) || Telefon.Length != 9 || !Telefon.All(char.IsDigit))
+                    {
+                        komunikat = "Telefon musi składać się z 9 cyfr.";
+                    }
+                }
+                else if (name == nameof(Email))
+                {
+                    komunikat = StringValidator.SprawdzEmail(Email);
+                }
+
+                return komunikat;
+            }
+        }
+
+        #endregion
+
         #region Helpers
+
         public override void Save()
         {
-            if (string.IsNullOrWhiteSpace(item.Imie))
-                throw new InvalidOperationException("Pole 'Imię' jest wymagane.");
-
-            if (string.IsNullOrWhiteSpace(item.Nazwisko))
-                throw new InvalidOperationException("Pole 'Nazwisko' jest wymagane.");
-
-            if (item    .DataUrodzenia == null || item.DataUrodzenia == DateTime.MinValue)
-                throw new InvalidOperationException("Pole 'Data Urodzenia' jest wymagane.");
+            if (!IsValid())
+            {
+                MessageBox.Show("Popraw błędy przed zapisaniem.", "Błąd walidacji", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
 
             savePatient();
-
         }
+
+        // Sprawdzenie, czy wszystkie dane są poprawne
+        public override bool IsValid()
+        {
+            foreach (var property in new[] { nameof(Imie), nameof(Nazwisko), nameof(Pesel), nameof(DataUrodzenia), nameof(Adres), nameof(Telefon), nameof(Email) })
+            {
+                if (this[property] != null)
+                {
+                    return false; // Jeśli jakiekolwiek pole ma błąd, zwracamy false
+                }
+            }
+
+            return true;
+        }
+
         private void savePatient()
         {
             try
             {
-                Console.WriteLine("Adding patient");
                 dentCareEntities.Pacjenci.Add(item); // dodawanie rekordu najpierw do lokalnej kolekcji
                 dentCareEntities.SaveChanges(); // zapisywanie do bazy danych 
-                Console.WriteLine("Added patient successfully");
 
                 // Dodawanie logów aktywności
-                LogiAktywnosci logi = new LogiAktywnosci();
-                logi.IdUzytkownika = 3; // Ustawienie identyfikatora zalogowanego użytkownika
-                logi.Akcja = "Dodano pacjenta o ID: " + item.IdPacjenta;
-                logi.Data = DateTime.Now;
-                logi.Godzina = logi.Data.TimeOfDay;
-                logi.Opis = "Dodano pacjenta: " + item.Imie + " " + item.Nazwisko;
-                dentCareEntities.LogiAktywnosci.Add(logi);
+                LogiAktywnosci logi = new LogiAktywnosci
+                {
+                    IdUzytkownika = 3, // Ustawienie identyfikatora zalogowanego użytkownika
+                    Akcja = "Dodano pacjenta o ID: " + item.IdPacjenta,
+                    Data = DateTime.Now,
+                    Godzina = DateTime.Now.TimeOfDay,
+                    Opis = "Dodano pacjenta: " + item.Imie + " " + item.Nazwisko
+                };
 
+                dentCareEntities.LogiAktywnosci.Add(logi);
                 dentCareEntities.SaveChanges(); // Zapisywanie logów
-                Console.WriteLine("Added activity log successfully");
             }
             catch (DbEntityValidationException e)
             {
-                Console.WriteLine("Errors");
-                foreach (DbEntityValidationResult entityError in e.EntityValidationErrors)
+                foreach (var entityError in e.EntityValidationErrors)
                 {
-                    foreach (DbValidationError validationError in entityError.ValidationErrors)
+                    foreach (var validationError in entityError.ValidationErrors)
                     {
                         Console.WriteLine(validationError.PropertyName + ": " + validationError.ErrorMessage);
                     }

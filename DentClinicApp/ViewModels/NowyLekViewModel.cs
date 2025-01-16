@@ -1,6 +1,8 @@
 ﻿using DentClinicApp.Models.Entities;
+using DentClinicApp.Validators;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text;
@@ -8,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DentClinicApp.ViewModels
 {
-    public class NowyLekViewModel : JedenViewModel<Leki>
+    public class NowyLekViewModel : JedenViewModel<Leki>, IDataErrorInfo
     {
         #region Constructor
 
@@ -80,6 +82,52 @@ namespace DentClinicApp.ViewModels
         }
 
         #endregion
+
+
+        #region Validation
+
+        public string this[string columnName]
+        {
+            get
+            {
+                string error = null;
+
+                switch (columnName)
+                {
+                    case nameof(Nazwa):
+                        error = StringValidator.SprawdzCzyZaczynaSieOdDuzej(Nazwa);
+                        break;
+                    case nameof(SubstancjaCzynna):
+                        if (string.IsNullOrEmpty(SubstancjaCzynna))
+                        {
+                            error = "Substancja czynna jest wymagana.";
+                        }
+                        break;
+                    case nameof(Dawka):
+                        error = LekValidator.SprawdzCzyPoprawnaDawka(Dawka);
+                        break;
+                    case nameof(Postac):
+                        error = LekValidator.SprawdzPostac(Postac);
+                        break;
+                }
+
+                return error;
+            }
+        }
+
+        public string Error => null;
+
+        public override bool IsValid()
+        {
+            return string.IsNullOrEmpty(this[nameof(Nazwa)])
+                && string.IsNullOrEmpty(this[nameof(SubstancjaCzynna)])
+                && string.IsNullOrEmpty(this[nameof(Dawka)])
+                && string.IsNullOrEmpty(this[nameof(Postac)]);
+        }
+
+        #endregion
+
+
 
         #region Helpers
         public override void Save()

@@ -173,6 +173,11 @@
     <Compile Include="Models\Entities\Wizyty.cs">
       <DependentUpon>ModelDentCare.tt</DependentUpon>
     </Compile>
+    <Compile Include="Validators\BusinessValidator.cs" />
+    <Compile Include="Validators\LekValidator.cs" />
+    <Compile Include="Validators\NumericValidator.cs" />
+    <Compile Include="Validators\StringValidator.cs" />
+    <Compile Include="Validators\Validator.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\CommandViewModel.cs" />
     <Compile Include="ViewModels\JedenViewModel.cs" />

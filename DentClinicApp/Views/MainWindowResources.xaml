@@ -192,6 +192,18 @@ This style ensures that the borders in the main window are consistent.
         <Setter Property="SnapsToDevicePixels" Value="True" />
     </Style>
 
+
+    <Style TargetType="TextBox">
+        <Style.Triggers>
+            <Trigger Property="Validation.HasError" Value="true">
+                <Setter Property="ToolTip" 
+                    Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)[0].ErrorContent}" />
+                <Setter Property="BorderBrush" Value="Red" />
+                <Setter Property="BorderThickness" Value="1" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
     <!--
 This template explains how to render the list of commands on the left
 side in the main window (the 'Control Panel' area).

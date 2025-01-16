@@ -87,6 +87,20 @@ namespace DentClinicApp.ViewModels
 
         #endregion
 
+        #region MessageBoxMethods
+
+        protected void ShowMessageBoxError(string message)
+        {
+            MessageBox.Show(message, "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+
+        protected void ShowMessageBoxInformation(string message)
+        {
+            MessageBox.Show(message, "Informacja", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        #endregion
+
         #region Propertychanged
 
         protected void OnPropertyChanged<T>(Expression<Func<T>> action)
