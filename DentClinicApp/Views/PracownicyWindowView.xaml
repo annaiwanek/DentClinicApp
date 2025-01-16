@@ -1,0 +1,16 @@
+﻿<local:WszystkieViewBase x:Class="DentClinicApp.Views.PracownicyWindowView"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:local="clr-namespace:DentClinicApp.Views">
+    <Grid>
+        <DataGrid ItemsSource="{Binding List}" SelectedItem="{Binding WybranyPracownik}"
+                  AutoGenerateColumns="False" CanUserAddRows="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding IdPracownika}" />
+                <DataGridTextColumn Header="Imię" Binding="{Binding Imie}" />
+                <DataGridTextColumn Header="Nazwisko" Binding="{Binding Nazwisko}" />
+                <DataGridTextColumn Header="Stanowisko" Binding="{Binding Stanowiska}" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</local:WszystkieViewBase>

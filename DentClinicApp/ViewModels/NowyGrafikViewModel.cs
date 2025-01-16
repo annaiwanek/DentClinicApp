@@ -1,12 +1,15 @@
-﻿using DentClinicApp.Models.BusinessLogic;
+﻿using DentClinicApp.Helper;
+using DentClinicApp.Models.BusinessLogic;
 using DentClinicApp.Models.Entities;
 using DentClinicApp.Models.EntitiesForView;
+using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlTypes;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace DentClinicApp.ViewModels
 {
@@ -14,29 +17,50 @@ namespace DentClinicApp.ViewModels
     {
         #region Constructor
         public NowyGrafikViewModel()
-          : base("GrafikPracownikow")
+            : base("GrafikPracownikow")
         {
             item = new GrafikPracownikow();
             Data = DateTime.Now;
 
+            // Rejestracja Messengera, który odbiera wybranego pracownika z widoku PracownicyWindow
+            Messenger.Default.Register<PracownikForAllView>(this, getWybranyPracownik);
+        }
+        #endregion
+
+        #region Command
+
+        private BaseCommand _ShowPracownicyWindow;
+        public ICommand ShowPracownicyWindow
+        {
+            get
+            {
+                if (_ShowPracownicyWindow == null)
+                    _ShowPracownicyWindow = new BaseCommand(() => showPracownicyWindow());
+                return _ShowPracownicyWindow;
+            }
+        }
+
+        private void showPracownicyWindow()
+        {
+            Messenger.Default.Send("PracownicyWindowAll"); // Wyślij komunikat, aby otworzyć okno modalne
         }
 
         #endregion
 
-        #region Fields
-        //Dla każdego pola na interface dodajemy properties
+        #region Properties
 
-        public int IdPracownika
+        public string WybranyPracownik
         {
             get
             {
-                return item.IdPracownika;
+                if (item.Pracownicy != null)
+                    return $"{item.Pracownicy.Imie} {item.Pracownicy.Nazwisko}";
+                return string.Empty;
             }
-
             set
             {
-                item.IdPracownika = value;
-                OnPropertyChanged(() => IdPracownika);
+                // Pole nie może być zmieniane bezpośrednio
+                OnPropertyChanged(() => WybranyPracownik);
             }
         }
 
@@ -47,46 +71,6 @@ namespace DentClinicApp.ViewModels
             {
                 item.Data = value;
                 OnPropertyChanged(() => Data);
-            }
-        }
-
-        public string GodzinaRozpoczeciaHours
-        {
-            get => GodzinaRozpoczecia.Hours.ToString();
-            set
-            {
-                GodzinaRozpoczecia = new TimeSpan(Int32.Parse(value), GodzinaRozpoczecia.Minutes, 0);
-                OnPropertyChanged(() => GodzinaRozpoczeciaHours);
-            }
-        }
-
-        public string GodzinaRozpoczeciaMinutes
-        {
-            get => GodzinaRozpoczecia.Minutes.ToString();
-            set
-            {
-                GodzinaRozpoczecia = new TimeSpan(GodzinaRozpoczecia.Hours, Int32.Parse(value), 0);
-                OnPropertyChanged(() => GodzinaRozpoczeciaMinutes);
-            }
-        }
-
-        public string GodzinaZakonczeniaHours
-        {
-            get => GodzinaZakonczenia.Hours.ToString();
-            set
-            {
-                GodzinaZakonczenia = new TimeSpan(Int32.Parse(value), GodzinaZakonczenia.Minutes, 0);
-                OnPropertyChanged(() => GodzinaZakonczeniaHours);
-            }
-        }
-
-        public string GodzinaZakonczeniaMinutes
-        {
-            get => GodzinaZakonczenia.Minutes.ToString();
-            set
-            {
-                GodzinaZakonczenia = new TimeSpan(GodzinaZakonczenia.Hours, Int32.Parse(value), 0);
-                OnPropertyChanged(() => GodzinaZakonczeniaMinutes);
             }
         }
 
@@ -112,40 +96,65 @@ namespace DentClinicApp.ViewModels
 
         #endregion
 
-    
-        #region Properties
-        // Właściwości dla combobox
+        #region Helpers
 
-        public IQueryable<KeyAndValue> PracownicyItems
+        private void getWybranyPracownik(PracownikForAllView pracownik)
         {
-            get // pobieranie wszystkich uslug do comboboxa poprzez key and value pobrać za pomocą klasy PracownikB
+            if (pracownik != null)
             {
-                return new PracownikB(dentCareEntities).GetPracownikKeyAndValueItems();
+                // Pobierz obiekt pracownika z bazy danych
+                var pracownikFromDb = dentCareEntities.Pracownicy.SingleOrDefault(p => p.IdPracownika == pracownik.IdPracownika);
+
+                if (pracownikFromDb != null)
+                {
+                    item.Pracownicy = pracownikFromDb;
+                    item.IdPracownika = pracownikFromDb.IdPracownika;
+                    OnPropertyChanged(() => WybranyPracownik);
+                }
             }
         }
 
-
-        #endregion
-
-        #region Helpers
-
         public override void Save()
         {
-            dentCareEntities.GrafikPracownikow.Add(item);
-            
-            // Dodawanie logów aktywności 
-            LogiAktywnosci logi = new LogiAktywnosci();
-            logi.IdUzytkownika = 3; //Aktualnie nie ma dostępu do zalogowanego użytkownika
-            logi.Akcja = "Dodanie grafiku dla pracownika ID: " + item.IdPracownika;
-            logi.Data = DateTime.Now;
-            logi.Godzina = logi.Data.TimeOfDay;
-            logi.Opis = "Dodanie nowego grafiku dla użytkownika o ID: " + item.IdPracownika;
-            dentCareEntities.LogiAktywnosci.Add(logi);
-            
-            dentCareEntities.SaveChanges();
+            if (item.Pracownicy == null || item.IdPracownika <= 0)
+                throw new InvalidOperationException("Nie wybrano poprawnego pracownika.");
+
+            if (Data == DateTime.MinValue)
+                throw new InvalidOperationException("Pole 'Data' jest wymagane.");
+
+            if (GodzinaRozpoczecia >= GodzinaZakonczenia)
+                throw new InvalidOperationException("Godzina rozpoczęcia musi być wcześniejsza niż godzina zakończenia.");
+
+            saveGrafik();
+        }
+
+        private void saveGrafik()
+        {
+            try
+            {
+                dentCareEntities.GrafikPracownikow.Add(item);
+
+                // Dodawanie logów aktywności
+                LogiAktywnosci logi = new LogiAktywnosci
+                {
+                    IdUzytkownika = 3, // Aktualnie brak dostępu do zalogowanego użytkownika
+                    Akcja = $"Dodano grafik dla pracownika ID: {item.IdPracownika}",
+                    Data = DateTime.Now,
+                    Godzina = DateTime.Now.TimeOfDay,
+                    Opis = $"Dodano grafik dla pracownika o ID: {item.IdPracownika}"
+                };
+
+                dentCareEntities.LogiAktywnosci.Add(logi);
+                dentCareEntities.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Wystąpił błąd: {e.Message}");
+            }
         }
 
         #endregion
-
     }
+
 }
+

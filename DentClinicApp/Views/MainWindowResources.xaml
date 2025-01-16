@@ -133,6 +133,11 @@
         <vw:PacjenciWindowView/>
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type vm:PracownicyWindowViewModel}">
+        <vw:PracownicyWindowView />
+    </DataTemplate>
+
+
     <Style x:Key="MainHCCStyle" TargetType="{x:Type HeaderedContentControl}">
         <Setter Property="HeaderTemplate">
             <Setter.Value>

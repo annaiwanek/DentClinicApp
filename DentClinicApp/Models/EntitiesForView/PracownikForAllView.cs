@@ -26,7 +26,15 @@ namespace DentClinicApp.Models.EntitiesForView
         public string Stanowiska
         {
             get => Stanowisko?.Nazwa;
+            set
+            {
+                if (Stanowisko != null)
+                {
+                    Stanowisko.Nazwa = value;
+                }
+            }
         }
+
 
 
         public bool IsPracownikActive {
@@ -36,6 +44,12 @@ namespace DentClinicApp.Models.EntitiesForView
             set {}
                 
         }
-       
+
+        public int IdPracownika
+        {
+            get => Pracownik.IdPracownika;
+            set { }
+        }
+
     }
 }

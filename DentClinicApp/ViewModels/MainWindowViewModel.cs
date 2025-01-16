@@ -52,6 +52,11 @@ namespace DentClinicApp.ViewModels
                     "PacjenciWindow",
                      new BaseCommand(() => this.ShowWorkspace<PacjenciWindowViewModel>())),
 
+                new CommandViewModel(
+                    "PracownicyWindow",
+                     new BaseCommand(() => this.ShowWorkspace<PracownicyWindowViewModel>())),
+
+
                  new CommandViewModel(
                     "Leki",
                     new BaseCommand(() => this.ShowWorkspace<WszystkieLekiViewModel>())),
@@ -265,6 +270,9 @@ namespace DentClinicApp.ViewModels
                 CreateView(new NowaWizytaViewModel());
             if (name == "PacjenciWindowAll")
                 ShowWorkspace<PacjenciWindowViewModel>();
+            if (name == "PracownicyWindowAll")
+                ShowWorkspace<PracownicyWindowViewModel>();
+
         }
         #endregion
     }
