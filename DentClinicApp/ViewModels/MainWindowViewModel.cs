@@ -48,13 +48,13 @@ namespace DentClinicApp.ViewModels
                     "Pacjent",
                     new BaseCommand(() => this.CreateView(new NowyPacjentViewModel()))),
 
-                new CommandViewModel(
-                    "PacjenciWindow",
-                     new BaseCommand(() => this.ShowWorkspace<PacjenciWindowViewModel>())),
+                //new CommandViewModel(
+                //    "PacjenciWindow",
+                //     new BaseCommand(() => this.ShowWorkspace<PacjenciWindowViewModel>())),
 
-                new CommandViewModel(
-                    "PracownicyWindow",
-                     new BaseCommand(() => this.ShowWorkspace<PracownicyWindowViewModel>())),
+                //new CommandViewModel(
+                //    "PracownicyWindow",
+                //     new BaseCommand(() => this.ShowWorkspace<PracownicyWindowViewModel>())),
 
 
                  new CommandViewModel(

@@ -21,6 +21,7 @@ namespace DentClinicApp.ViewModels
         {
             item = new GrafikPracownikow();
             Data = DateTime.Now;
+           
 
             // Rejestracja Messengera, który odbiera wybranego pracownika z widoku PracownicyWindow
             Messenger.Default.Register<PracownikForAllView>(this, getWybranyPracownik);
@@ -79,8 +80,11 @@ namespace DentClinicApp.ViewModels
             get => item.GodzinaRozpoczęcia;
             set
             {
-                item.GodzinaRozpoczęcia = value;
-                OnPropertyChanged(() => GodzinaRozpoczecia);
+                if (item.GodzinaRozpoczęcia != value)
+                {
+                    item.GodzinaRozpoczęcia = value;
+                    OnPropertyChanged(() => GodzinaRozpoczecia);
+                }
             }
         }
 
@@ -89,10 +93,58 @@ namespace DentClinicApp.ViewModels
             get => item.GodzinaZakończenia;
             set
             {
-                item.GodzinaZakończenia = value;
+                if (item.GodzinaZakończenia != value)
+                {
+                    item.GodzinaZakończenia = value;
+                    OnPropertyChanged(() => GodzinaZakonczenia);
+                }
+            }
+        }
+        // Właściwości pomocnicze dla ComboBox
+        public int GodzinaRozpoczeciaHours
+        {
+            get => GodzinaRozpoczecia.Hours;
+            set
+            {
+                GodzinaRozpoczecia = new TimeSpan(value, GodzinaRozpoczecia.Minutes, 0);
+                OnPropertyChanged(() => GodzinaRozpoczeciaHours);
+                OnPropertyChanged(() => GodzinaRozpoczecia);
+            }
+        }
+
+        public int GodzinaRozpoczeciaMinutes
+        {
+            get => GodzinaRozpoczecia.Minutes;
+            set
+            {
+                GodzinaRozpoczecia = new TimeSpan(GodzinaRozpoczecia.Hours, value, 0);
+                OnPropertyChanged(() => GodzinaRozpoczeciaMinutes);
+                OnPropertyChanged(() => GodzinaRozpoczecia);
+            }
+        }
+
+        public int GodzinaZakonczeniaHours
+        {
+            get => GodzinaZakonczenia.Hours;
+            set
+            {
+                GodzinaZakonczenia = new TimeSpan(value, GodzinaZakonczenia.Minutes, 0);
+                OnPropertyChanged(() => GodzinaZakonczeniaHours);
                 OnPropertyChanged(() => GodzinaZakonczenia);
             }
         }
+
+        public int GodzinaZakonczeniaMinutes
+        {
+            get => GodzinaZakonczenia.Minutes;
+            set
+            {
+                GodzinaZakonczenia = new TimeSpan(GodzinaZakonczenia.Hours, value, 0);
+                OnPropertyChanged(() => GodzinaZakonczeniaMinutes);
+                OnPropertyChanged(() => GodzinaZakonczenia);
+            }
+        }
+
 
         #endregion
 
@@ -116,17 +168,24 @@ namespace DentClinicApp.ViewModels
 
         public override void Save()
         {
+            // Sprawdzenie, czy wybrano poprawnego pracownika
             if (item.Pracownicy == null || item.IdPracownika <= 0)
                 throw new InvalidOperationException("Nie wybrano poprawnego pracownika.");
 
+            // Sprawdzenie, czy wybrano datę
             if (Data == DateTime.MinValue)
                 throw new InvalidOperationException("Pole 'Data' jest wymagane.");
+
+            if (GodzinaRozpoczecia == TimeSpan.Zero || GodzinaZakonczenia == TimeSpan.Zero)
+                throw new InvalidOperationException("Musisz ustawić godziny rozpoczęcia i zakończenia.");
 
             if (GodzinaRozpoczecia >= GodzinaZakonczenia)
                 throw new InvalidOperationException("Godzina rozpoczęcia musi być wcześniejsza niż godzina zakończenia.");
 
+            // Zapis grafiku
             saveGrafik();
         }
+
 
         private void saveGrafik()
         {
