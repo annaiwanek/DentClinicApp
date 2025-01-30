@@ -129,6 +129,10 @@
         <vw:RaportPrzychodowView/>
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type vm:WystawRecepteViewModel}">
+        <vw:WystawRecepteView/>
+    </DataTemplate>
+
     <DataTemplate DataType="{x:Type vm:PacjenciWindowViewModel}">
         <vw:PacjenciWindowView/>
     </DataTemplate>

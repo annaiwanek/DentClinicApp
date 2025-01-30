@@ -171,9 +171,11 @@ namespace DentClinicApp.ViewModels
 
                    new CommandViewModel(
                     "Raport przychodów",
-                    new BaseCommand(() => this.CreateView(new RaportPrzychodowViewModel())))
+                    new BaseCommand(() => this.CreateView(new RaportPrzychodowViewModel()))),
 
-             
+              new CommandViewModel(
+                    "Wystaw receptę",
+                    new BaseCommand(() => this.CreateView(new WystawRecepteViewModel())))
             };
         }
         #endregion

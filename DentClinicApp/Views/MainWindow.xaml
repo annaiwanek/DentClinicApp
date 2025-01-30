@@ -17,6 +17,8 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
+
+        <!-- Główne menu -->
         <Menu Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Margin="2">
             <MenuItem Header="_Wizyty"/>
             <MenuItem Header="_Pacjenci">
@@ -25,27 +27,35 @@
             </MenuItem>
             <MenuItem Header="Moje konto"/>
         </Menu>
+
+        <!-- Pasek narzędzi -->
         <ToolBar Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Margin="2">
             <ToggleButton Width="32" Height="32" Background="LightBlue" Margin="2"/>
             <ToggleButton Width="32" Height="32" Background="White" Margin="2"/>
         </ToolBar>
+
+        <!-- Menu boczne z przewijaniem -->
         <Border Grid.Row="2" Grid.Column="0">
-            <HeaderedContentControl 
-                Header="Menu" 
-                Background="Aqua" 
-                Content="{Binding Path=Commands}" 
-                ContentTemplate="{StaticResource CommandsTemplate}"
-                Style="{StaticResource MainHCCStyle}"
-                />
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <HeaderedContentControl 
+                    Header="Menu" 
+                    Background="Aqua" 
+                    Content="{Binding Path=Commands}" 
+                    ContentTemplate="{StaticResource CommandsTemplate}"
+                    Style="{StaticResource MainHCCStyle}"/>
+            </ScrollViewer>
         </Border>
+
+        <!-- Przestrzeń robocza -->
         <Border Grid.Row="2" Grid.Column="1">
             <HeaderedContentControl 
                 Header="Przestrzeń robocza"
                 Content="{Binding Path=Workspaces}"
                 ContentTemplate="{StaticResource WorkspacesTemplate}"
-                Style="{StaticResource MainHCCStyle}"
-                 />
+                Style="{StaticResource MainHCCStyle}"/>
         </Border>
+
+        <!-- Pasek statusu -->
         <StatusBar Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2">
             <StatusBarItem>
                 <TextBlock>Anna Iwanek-Sikorska</TextBlock>
