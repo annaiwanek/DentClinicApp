@@ -17,6 +17,9 @@ namespace DentClinicApp.Models.EntitiesForView
         // Właściwości wyliczane na podstawie powiązanych danych
         public DateTime Data => Wizyta?.Data ?? DateTime.MinValue; // Data wizyty
         public TimeSpan Godzina => Wizyta?.Godzina ?? TimeSpan.Zero; // Godzina wizyty
+        public int IdWizyty => Wizyta?.IdWizyty ?? 0;
+    
+
 
         // Zmieniona właściwość: Czas trwania wizyty w minutach
         public int CzasTrwaniaWMinutach => Wizyta?.CzasTrwaniaWMinutach ?? 0;

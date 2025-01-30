@@ -181,6 +181,7 @@
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\CommandViewModel.cs" />
     <Compile Include="ViewModels\JedenViewModel.cs" />
+    <Compile Include="ViewModels\LekiWindowViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\NowaHistoriaLeczeniaViewModel.cs" />
     <Compile Include="ViewModels\NowaNotatkaViewModel.cs" />
@@ -200,6 +201,9 @@
     <Compile Include="ViewModels\PacjenciWindowViewModel.cs" />
     <Compile Include="ViewModels\PracownicyWindowViewModel.cs" />
     <Compile Include="ViewModels\RaportPrzychodowViewModel.cs" />
+    <Compile Include="ViewModels\ReceptyWindowViewModel.cs" />
+    <Compile Include="ViewModels\StanowiskaWindowViewModel.cs" />
+    <Compile Include="ViewModels\WizytyWindowViewModel.cs" />
     <Compile Include="ViewModels\WorkspaceViewModel.cs" />
     <Compile Include="ViewModels\WszyscyPacjenciViewModel.cs" />
     <Compile Include="ViewModels\WszyscyPracownicyViewModel.cs" />
@@ -220,6 +224,9 @@
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="Views\JedenViewBase.cs" />
+    <Compile Include="Views\LekiWindowView.xaml.cs">
+      <DependentUpon>LekiWindowView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
@@ -281,6 +288,15 @@
     <Compile Include="Views\RaportPrzychodowView.xaml.cs">
       <DependentUpon>RaportPrzychodowView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ReceptyWindowView.xaml.cs">
+      <DependentUpon>ReceptyWindowView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StanowiskaWindowView.xaml.cs">
+      <DependentUpon>StanowiskaWindowView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WizytyWindowView.xaml.cs">
+      <DependentUpon>WizytyWindowView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\WszyscyPacjenciView.xaml.cs">
       <DependentUpon>WszyscyPacjenciView.xaml</DependentUpon>
     </Compile>
@@ -334,6 +350,10 @@
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\LekiWindowView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -412,6 +432,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\RaportPrzychodowView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ReceptyWindowView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\StanowiskaWindowView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WizytyWindowView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

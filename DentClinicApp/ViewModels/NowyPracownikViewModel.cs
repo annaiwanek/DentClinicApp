@@ -1,13 +1,10 @@
-﻿using DentClinicApp.Models.BusinessLogic;
+﻿using DentClinicApp.Helper;
 using DentClinicApp.Models.Entities;
 using DentClinicApp.Models.EntitiesForView;
+using GalaSoft.MvvmLight.Messaging;
 using System;
-using System.Collections.Generic;
-using System.Data.Entity.Validation;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Markup;
+using System.Windows.Input;
 
 namespace DentClinicApp.ViewModels
 {
@@ -15,25 +12,21 @@ namespace DentClinicApp.ViewModels
     {
         #region Constructor
         public NowyPracownikViewModel()
-            :base("Pracownik")
+            : base("Pracownik")
         {
             item = new Pracownicy();
             DataZatrudnienia = DateTime.Now;
             CzyZwolniony = false;
 
+            // Rejestracja Messengera do odbioru wybranego stanowiska
+            Messenger.Default.Register<Stanowiska>(this, getWybraneStanowisko);
         }
-
         #endregion
 
         #region Properties
-        //dla każdego pola na interface tworzymy properties
         public string Imie
         {
-            get
-            {
-                return item.Imie;
-            }
-
+            get => item.Imie;
             set
             {
                 item.Imie = value;
@@ -43,11 +36,7 @@ namespace DentClinicApp.ViewModels
 
         public string Nazwisko
         {
-            get
-            {
-                return item.Nazwisko;
-            }
-
+            get => item.Nazwisko;
             set
             {
                 item.Nazwisko = value;
@@ -55,14 +44,9 @@ namespace DentClinicApp.ViewModels
             }
         }
 
-       
-
         public DateTime DataZatrudnienia
         {
-            get
-            {
-                return item.DataZatrudnienia;
-            }
+            get => item.DataZatrudnienia;
             set
             {
                 item.DataZatrudnienia = value;
@@ -70,27 +54,9 @@ namespace DentClinicApp.ViewModels
             }
         }
 
-        public DateTime? DataZwolnienia
-        {
-            get
-            {
-                return item.DataZwolnienia;
-            }
-            set
-            {
-                item.DataZwolnienia = value;
-                OnPropertyChanged(() => DataZwolnienia);
-            }
-        }
-
-
         public string Telefon
         {
-            get
-            {
-                return item.Telefon;
-            }
-
+            get => item.Telefon;
             set
             {
                 item.Telefon = value;
@@ -100,11 +66,7 @@ namespace DentClinicApp.ViewModels
 
         public string Email
         {
-            get
-            {
-                return item.Email;
-            }
-
+            get => item.Email;
             set
             {
                 item.Email = value;
@@ -112,31 +74,37 @@ namespace DentClinicApp.ViewModels
             }
         }
 
+        private string _stanowisko;
+        public string WybraneStanowisko
+        {
+            get => _stanowisko;
+            set
+            {
+                _stanowisko = value;
+                OnPropertyChanged(() => WybraneStanowisko);
+            }
+        }
+
         public int? IdStanowiska
         {
-            get
-            {
-                return item.IdStanowiska;
-            }
-
+            get => item.IdStanowiska;
             set
             {
                 item.IdStanowiska = value;
                 OnPropertyChanged(() => IdStanowiska);
             }
         }
-        public string Status
+
+        private string _zakresObowiazkow;
+        public string ZakresObowiazkow
         {
-            get
-            {
-                return CzyZwolniony ? "Nieaktywny" : "Aktywny";
-            }
+            get => _zakresObowiazkow;
             set
             {
-                CzyZwolniony = value == "Nieaktywny";
+                _zakresObowiazkow = value;
+                OnPropertyChanged(() => ZakresObowiazkow);
             }
         }
-
 
         private bool _czyZwolniony;
         public bool CzyZwolniony
@@ -147,51 +115,46 @@ namespace DentClinicApp.ViewModels
                 _czyZwolniony = value;
                 if (!_czyZwolniony)
                 {
-                    DataZwolnienia = null; // Resetuj datę zwolnienia, gdy pracownik nie jest zwolniony
+                    item.DataZwolnienia = null;
                 }
                 OnPropertyChanged(() => CzyZwolniony);
             }
         }
-
         #endregion
 
-        public IQueryable<KeyAndValue> StanowiskoItems
+        #region Commands
+        public ICommand ShowStanowiskaWindowCommand => new BaseCommand(() =>
         {
-            get 
-            {
-                return new StanowiskoB(dentCareEntities).GetStanowiskoKeyAndValueItems();
-            }
-        }
+            Messenger.Default.Send("StanowiskaWindowAll");
+        });
+        #endregion
 
         #region Helpers
+        private void getWybraneStanowisko(Stanowiska stanowisko)
+        {
+            if (stanowisko != null)
+            {
+                item.IdStanowiska = stanowisko.IdStanowiska;
+                WybraneStanowisko = stanowisko.Nazwa;
+                ZakresObowiazkow = stanowisko.ZakresObowiazkow;
+                OnPropertyChanged(() => IdStanowiska);
+                OnPropertyChanged(() => WybraneStanowisko);
+                OnPropertyChanged(() => ZakresObowiazkow);
+            }
+        }
 
         public override void Save()
         {
-            item.Status = CzyZwolniony ? "Nieaktywny" : "Aktywny";
+            if (string.IsNullOrWhiteSpace(Imie) || string.IsNullOrWhiteSpace(Nazwisko))
+                throw new InvalidOperationException("Imię i nazwisko są wymagane.");
+            if (string.IsNullOrWhiteSpace(WybraneStanowisko))
+                throw new InvalidOperationException("Nie wybrano stanowiska.");
 
-            if (!CzyZwolniony)
-            {
-                DataZwolnienia = null; // Jeśli pracownik nie jest zwolniony, usuń datę zwolnienia
-            }
+            item.Status = CzyZwolniony ? "Nieaktywny" : "Aktywny";
 
             dentCareEntities.Pracownicy.Add(item);
             dentCareEntities.SaveChanges();
-
-            // Dodawanie logów aktywności
-            LogiAktywnosci logi = new LogiAktywnosci
-            {
-                IdUzytkownika = 3, 
-                Akcja = $"Dodano pracownika o ID: {item.IdPracownika}",
-                Data = DateTime.Now,
-                Godzina = DateTime.Now.TimeOfDay,
-                Opis = $"Dodano pracownika {item.Imie} {item.Nazwisko}"
-            };
-            dentCareEntities.LogiAktywnosci.Add(logi);
-            dentCareEntities.SaveChanges();
         }
-
-
         #endregion
-
     }
 }

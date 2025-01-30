@@ -136,7 +136,22 @@
     <DataTemplate DataType="{x:Type vm:PracownicyWindowViewModel}">
         <vw:PracownicyWindowView />
     </DataTemplate>
+    
+    <DataTemplate DataType="{x:Type vm:WizytyWindowViewModel}">
+        <vw:WizytyWindowView />
+    </DataTemplate>
+    
+    <DataTemplate DataType="{x:Type vm:StanowiskaWindowViewModel}">
+        <vw:StanowiskaWindowView />
+    </DataTemplate>
 
+    <DataTemplate DataType="{x:Type vm:LekiWindowViewModel}">
+        <vw:LekiWindowView />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:ReceptyWindowViewModel}">
+        <vw:ReceptyWindowView />
+    </DataTemplate>
 
     <Style x:Key="MainHCCStyle" TargetType="{x:Type HeaderedContentControl}">
         <Setter Property="HeaderTemplate">

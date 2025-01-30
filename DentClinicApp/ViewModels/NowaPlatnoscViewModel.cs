@@ -1,20 +1,17 @@
 ﻿using DentClinicApp.Helper;
 using DentClinicApp.Models.Entities;
+using DentClinicApp.Models.EntitiesForView;
 using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace DentClinicApp.ViewModels
 {
-  
-      
-        public class NowaPlatnoscViewModel : JedenViewModel<Platnosci>
-        {
+    public class NowaPlatnoscViewModel : JedenViewModel<Platnosci>
+    {
         public NowaPlatnoscViewModel()
             : base("Nowa Płatność")
         {
@@ -26,29 +23,17 @@ namespace DentClinicApp.ViewModels
             Wizyty = new ObservableCollection<Wizyty>(dentCareEntities.Wizyty.Where(w => w.Status == "Zakończona").ToList());
             MetodyPlatnosci = new ObservableCollection<string> { "Gotówka", "Karta", "Przelew" };
 
-            // Rejestracja komunikatora
-            Messenger.Default.Register<Pacjenci>(this, getWybranyPacjent);
+            // Rejestracja Messengera do odbierania wybranej wizyty
+            Messenger.Default.Register<WizytaForAllView>(this, getWybranaWizyta);
         }
 
         #region Properties
 
         public ObservableCollection<Wizyty> Wizyty { get; set; }
-
-        public string WybranyPacjent
-        {
-            get
-            {
-                if (item.Pacjenci != null)
-                    return $"{item.Pacjenci.Imie} {item.Pacjenci.Nazwisko}";
-                return string.Empty;
-            }
-            set
-            {
-                OnPropertyChanged(() => WybranyPacjent);
-            }
-        }
-
         public ObservableCollection<Uslugi> Uslugi { get; set; }
+        public ObservableCollection<string> MetodyPlatnosci { get; set; }
+
+        public string WybranyPacjent { get; set; }
 
         public Uslugi WybranaUsluga
         {
@@ -58,7 +43,7 @@ namespace DentClinicApp.ViewModels
                 item.Uslugi = value;
                 if (value != null)
                 {
-                    Kwota = value.Cena; // Przypisanie kwoty automatycznie
+                    Kwota = value.Cena;
                     item.IdUslugi = value.IdUslugi;
                 }
                 OnPropertyChanged(() => WybranaUsluga);
@@ -74,8 +59,6 @@ namespace DentClinicApp.ViewModels
                 OnPropertyChanged(() => Kwota);
             }
         }
-
-        public ObservableCollection<string> MetodyPlatnosci { get; set; }
 
         public string WybranaMetodaPlatnosci
         {
@@ -114,7 +97,7 @@ namespace DentClinicApp.ViewModels
             set
             {
                 _idWizyty = value;
-                item.IdWizyty = value ?? 0; // Przypisz ID wizyty do płatności
+                item.IdWizyty = value ?? 0;
                 OnPropertyChanged(() => IdWizyty);
             }
         }
@@ -123,28 +106,58 @@ namespace DentClinicApp.ViewModels
 
         #region Commands
 
-        public ICommand ShowPacjenciWindowCommand => new BaseCommand(() =>
+        public ICommand ShowWizytyWindowCommand => new BaseCommand(() =>
         {
-            Messenger.Default.Send("PacjenciWindowAll"); // Otwórz okno modalne
+            Messenger.Default.Send("WizytyWindowAll");
         });
 
         #endregion
 
         #region Helpers
 
-        private void getWybranyPacjent(Pacjenci pacjent)
+        private void getWybranaWizyta(WizytaForAllView wizyta)
         {
-            if (pacjent != null)
+            if (wizyta != null)
             {
-                var pacjentFromDb = dentCareEntities.Pacjenci.SingleOrDefault(p => p.IdPacjenta == pacjent.IdPacjenta);
-                if (pacjentFromDb != null)
+                Console.WriteLine($"Odebrano wizytę: IdWizyty = {wizyta.IdWizyty}");
+
+                // Aktualizacja IdWizyty
+                IdWizyty = wizyta.IdWizyty;
+
+                // Sprawdzenie czy wizyta ma pacjenta
+                if (wizyta.Pacjent != null)
                 {
-                    item.Pacjenci = pacjentFromDb;
-                    item.IdPacjenta = pacjentFromDb.IdPacjenta;
-                    OnPropertyChanged(() => WybranyPacjent);
+                    item.Pacjenci = wizyta.Pacjent;
+                    item.IdPacjenta = wizyta.Pacjent.IdPacjenta;
+                    WybranyPacjent = $"{wizyta.Pacjent.Imie} {wizyta.Pacjent.Nazwisko}";
+                    Console.WriteLine($"Przypisano pacjenta: {WybranyPacjent}");
                 }
+                else
+                {
+                    Console.WriteLine("Błąd: wizyta nie zawiera pacjenta.");
+                }
+
+                // Aktualizacja Usługi
+                if (wizyta.Usluga != null)
+                {
+                    item.Uslugi = wizyta.Usluga;
+                    item.IdUslugi = wizyta.Usluga.IdUslugi;
+                    Kwota = wizyta.Usluga.Cena;
+                    Console.WriteLine($"Przypisano usługę: {wizyta.Usluga.Nazwa}");
+                }
+                else
+                {
+                    Console.WriteLine("Błąd: wizyta nie zawiera usługi.");
+                }
+
+                // Odświeżenie widoku
+                OnPropertyChanged(() => IdWizyty);
+                OnPropertyChanged(() => WybranyPacjent);
+                OnPropertyChanged(() => WybranaUsluga);
+                OnPropertyChanged(() => Kwota);
             }
         }
+
 
         public override void Save()
         {
@@ -179,10 +192,4 @@ namespace DentClinicApp.ViewModels
 
         #endregion
     }
-
 }
-
-
-
-
-

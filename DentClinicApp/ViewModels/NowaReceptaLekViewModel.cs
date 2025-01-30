@@ -1,147 +1,208 @@
 ﻿using DentClinicApp.Helper;
 using DentClinicApp.Models.Entities;
+using DentClinicApp.Models.EntitiesForView;
 using GalaSoft.MvvmLight.Messaging;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace DentClinicApp.ViewModels
 {
-    public class NowaReceptaLekViewModel : JedenViewModel<ReceptyLeki>
-  
+    public class NowaReceptaLekViewModel : JedenViewModel<ReceptaLekForAllView>
+    {
+        public NowaReceptaLekViewModel()
+            : base("Nowa Recepta - Lek")
         {
-            public NowaReceptaLekViewModel()
-                 : base("Nowa Recepta - Lek")
+            item = new ReceptaLekForAllView();
+            DataDodania = DateTime.Now;
+
+            // Rejestracja Messenger dla wyboru recepty i leku
+            Messenger.Default.Register<Recepty>(this, getWybranaRecepta);
+            Messenger.Default.Register<Leki>(this, getWybranyLek);
+        }
+
+        #region Properties
+
+        private int _wybranaReceptaId;
+        public int WybranaReceptaId
+        {
+            get => _wybranaReceptaId;
+            set
             {
-                item = new ReceptyLeki();
-                DataDodania = DateTime.Now;
-
-                // Załaduj listy
-                Recepty = new ObservableCollection<Recepty>(dentCareEntities.Recepty.ToList());
-                Leki = new ObservableCollection<Leki>(dentCareEntities.Leki.ToList());
+                _wybranaReceptaId = value;
+                OnPropertyChanged(() => WybranaReceptaId);
             }
+        }
 
-            #region Properties
-
-            public ObservableCollection<Recepty> Recepty { get; set; }
-            public ObservableCollection<Leki> Leki { get; set; }
-
-            public Recepty WybranaRecepta
+        private string _peselPacjenta;
+        public string PeselPacjenta
+        {
+            get => _peselPacjenta;
+            set
             {
-                get => item.Recepty;
-                set
-                {
-                    item.Recepty = value;
-                    if (value != null)
-                    {
-                        DataWystawienia = value.DataWystawienia;
-                        PeselPacjenta = value.Pacjenci.PESEL;
-                    }
-                    OnPropertyChanged(() => WybranaRecepta);
-                }
+                _peselPacjenta = value;
+                OnPropertyChanged(() => PeselPacjenta);
             }
+        }
 
-            public Leki WybranyLek
+        private string _wybranyLekNazwa;
+        public string WybranyLekNazwa
+        {
+            get => _wybranyLekNazwa;
+            set
             {
-                get => item.Leki;
-                set
-                {
-                    item.Leki = value;
-                    if (value != null)
-                    {
-                        DawkaPostac = $"{value.Dawka} {value.Postac}";
-                    }
-                    OnPropertyChanged(() => WybranyLek);
-                }
+                _wybranyLekNazwa = value;
+                OnPropertyChanged(() => WybranyLekNazwa);
             }
+        }
 
-            public string DawkaPostac { get; set; }
-            public string PeselPacjenta { get; set; }
-            public DateTime DataWystawienia { get; set; }
-
-            public int Ilosc
+        private string _dawkaPostac;
+        public string DawkaPostac
+        {
+            get => _dawkaPostac;
+            set
             {
-                get => item.Ilosc;
-                set
-                {
-                    item.Ilosc = value;
-                    OnPropertyChanged(() => Ilosc);
-                }
+                _dawkaPostac = value;
+                OnPropertyChanged(() => DawkaPostac);
             }
+        }
 
-           
+        //private Leki _wybranyLek;
+        //public Leki WybranyLek
+        //{
+        //    get => _wybranyLek;
+        //    set
+        //    {
+        //        _wybranyLek = value;
+        //        OnPropertyChanged(() => WybranyLek);
+        //    }
+        //}
 
-            public DateTime DataDodania
+       
+
+        private Leki _wybranyLek;
+        public Leki WybranyLek
+        {
+            get => _wybranyLek;
+            set
             {
-                get => item.DataDodania;
-                set
-                {
-                    item.DataDodania = value;
-                    OnPropertyChanged(() => DataDodania);
-                }
+                _wybranyLek = value;
+                OnPropertyChanged(() => WybranyLek);
+                OnPropertyChanged(() => WybranyLekNazwa); // Odświeżenie nazwy w interfejsie
             }
+        }
+
+        //private int _wybranaReceptaId;
+        //public int WybranaReceptaId
+        //{
+        //    get => _wybranaReceptaId;
+        //    set
+        //    {
+        //        _wybranaReceptaId = value;
+        //        OnPropertyChanged(() => WybranaReceptaId);
+        //    }
+        //}
+
+
+        public int Ilosc
+        {
+            get => item.Ilosc;
+            set
+            {
+                item.Ilosc = value;
+                OnPropertyChanged(() => Ilosc);
+            }
+        }
+
+        public DateTime DataDodania
+        {
+            get => item.DataWystawienia;
+            set
+            {
+                item.DataWystawienia = value;
+                OnPropertyChanged(() => DataDodania);
+            }
+        }
 
         #endregion
 
-        public override void Save()
+        #region Commands
+
+        public ICommand ShowReceptyWindowCommand => new BaseCommand(() =>
         {
-            // Walidacja danych wejściowych
-            if (WybranaRecepta == null)
-                throw new InvalidOperationException("Nie wybrano recepty.");
-            if (WybranyLek == null)
-                throw new InvalidOperationException("Nie wybrano leku.");
-            if (Ilosc <= 0)
-                throw new InvalidOperationException("Ilość musi być większa od zera.");
+            Messenger.Default.Send("ReceptyWindowAll");
+        });
 
-            try
+        public ICommand ShowLekiWindowCommand => new BaseCommand(() =>
+        {
+            Messenger.Default.Send("LekiWindowAll");
+        });
+
+        #endregion
+
+        #region Messenger Handlers
+
+        private void getWybranaRecepta(Recepty recepta)
+        {
+            if (recepta != null)
             {
-                // Przypisz wartości do elementu ReceptyLeki
-                item.IdRecepty = WybranaRecepta.IdRecepty;
-                item.IdLeku = WybranyLek.IdLeku;
-                item.Ilosc = Ilosc;
-                item.DataDodania = DateTime.Now; // Automatyczne przypisanie daty
-
-                // Sprawdzenie, czy recepta istnieje w bazie danych
-                var receptaFromDb = dentCareEntities.Recepty
-                    .SingleOrDefault(r => r.IdRecepty == item.IdRecepty);
-                if (receptaFromDb == null)
-                    throw new InvalidOperationException("Wybrana recepta nie istnieje w bazie danych.");
-
-                // Sprawdzenie, czy lek istnieje w bazie danych
-                var lekFromDb = dentCareEntities.Leki
-                    .SingleOrDefault(l => l.IdLeku == item.IdLeku);
-                if (lekFromDb == null)
-                    throw new InvalidOperationException("Wybrany lek nie istnieje w bazie danych.");
-
-                // Dodanie nowego wpisu do tabeli ReceptyLeki
-                dentCareEntities.ReceptyLeki.Add(item);
-                dentCareEntities.SaveChanges();
-
-                Console.WriteLine("Lek został pomyślnie przypisany do recepty.");
-            }
-            catch (InvalidOperationException ex)
-            {
-                // Obsługa błędów walidacji
-                Console.WriteLine($"Błąd walidacji: {ex.Message}");
-                throw;
-            }
-            catch (Exception ex)
-            {
-                // Obsługa błędów przy zapisie do bazy danych
-                Console.WriteLine($"Błąd podczas zapisu do bazy danych: {ex.Message}");
-                if (ex.InnerException != null)
-                {
-                    Console.WriteLine($"Inner Exception: {ex.InnerException.Message}");
-                }
-                throw;
+                WybranaReceptaId = recepta.IdRecepty;
+                System.Diagnostics.Debug.WriteLine($"Wybrana recepta: {WybranaReceptaId}"); // Debug
+                OnPropertyChanged(() => WybranaReceptaId);
             }
         }
 
 
 
+
+        //private void getWybranyLek(Leki lek)
+        //{
+        //    if (lek != null)
+        //    {
+        //        WybranyLek = lek;
+        //        OnPropertyChanged(() => WybranyLek);
+        //    }
+        //}
+        private void getWybranyLek(Leki lek)
+        {
+            if (lek != null)
+            {
+                WybranyLek = lek; // Przypisanie obiektu leku do właściwości
+                WybranyLekNazwa = lek.Nazwa; // Przypisanie nazwy leku do pola tekstowego
+                OnPropertyChanged(() => WybranyLek);
+                OnPropertyChanged(() => WybranyLekNazwa);
+            }
+        }
+
+
+
+        #endregion
+
+        #region Helpers
+
+        public override void Save()
+        {
+            if (WybranaReceptaId == 0)
+                throw new InvalidOperationException("Nie wybrano recepty.");
+            if (WybranyLek == null || WybranyLek.IdLeku == 0)
+                throw new InvalidOperationException("Nie wybrano leku.");
+            if (Ilosc <= 0)
+                throw new InvalidOperationException("Ilość musi być większa od zera.");
+
+            var receptaLek = new ReceptyLeki
+            {
+                IdRecepty = WybranaReceptaId,
+                IdLeku = WybranyLek.IdLeku,  // Poprawne odwołanie
+                Ilosc = Ilosc,
+                DataDodania = DateTime.Now   // Poprawione zgodnie z bazą danych
+            };
+
+            dentCareEntities.ReceptyLeki.Add(receptaLek);
+            dentCareEntities.SaveChanges();
+        }
+
+
+        #endregion
     }
 }

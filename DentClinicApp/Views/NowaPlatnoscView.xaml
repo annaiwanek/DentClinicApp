@@ -22,19 +22,17 @@
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
 
-        <!-- Pacjent -->
+        <!-- Pacjent - usunięto przycisk -->
         <Label Grid.Column="0" Grid.Row="0" Margin="0,8,0,8" Content="Pacjent"/>
         <TextBox Grid.Column="1" Grid.Row="0" Margin="0,8,0,8" Text="{Binding WybranyPacjent}" IsReadOnly="True"/>
-        <Button Content="..." Grid.Column="2" Grid.Row="0" Margin="8,8,0,8" Command="{Binding ShowPacjenciWindowCommand}"/>
 
-        <Label Grid.Column="0" Grid.Row="1" Margin="0,8,0,8" Content="Kod wizyty"/>
-        <ComboBox Grid.Column="1" Grid.Row="1" Margin="0,8,0,8"
-          ItemsSource="{Binding Wizyty}" 
-          SelectedValue="{Binding IdWizyty}" 
-          SelectedValuePath="IdWizyty" 
-          DisplayMemberPath="IdWizyty" />
-
-
+        <!-- Wizyta -->
+        <Label Grid.Column="0" Grid.Row="1" Margin="0,8,0,8" Content="Id wizyty"/>
+        <TextBox Grid.Column="1" Grid.Row="1" Margin="0,8,0,8" 
+                 Text="{Binding IdWizyty, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                 IsReadOnly="True"/>
+        <Button Content="..." Grid.Column="2" Grid.Row="1" Margin="8,8,0,8"
+                Command="{Binding ShowWizytyWindowCommand}"/>
 
         <!-- Usługa -->
         <Label Grid.Column="0" Grid.Row="2" Margin="0,8,0,8" Content="Usługa"/>
@@ -57,5 +55,6 @@
         <!-- Czy zapłacono -->
         <Label Grid.Column="0" Grid.Row="6" Margin="0,8,0,8" Content="Zapłacono"/>
         <CheckBox Grid.Column="1" Grid.Row="6" Margin="0,8,0,8" IsChecked="{Binding CzyZaplacono}"/>
+
     </Grid>
 </local:JedenViewBase>

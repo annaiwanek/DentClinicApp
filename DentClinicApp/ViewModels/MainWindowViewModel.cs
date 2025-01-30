@@ -272,6 +272,15 @@ namespace DentClinicApp.ViewModels
                 ShowWorkspace<PacjenciWindowViewModel>();
             if (name == "PracownicyWindowAll")
                 ShowWorkspace<PracownicyWindowViewModel>();
+            if (name == "WizytyWindowAll")
+                ShowWorkspace<WizytyWindowViewModel>();
+            if (name == "StanowiskaWindowAll")
+                ShowWorkspace<StanowiskaWindowViewModel>();
+            if (name == "ReceptyWindowAll")
+                ShowWorkspace<ReceptyWindowViewModel>();
+            if (name == "LekiWindowAll")
+                ShowWorkspace<LekiWindowViewModel>();
+
 
         }
         #endregion
