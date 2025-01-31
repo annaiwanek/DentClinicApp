@@ -1,0 +1,197 @@
+﻿<UserControl x:Class="DentClinicApp.Views.RaportWizytView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+             mc:Ignorable="d"
+             d:DesignWidth="1000" d:DesignHeight="600">
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <!-- Filtry -->
+            <RowDefinition Height="Auto"/>
+            <!-- TabControl -->
+            <RowDefinition Height="*"/>
+            <!-- Dolny pasek (Eksport PDF) -->
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- [1] Sekcja filtrów -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="5">
+            <Label Content="Od:" VerticalAlignment="Center"/>
+            <DatePicker SelectedDate="{Binding OdData}" Width="120" Margin="5,0"/>
+
+            <Label Content="Do:" VerticalAlignment="Center"/>
+            <DatePicker SelectedDate="{Binding DoData}" Width="120" Margin="5,0"/>
+
+            <Label Content="Lekarz:" VerticalAlignment="Center"/>
+            <ComboBox ItemsSource="{Binding Lekarze}"
+                      SelectedItem="{Binding WybranyLekarz}"
+                      DisplayMemberPath="Nazwisko"
+                      Width="120" Margin="5,0"/>
+
+            <Label Content="Usługa:" VerticalAlignment="Center"/>
+            <ComboBox ItemsSource="{Binding Uslugi}"
+                      SelectedItem="{Binding WybranaUsluga}"
+                      DisplayMemberPath="Nazwa"
+                      Width="120" Margin="5,0"/>
+
+            <Button Content="Filtruj"
+                    Command="{Binding FiltrujCommand}"
+                    Margin="10,0"/>
+        </StackPanel>
+
+        <!-- [2] TabControl: "Lista wizyt" / "Wykresy" -->
+        <TabControl Grid.Row="1" Margin="5">
+            <!-- ZAKŁADKA: LISTA WIZYT -->
+            <TabItem Header="Lista wizyt">
+                <DockPanel>
+
+                    <!-- Panel u góry z wybranymi filtrami, liczbą wizyt, sum. czasem -->
+                    <StackPanel DockPanel.Dock="Top" Orientation="Vertical" Margin="10">
+
+                        <TextBlock Text="Zakres dat:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding OdData, StringFormat='Od {0:dd-MM-yyyy}'}"/>
+                        <TextBlock Text="{Binding DoData, StringFormat='Do {0:dd-MM-yyyy}'}" Margin="0,0,0,10"/>
+
+                        <TextBlock Text="Wybrany lekarz:" FontWeight="Bold"/>
+                        <TextBlock>
+                            <Run Text="{Binding WybranyLekarz.Imie}" />
+                            <Run Text=" " />
+                            <Run Text="{Binding WybranyLekarz.Nazwisko}" />
+                        </TextBlock>
+
+                        <TextBlock Text="Wybrana usługa:" FontWeight="Bold" Margin="0,10,0,0"/>
+                        <TextBlock Text="{Binding WybranaUsluga.Nazwa}" Margin="0,0,0,10"/>
+
+                        <TextBlock Text="Liczba wizyt:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding LiczbaZnalezionychWizyt}" Margin="0,0,0,10"/>
+
+                        <TextBlock Text="Sumaryczny czas (min):" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding SumarycznyCzasTrwania}" Margin="0,0,0,10"/>
+
+                        <Button Content="Pokaż szczegóły wybranej wizyty"
+                                Command="{Binding PokazSzczegolyCommand}"
+                                Width="220"/>
+                    </StackPanel>
+
+                    <!-- DataGrid na wizyty -->
+                    <DataGrid DockPanel.Dock="Bottom"
+                              ItemsSource="{Binding WizytyFiltr}"
+                              SelectedItem="{Binding WybranaWizyta}"
+                              AutoGenerateColumns="False"
+                              IsReadOnly="True"
+                              CanUserAddRows="False"
+                              Margin="5"
+                              AlternationCount="2"
+                              GridLinesVisibility="None">
+
+                        <DataGrid.Resources>
+                            <!-- Lekko szary, pogrubione nagłówki -->
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="Background" Value="#FFEFEFEF"/>
+                                <Setter Property="FontWeight" Value="Bold"/>
+                            </Style>
+                            <!-- Margines w komórkach -->
+                            <Style TargetType="DataGridCell">
+                                <Setter Property="Margin" Value="4"/>
+                            </Style>
+                        </DataGrid.Resources>
+
+                        <!-- RowStyle z triggers: 
+                             Naprzemienny wiersz + DataTrigger dla Statusu -->
+                        <DataGrid.RowStyle>
+                            <Style TargetType="DataGridRow">
+                                <Setter Property="Background" Value="White"/>
+                                <Style.Triggers>
+                                    <!-- Co drugi wiersz (jeśli status nie nadpisze koloru) -->
+                                    <Trigger Property="AlternationIndex" Value="1">
+                                        <Setter Property="Background" Value="#FFF7F7F7"/>
+                                    </Trigger>
+
+                                    <!-- Kolor wg Status -->
+                                    <DataTrigger Binding="{Binding Status}" Value="Zakończona">
+                                        <Setter Property="Background" Value="LightGreen"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Status}" Value="Zaplanowana">
+                                        <Setter Property="Background" Value="LightCyan"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Status}" Value="Anulowana">
+                                        <Setter Property="Background" Value="LightPink"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGrid.RowStyle>
+
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Data"
+                                                Binding="{Binding Data, StringFormat={}{0:dd-MM-yyyy}}"
+                                                Width="*" />
+                            <DataGridTextColumn Header="Godzina"
+                                                Binding="{Binding Godzina, StringFormat={}{0:hh\\:mm}}"
+                                                Width="Auto"/>
+                            <DataGridTextColumn Header="Status"
+                                                Binding="{Binding Status}"
+                                                Width="*" />
+                            <DataGridTextColumn Header="Czas (min)"
+                                                Binding="{Binding CzasTrwaniaWMinutach}"
+                                                Width="Auto"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </DockPanel>
+            </TabItem>
+
+            <!-- ZAKŁADKA: WYKRESY -->
+            <TabItem Header="Wykresy">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel Margin="10">
+                        <TextBlock Text="Liczba wizyt na lekarza"
+                                   FontWeight="Bold"
+                                   FontSize="15"
+                                   Margin="0,0,0,5"/>
+                        <lvc:CartesianChart Series="{Binding LiczbaWizytNaLekarza}"
+                                            LegendLocation="Right"
+                                            Height="250"
+                                            Margin="0,0,0,20">
+                            <lvc:CartesianChart.AxisX>
+                                <lvc:Axis Title="Nazwisko lekarza"
+                                          FontSize="14"
+                                          Labels="{Binding LabelsLekarze}">
+                                    <lvc:Axis.Separator>
+                                        <lvc:Separator Step="1" Stroke="#FFE0E0E0" StrokeThickness="1"/>
+                                    </lvc:Axis.Separator>
+                                </lvc:Axis>
+                            </lvc:CartesianChart.AxisX>
+                            <lvc:CartesianChart.AxisY>
+                                <lvc:Axis Title="Ilość wizyt" FontSize="14">
+                                    <lvc:Axis.Separator>
+                                        <lvc:Separator Stroke="#FFE0E0E0" StrokeThickness="1"/>
+                                    </lvc:Axis.Separator>
+                                </lvc:Axis>
+                            </lvc:CartesianChart.AxisY>
+                        </lvc:CartesianChart>
+
+                        <TextBlock Text="Podział wizyt według usługi"
+                                   FontWeight="Bold"
+                                   FontSize="15"
+                                   Margin="0,0,0,5"/>
+                        <lvc:PieChart Series="{Binding PodzialUslug}"
+                                      LegendLocation="Right"
+                                      Height="250"/>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+        </TabControl>
+
+        <!-- [3] Przycisk Eksportuj do PDF -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal"
+                    HorizontalAlignment="Right"
+                    Margin="5">
+            <Button Content="Eksportuj do PDF"
+                    Command="{Binding EksportujPdfCommand}"
+                    Width="150" 
+                    Margin="5"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

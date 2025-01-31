@@ -173,6 +173,10 @@ namespace DentClinicApp.ViewModels
                     "Raport przychodów",
                     new BaseCommand(() => this.CreateView(new RaportPrzychodowViewModel()))),
 
+                   new CommandViewModel(
+                    "Raport wizyt",
+                    new BaseCommand(() => this.CreateView(new RaportWizytViewModel()))),
+
               new CommandViewModel(
                     "Wystaw receptę",
                     new BaseCommand(() => this.CreateView(new WystawRecepteViewModel())))
