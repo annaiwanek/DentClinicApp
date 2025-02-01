@@ -173,7 +173,7 @@ namespace DentClinicApp.ViewModels
                 db.SaveChanges();
             }
 
-           
+
         }
 
 
@@ -188,7 +188,8 @@ namespace DentClinicApp.ViewModels
 
             try
             {
-                string kodRecepty = $"{item.IdRecepty}-{DateTime.Now:yyyyMMdd}";
+                //string kodRecepty = $"{item.IdRecepty}-{DateTime.Now:yyyyMMdd}";
+                string kodRecepty = $"{DateTime.Now:yyyyMMdd}-{Guid.NewGuid().ToString().Substring(0, 8).ToUpper()}";
 
                 SaveFileDialog saveFileDialog = new SaveFileDialog
                 {

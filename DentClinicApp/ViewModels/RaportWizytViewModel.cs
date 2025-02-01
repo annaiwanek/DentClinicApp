@@ -44,6 +44,7 @@ namespace DentClinicApp.ViewModels
             DoData = DateTime.Now;
 
             WizytyFiltr = new ObservableCollection<Wizyty>();
+            PodzialUslug = new SeriesCollection();
 
             using (var db = new DentCareEntities())
             {
@@ -140,6 +141,7 @@ namespace DentClinicApp.ViewModels
             {
                 _wizytyFiltr = value;
                 OnPropertyChanged(() => WizytyFiltr);
+                GenerujWykresy(); // << TERAZ wykresy zawsze się aktualizują
             }
         }
 
@@ -290,9 +292,12 @@ namespace DentClinicApp.ViewModels
 
                 // WYKRES KOŁOWY: Podział wizyt wg usługi
                 var uslugiWizyty = db.Wizyty
+                    .Where(w => w.Data >= OdData && w.Data <= DoData)
                     .GroupBy(w => w.Uslugi.Nazwa)
                     .Select(g => new { Usluga = g.Key, Ilosc = g.Count() })
                     .ToList();
+
+                PodzialUslug = new SeriesCollection();
 
                 var pieSeriesCollection = new SeriesCollection();
                 foreach (var item in uslugiWizyty)
