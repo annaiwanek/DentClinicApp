@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -11,12 +12,13 @@ using System.Windows;
 
 namespace DentClinicApp.ViewModels
 {
-    public class BaseViewModel : INotifyPropertyChanged // z wykładu 
+    public class BaseViewModel : INotifyPropertyChanged
     {
         #region DisplayName
         public virtual string DisplayName { get; protected set; }
         #endregion
-        #region WindowPropertys
+
+        #region WindowProperties (Close, Minimice, Maximice, etc.)
 
         public void ShowMessageBox(string message)
         {
@@ -101,28 +103,26 @@ namespace DentClinicApp.ViewModels
 
         #endregion
 
-        #region Propertychanged
+        #region PropertyChanged
 
+        // 1) Stara metoda: OnPropertyChanged(() => property)
         protected void OnPropertyChanged<T>(Expression<Func<T>> action)
         {
             var propertyName = GetPropertyName(action);
             OnPropertyChanged(propertyName);
         }
-
         private static string GetPropertyName<T>(Expression<Func<T>> action)
         {
             var expression = (MemberExpression)action.Body;
-            var propertyName = expression.Member.Name;
-            return propertyName;
+            return expression.Member.Name;
         }
 
-        private void OnPropertyChanged(string propertyName)
+        // 2) Nowsza metoda: OnPropertyChanged([CallerMemberName])
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null)
+            if (!string.IsNullOrEmpty(propertyName))
             {
-                var e = new PropertyChangedEventArgs(propertyName);
-                handler(this, e);
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
             }
         }
 

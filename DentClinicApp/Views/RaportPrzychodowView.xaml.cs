@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DentClinicApp.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,11 @@ namespace DentClinicApp.Views
     /// </summary>
     public partial class RaportPrzychodowView : UserControl
     {
+        private RaportPrzychodowViewModel _vm;
         public RaportPrzychodowView()
         {
             InitializeComponent();
+           
         }
     }
 }

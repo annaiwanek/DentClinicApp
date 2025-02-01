@@ -3,54 +3,86 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:DentClinicApp.Views"
-             mc:Ignorable="d" 
-             d:DesignHeight="450">
-    <Grid Background="White" Width="600"  HorizontalAlignment="Left">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="33" />
-            <RowDefinition Height="33" />
-            <RowDefinition Height="33" />
-            <RowDefinition Height="40" />
-            <RowDefinition Height="33" />
-        </Grid.RowDefinitions>
-        <Label Grid.Row="0" Content="Raport przychodów z wizyt i usług" 
-               Margin="3" HorizontalContentAlignment="Center"/>
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="40"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="40"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" Content="Od" Margin="3"/>
-            <DatePicker Grid.Column="1" Margin="3" SelectedDate="{Binding DataOd}"/>
-            <Label Grid.Column="2" Content="Do" Margin="3"/>
-            <DatePicker Grid.Column="3" Margin="3" SelectedDate="{Binding DataDo}"/>
-        </Grid>
-        <Grid Grid.Row="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="100"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" Content="Wybierz usługę:" Margin="3"/>
-            <ComboBox Grid.Column="1" Margin="3"
-                      ItemsSource="{Binding UslugiItems}"
-                      DisplayMemberPath="Value"
-                      SelectedValuePath="Key"
-                      SelectedValue="{Binding Path=IdUslugi, Mode=TwoWay}" />
+             xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+             mc:Ignorable="d">
 
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Nagłówek -->
+        <TextBlock Text="Raport Przychodów" FontSize="26" FontWeight="Bold" HorizontalAlignment="Center" Grid.Row="0" 
+                   Margin="0,0,0,20" Foreground="#1E3A5F"/>
+
+        <!-- Panel filtrów -->
+        <Border BorderBrush="Gray" BorderThickness="1" Padding="15" CornerRadius="10" Grid.Row="1" Background="#E3F2FD">
+            <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,10" HorizontalAlignment="Center">
+                    <TextBlock Text="Okres: " VerticalAlignment="Center" FontWeight="Bold" FontSize="14"/>
+                    <DatePicker SelectedDate="{Binding DataOd}" Width="150" Margin="5,0"/>
+                    <TextBlock Text=" - " VerticalAlignment="Center" FontSize="14"/>
+                    <DatePicker SelectedDate="{Binding DataDo}" Width="150" Margin="5,0"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,10" HorizontalAlignment="Center">
+                    <TextBlock Text="Usługa: " VerticalAlignment="Center" FontWeight="Bold" FontSize="14"/>
+                    <ComboBox ItemsSource="{Binding UslugiCombo}"
+                              SelectedValue="{Binding IdUslugi}"
+                              DisplayMemberPath="Value" SelectedValuePath="Key"
+                              Width="280" Margin="5,0"/>
+                </StackPanel>
+
+                <Button Content="Oblicz" Command="{Binding ObliczCommand}" Width="160" Height="40" HorizontalAlignment="Center" 
+                        Background="#1976D2" Foreground="White" FontWeight="Bold" BorderBrush="Transparent" Cursor="Hand"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Lista przychodów -->
+        <Grid Grid.Row="2" Margin="0,10,0,10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Border BorderBrush="DarkGray" BorderThickness="1" Padding="10" CornerRadius="5" Background="White" Grid.Row="0">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <TextBlock Text="Łączny przychód: " FontWeight="Bold" VerticalAlignment="Center" FontSize="16"/>
+                    <TextBlock Foreground="#388E3C" FontSize="16" FontWeight="Bold">
+                        <Run Text="{Binding LacznyPrzychod, StringFormat=N2}"/>
+                        <Run Text=" PLN"/>
+                    </TextBlock>
+                </StackPanel>
+            </Border>
+
+            <DataGrid ItemsSource="{Binding ListaPrzychodow}"
+                      AutoGenerateColumns="False"
+                      Grid.Row="1" Margin="0,5,0,5" HeadersVisibility="Column" 
+                      AlternatingRowBackground="#E3F2FD" RowBackground="White"
+                      HorizontalAlignment="Stretch" BorderBrush="LightGray" BorderThickness="1">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Usługa" Binding="{Binding UslugaNazwa}" Width="*"/>
+                    <DataGridTextColumn Header="Kwota (PLN)" Binding="{Binding Kwota, StringFormat='{}{0:N2}'}" Width="Auto"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <!-- Wykres -->
+            <lvc:CartesianChart Grid.Row="2" Series="{Binding SeriesPrzychody}" Height="300" Margin="10" Background="White">
+                <lvc:CartesianChart.AxisX>
+                    <lvc:Axis Title="Usługi" Labels="{Binding LabelsPrzychody}" FontSize="14" Foreground="Black"/>
+                </lvc:CartesianChart.AxisX>
+                <lvc:CartesianChart.AxisY>
+                    <lvc:Axis Title="Kwota (PLN)" FontSize="14" Foreground="Black"/>
+                </lvc:CartesianChart.AxisY>
+            </lvc:CartesianChart>
         </Grid>
-        <Button Grid.Row="3" Content="Oblicz" Margin="3" Command="{Binding ObliczCommand}"/>
-        <Grid Grid.Row="4">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="100"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Text="Przychód wynosi:" Margin="3"  VerticalAlignment="Center" TextWrapping="NoWrap"/>
-            <TextBlock Grid.Column="1" Text="{Binding Przychod}" Margin="3" VerticalAlignment="Center" TextWrapping="NoWrap" />
-           
-        </Grid>
-        
+
+        <!-- Eksport PDF -->
+        <Button Content="Eksportuj do PDF" Command="{Binding EksportPdfCommand}" Width="200" Height="45" HorizontalAlignment="Right" 
+                Margin="0,10,0,0" Grid.Row="3" Background="#D32F2F" Foreground="White" FontWeight="Bold" BorderBrush="Transparent" Cursor="Hand"/>
     </Grid>
 </UserControl>

@@ -1,40 +1,56 @@
 ﻿using DentClinicApp.Models.Entities;
+using DentClinicApp.Models.DTO;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DentClinicApp.Models.BusinessLogic
 {
     public class PrzychodB : DatabaseClass
     {
-        #region Constructor
+        public PrzychodB(DentCareEntities db) : base(db) { }
 
-        public PrzychodB(DentCareEntities db) // konstruktor "wypełnia" dostęp do bazy danych
-        :base(db) { }
-
-        #endregion
-
-        #region Business function
-        // Ta funkcja oblicza przychód danej usługi w danym okresie od do 
-
+        // Stara metoda - do pojedynczej usługi
         public decimal PrzychodOkresUsluga(int IdUslugi, DateTime dataOd, DateTime dataDo)
         {
-            return
-                (
-                    from wizyta in db.Wizyty
-                    join usluga in db.Uslugi on wizyta.IdUslugi equals usluga.IdUslugi
-                    where wizyta.IdUslugi == IdUslugi &&
-                      wizyta.Data >= dataOd &&
-                      wizyta.Data <= dataDo
-                       && wizyta.Status == "Zakończona"
-                    select (decimal?)usluga.Cena  // Obsługuje wartości null
-
-                    //select usluga.Cena  // Cena usługi
-
-                ).Sum() ?? 0;
+            return (
+                from wizyta in db.Wizyty
+                join usluga in db.Uslugi on wizyta.IdUslugi equals usluga.IdUslugi
+                where wizyta.IdUslugi == IdUslugi
+                      && wizyta.Data >= dataOd
+                      && wizyta.Data <= dataDo
+                      && wizyta.Status == "Zakończona"
+                select (decimal?)usluga.Cena
+            ).Sum() ?? 0;
         }
-        #endregion
+
+        // NOWA metoda: zwraca listę [usługa, kwota]
+        public List<PrzychodDto> GetPrzychodyOkresUslug(int idUslugi, DateTime dataOd, DateTime dataDo)
+        {
+            // wizyta z uslugą, zakończona, w okresie
+            var query = db.Wizyty
+                .Include(w => w.Uslugi)
+                .Where(w => w.Data >= dataOd
+                            && w.Data <= dataDo
+                            && w.Status == "Zakończona");
+
+            if (idUslugi != 0)
+            {
+                query = query.Where(w => w.IdUslugi == idUslugi);
+            }
+
+            // grupujemy, bo może być wiele wizyt jednej usługi
+            var list = query
+                .GroupBy(w => w.Uslugi.Nazwa)
+                .Select(g => new PrzychodDto
+                {
+                    UslugaNazwa = g.Key,
+                    Kwota = g.Sum(x => x.Uslugi.Cena)
+                })
+                .ToList();
+
+            return list;
+        }
     }
 }

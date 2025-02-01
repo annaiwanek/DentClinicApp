@@ -104,6 +104,7 @@
     <Compile Include="Models\BusinessLogic\PrzychodB.cs" />
     <Compile Include="Models\BusinessLogic\StanowiskoB.cs" />
     <Compile Include="Models\BusinessLogic\UslugaB.cs" />
+    <Compile Include="Models\DTO\PrzychodDto.cs" />
     <Compile Include="Models\EntitiesForView\DokumentForAllView.cs" />
     <Compile Include="Models\EntitiesForView\GrafikForAllView.cs" />
     <Compile Include="Models\EntitiesForView\HistoriaLeczeniaForAllView.cs" />
